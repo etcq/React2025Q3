@@ -12,6 +12,8 @@
     "format:fix": "prettier --write ."
   },
   "dependencies": {
+    "@types/md5": "^2.3.5",
+    "md5": "^2.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "sass": "^1.89.2"
