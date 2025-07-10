@@ -1,6 +1,9 @@
 .card-list {
   width: 90%;
   background-color: #fff;
-  height: 400px;
+  height: 500px;
   margin-top: 10px;
+  flex-direction: column;
+  padding: 10px;
+  overflow: scroll;
 }

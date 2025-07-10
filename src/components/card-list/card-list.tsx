@@ -1,20 +1,15 @@
 import React from 'react';
 import style from './card-list.module.scss';
-import { getAllCharacters } from '../../core/services/api-service';
+import Card from './card/card.tsx';
+import type { Character } from '../../core/interfaces/interface.ts';
 
-class CardList extends React.Component {
+class CardList extends React.Component<{ charList: Character[] }> {
   render(): React.ReactNode {
     return (
       <div className={style['card-list']}>
-        <h1>Marvel Characters</h1>
-        <button
-          onClick={() => {
-            getAllCharacters().then((data) => console.log(data));
-          }}
-        >
-          Fetch
-        </button>
-        <p>Check the console for the fetched data.</p>
+        {this.props.charList.map((char) => (
+          <Card data={char} key={String(char.id)} />
+        ))}
       </div>
     );
   }

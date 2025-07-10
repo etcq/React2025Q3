@@ -1,12 +1,25 @@
 import React from 'react';
+import type { Character } from '../../../core/interfaces/interface.ts';
+import styles from './card.module.scss';
 
-class Card extends React.Component {
+class Card extends React.Component<{ data: Character }> {
   render() {
+    const { id, name, image, status, gender, species } = this.props.data;
     return (
-      <div className="card">
-        <img src="#" alt="Card image" />
-        <h2>Spider-Man</h2>
-        <p>This is a simple card component.</p>
+      <div className={styles.card} id={String(id)}>
+        <img className={styles['card-avatar']} src={image} alt={name} />
+        <div className={styles['card-info']}>
+          <div className={styles['card-main_info']}>
+            <span>{name}</span>
+            <span className={status === 'Alive' ? styles.alive : styles.dead}>
+              {status}
+            </span>
+          </div>
+          <div className={styles['card-secondary_info']}>
+            <span>{species}</span>
+            <span>{gender}</span>
+          </div>
+        </div>
       </div>
     );
   }

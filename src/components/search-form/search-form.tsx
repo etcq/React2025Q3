@@ -2,19 +2,17 @@ import React, { type ChangeEvent } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 
-class SearchForm extends React.Component {
-  state = {
-    query: '',
-  };
+interface ISearchFormProps {
+  query: string;
+  setQuery: (query: string) => void;
+  clickFn: () => void;
+}
 
-  componentDidMount(): void {
-    this.setState({ query: localStorage.getItem('search-query') });
-  }
-
+class SearchForm extends React.Component<ISearchFormProps> {
   handleChange = (e: ChangeEvent) => {
     if (e && e.target instanceof HTMLInputElement) {
       const value = e.target.value;
-      this.setState({ query: value });
+      this.props.setQuery(value);
     }
   };
 
@@ -25,12 +23,13 @@ class SearchForm extends React.Component {
           type="text"
           className={style['search-form__input']}
           onChange={(e) => this.handleChange(e)}
-          value={this.state.query}
+          value={this.props.query}
           placeholder="Search..."
         ></input>
         <Button
           callback={() => {
-            localStorage.setItem('search-query', this.state.query);
+            localStorage.setItem('search-query', this.props.query);
+            this.props.clickFn();
           }}
         />
       </div>
