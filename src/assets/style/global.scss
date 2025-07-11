@@ -1,7 +1,28 @@
+@use './variables.scss' as vars;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&display=swap');
+
 * {
   box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2rem;
+    background-color: vars.$c-font;
+    &:hover {
+      cursor: ns-resize;
+      background-color: vars.$c-light-font;
+    }
+  }
 }
 
 body {
-  background-color: #2d2d2d;
+  font-family: 'Oxanium', sans-serif;
+  background-color: vars.$c-dark-bg;
 }

@@ -1,9 +1,16 @@
+@use '../../../assets/style/variables.scss' as vars;
+
 .button {
   width: 120px;
   height: 40px;
-  background-color: #007bff;
-  color: white;
+  background-color: vars.$c-font;
   border: none;
   border-radius: 4px;
+  font-family: 'Oxanium', sans-serif;
+  text-transform: uppercase;
   cursor: pointer;
+  color: vars.$c-dark-bg;
+  &:hover {
+    background-color: vars.$c-light-font;
+  }
 }

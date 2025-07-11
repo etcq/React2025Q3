@@ -1,11 +1,12 @@
 .search-form {
-  width: 90%;
+  width: 70%;
   background-color: #fff;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
   &__input {
     width: 60%;
     height: 40px;
