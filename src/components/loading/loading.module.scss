@@ -1,0 +1,11 @@
+@use '../../assets/style/variables' as *;
+
+.loading {
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $c-light-font;
+  flex-direction: column;
+}

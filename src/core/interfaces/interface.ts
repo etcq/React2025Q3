@@ -20,12 +20,3 @@ export interface Character extends ResourceBase {
   image: string;
   episode?: string[];
 }
-
-export interface CharacterFilter {
-  name?: string;
-  type?: string;
-  species?: string;
-  status?: 'Dead' | 'Alive' | 'unknown';
-  gender?: 'Female' | 'Male' | 'Genderless' | 'unknown';
-  page?: number;
-}

@@ -8,10 +8,16 @@ import { getCharacters } from '../../core/services/api-service.ts';
 import bgPath from '../../assets/image/rick-and-morty-bg.jpg';
 import Loading from '../../components/loading/loading.tsx';
 
+interface ISearchState {
+  charList: Character[] | undefined;
+  query: string;
+  loading: boolean;
+}
+
 class Search extends React.Component {
-  state: { query: string; charList: Character[]; loading: boolean } = {
+  state: ISearchState = {
     query: '',
-    charList: [],
+    charList: undefined,
     loading: false,
   };
 

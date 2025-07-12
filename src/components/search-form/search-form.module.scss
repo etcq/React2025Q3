@@ -1,6 +1,7 @@
+@use '../../assets/style/variables' as *;
+
 .search-form {
   width: 70%;
-  background-color: #fff;
   height: 60px;
   display: flex;
   align-items: center;
@@ -13,5 +14,6 @@
     border-radius: 4px;
     font-size: 16px;
     padding-left: 20px;
+    background-color: $c-light-bg;
   }
 }

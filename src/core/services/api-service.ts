@@ -4,7 +4,7 @@ const API_BASE = 'https://rickandmortyapi.com/api';
 
 const getCharacters = async (
   name: string
-): Promise<Character[] | Error | undefined> => {
+): Promise<Character[] | undefined> => {
   const url = name
     ? `${API_BASE}/character/?name=${name}`
     : `${API_BASE}/character/?page=${1}`;

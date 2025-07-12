@@ -9,11 +9,9 @@ interface ISearchFormProps {
 }
 
 class SearchForm extends React.Component<ISearchFormProps> {
-  handleChange = (e: ChangeEvent) => {
-    if (e && e.target instanceof HTMLInputElement) {
-      const value = e.target.value;
-      this.props.setQuery(value);
-    }
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    this.props.setQuery(value);
   };
 
   render(): React.ReactNode {
@@ -22,7 +20,7 @@ class SearchForm extends React.Component<ISearchFormProps> {
         <input
           type="text"
           className={style['search-form__input']}
-          onChange={(e) => this.handleChange(e)}
+          onChange={this.handleChange}
           value={this.props.query}
           placeholder="Search..."
         ></input>
