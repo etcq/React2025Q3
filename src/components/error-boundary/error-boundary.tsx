@@ -1,21 +1,22 @@
-import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { Component, type ReactNode } from 'react';
 import ErrorMessage from '../error-message/error-message';
 
 class ErrorBoundary extends Component<{ children: ReactNode }> {
-  state: { error: boolean } = {
+  state: { error: boolean; errorMessage: string } = {
     error: false,
+    errorMessage: '',
   };
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.log(error, errorInfo);
+  componentDidCatch(error: Error) {
     this.setState({
       error: true,
+      errorMessage: error.message,
     });
   }
 
   render(): ReactNode {
     if (this.state.error) {
-      return <ErrorMessage />;
+      return <ErrorMessage message={this.state.errorMessage} />;
     }
 
     return this.props.children;

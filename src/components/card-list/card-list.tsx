@@ -4,12 +4,19 @@ import Card from './card/card.tsx';
 import type { Character } from '../../core/interfaces/interface.ts';
 
 class CardList extends React.Component<{ charList: Character[] }> {
+  componentDidMount(): void {
+    if (this.props.charList.length === 0) {
+      throw new Error('No characters to display');
+    }
+  }
+
   render(): React.ReactNode {
     return (
       <div className={style['card-list']}>
-        {this.props.charList.map((char) => (
-          <Card data={char} key={String(char.id)} />
-        ))}
+        {this.props.charList.length !== 0 &&
+          this.props.charList.map((char) => (
+            <Card data={char} key={String(char.id)} />
+          ))}
       </div>
     );
   }

@@ -2,26 +2,18 @@ import type { Character } from '../interfaces/interface';
 
 const API_BASE = 'https://rickandmortyapi.com/api';
 
-const getAllCharacters = async (): Promise<Character | undefined> => {
-  const url = `${API_BASE}/character/?page=${1}`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.results.map(transformCharacterData);
-  } catch (error) {
-    console.log(error);
+const getCharacters = async (
+  name: string
+): Promise<Character[] | Error | undefined> => {
+  const url = name
+    ? `${API_BASE}/character/?name=${name}`
+    : `${API_BASE}/character/?page=${1}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (!data.results || data.results.length === 0) {
+    throw new Error('No characters found');
   }
-};
-
-const getFilteredCharacters = async (name: string): Promise<void> => {
-  const url = `${API_BASE}/character/?name=${name}`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data.results.map(transformCharacterData);
-  } catch (error) {
-    console.log(error);
-  }
+  return data.results.map(transformCharacterData);
 };
 
 const transformCharacterData = (character: Character): Character => {
@@ -35,4 +27,4 @@ const transformCharacterData = (character: Character): Character => {
   };
 };
 
-export { getAllCharacters, getFilteredCharacters };
+export { getCharacters };
