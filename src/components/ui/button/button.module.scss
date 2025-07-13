@@ -1,16 +1,11 @@
-@use '../../../assets/style/variables.scss' as vars;
+@use '../../../assets/style/variables.scss' as *;
+@use '../../../assets/style/mixins.scss' as *;
 
 .button {
-  width: 120px;
-  height: 40px;
-  background-color: vars.$c-font;
-  border: none;
-  border-radius: 4px;
-  font-family: 'Oxanium', sans-serif;
-  text-transform: uppercase;
-  cursor: pointer;
-  color: vars.$c-dark-bg;
+  @include button(120px, 40px);
+  background-color: $c-font;
+  color: $c-dark-bg;
   &:hover {
-    background-color: vars.$c-light-font;
+    background-color: $c-light-font;
   }
 }

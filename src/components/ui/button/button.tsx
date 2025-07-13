@@ -1,24 +1,23 @@
-import React from 'react';
+import { Component, type ButtonHTMLAttributes } from 'react';
 import style from './button.module.scss';
 
-type ButtonProps = {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   callback: () => void;
-};
+  text: string;
+}
 
-class Button extends React.Component<ButtonProps> {
-  constructor(props: ButtonProps) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
+class Button extends Component<ButtonProps> {
   handleClick = () => {
     this.props.callback();
   };
 
-  render(): React.ReactNode {
+  render() {
     return (
-      <button className={style.button} onClick={this.handleClick}>
-        Search
+      <button
+        className={this.props.className || style.button}
+        onClick={this.handleClick}
+      >
+        {this.props.text}
       </button>
     );
   }

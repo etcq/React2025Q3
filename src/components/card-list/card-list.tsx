@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'react';
 import style from './card-list.module.scss';
 import Card from './card/card.tsx';
 import type { Character } from '../../core/interfaces/interface.ts';
 
-class CardList extends React.Component<{ charList: Character[] | undefined }> {
+class CardList extends Component<{ charList: Character[] | undefined }> {
   componentDidMount(): void {
     if (
       Array.isArray(this.props.charList) &&
@@ -13,7 +13,7 @@ class CardList extends React.Component<{ charList: Character[] | undefined }> {
     }
   }
 
-  render(): React.ReactNode {
+  render() {
     return (
       <div className={style['card-list']}>
         {this.props.charList ? (

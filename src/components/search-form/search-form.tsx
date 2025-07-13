@@ -1,4 +1,4 @@
-import React, { type ChangeEvent } from 'react';
+import { Component, type ChangeEvent } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 
@@ -8,13 +8,13 @@ interface ISearchFormProps {
   clickFn: () => void;
 }
 
-class SearchForm extends React.Component<ISearchFormProps> {
+class SearchForm extends Component<ISearchFormProps> {
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     this.props.setQuery(value);
   };
 
-  render(): React.ReactNode {
+  render() {
     return (
       <div className={style['search-form']}>
         <input
@@ -29,6 +29,7 @@ class SearchForm extends React.Component<ISearchFormProps> {
             localStorage.setItem('search-query', this.props.query);
             this.props.clickFn();
           }}
+          text="Search"
         />
       </div>
     );

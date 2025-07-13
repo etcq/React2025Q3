@@ -1,3 +1,5 @@
+@use '../../../assets/style/variables.scss' as *;
+
 .card {
   display: flex;
   margin: 0 auto;
@@ -7,8 +9,8 @@
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #000;
-  background-color: #a6cccc;
+  border: 1px solid $c-dark-bg;
+  background-color: $c-light-bg;
   gap: 16px;
   &-avatar {
     height: 100%;

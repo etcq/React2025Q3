@@ -7,6 +7,7 @@ import ErrorBoundary from '../../components/error-boundary/error-boundary';
 import { getCharacters } from '../../core/services/api-service.ts';
 import bgPath from '../../assets/image/rick-and-morty-bg.jpg';
 import Loading from '../../components/loading/loading.tsx';
+import Button from '../../components/ui/button/button.tsx';
 
 interface ISearchState {
   charList: Character[] | undefined;
@@ -28,9 +29,9 @@ class Search extends React.Component {
     }));
   }
 
-  handleClick = () => {
+  handleClick = (query = this.state.query) => {
     this.setState({ loading: true });
-    getCharacters(this.state.query)
+    getCharacters(query)
       .then((newCharList) => {
         this.setState({ charList: newCharList });
       })
@@ -62,6 +63,11 @@ class Search extends React.Component {
             </ErrorBoundary>
           )}
         </div>
+        <Button
+          callback={() => this.handleClick('qwe213')}
+          text="Error"
+          className={style['error-button']}
+        />
       </div>
     );
   }

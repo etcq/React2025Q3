@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 
-class Card extends React.Component<{ data: Character }> {
+class Card extends Component<{ data: Character }> {
   render() {
     const { name, image, status, gender, species } = this.props.data;
     return (
