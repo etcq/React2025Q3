@@ -1,0 +1,43 @@
+@use '../../assets/style/variables.scss' as *;
+@use '../../assets/style/mixins.scss' as *;
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  width: 1200px;
+  margin: 0 auto;
+  min-height: 800px;
+  margin-top: 10vh;
+
+  &-header {
+    color: $c-dark-bg;
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  &-subheader {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  &-results {
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 600px;
+    margin-top: 10px;
+  }
+}
+
+.error-button {
+  @include button(300px, 40px);
+  margin-top: 20px;
+  background-color: red;
+  color: white;
+  &:hover {
+    background-color: darkred;
+  }
+}

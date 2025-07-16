@@ -1,0 +1,19 @@
+@use '../../assets/style/variables' as *;
+
+.search-form {
+  width: 70%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  &__input {
+    width: 60%;
+    height: 40px;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-left: 20px;
+    background-color: $c-light-bg;
+  }
+}

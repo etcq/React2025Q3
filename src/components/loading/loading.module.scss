@@ -1,0 +1,10 @@
+@use '../../assets/style/variables' as *;
+@use '../../assets/style/mixins' as *;
+
+.loading {
+  @include center-flex;
+  width: 100%;
+  margin-top: 100px;
+  color: $c-light-font;
+  flex-direction: column;
+}

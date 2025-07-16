@@ -1,0 +1,11 @@
+@use '../../../assets/style/variables.scss' as *;
+@use '../../../assets/style/mixins.scss' as *;
+
+.button {
+  @include button(120px, 40px);
+  background-color: $c-font;
+  color: $c-dark-bg;
+  &:hover {
+    background-color: $c-light-font;
+  }
+}
