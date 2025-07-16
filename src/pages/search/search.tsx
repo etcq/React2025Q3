@@ -27,6 +27,7 @@ class Search extends React.Component {
       ...prevState,
       query: localStorage.getItem('search-query'),
     }));
+    this.handleClick();
   }
 
   handleClick = (query = this.state.query) => {
