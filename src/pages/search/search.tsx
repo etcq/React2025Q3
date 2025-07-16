@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
 import CardList from '../../components/card-list/card-list';
@@ -15,7 +15,7 @@ interface ISearchState {
   loading: boolean;
 }
 
-class Search extends React.Component {
+class Search extends Component {
   state: ISearchState = {
     query: '',
     charList: undefined,
@@ -30,7 +30,7 @@ class Search extends React.Component {
     this.handleClick();
   }
 
-  handleClick = (query = this.state.query) => {
+  handleClick = (query = this.state.query): void => {
     this.setState({ loading: true });
     getCharacters(query)
       .then((newCharList) => {
