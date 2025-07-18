@@ -11,7 +11,7 @@ interface ISearchFormProps {
 class SearchForm extends Component<ISearchFormProps> {
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    this.props.setQuery(value);
+    this.props.setQuery(value.trim());
   };
 
   render() {

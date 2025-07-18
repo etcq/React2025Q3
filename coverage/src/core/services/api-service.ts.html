@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/24</span>
+                <span class='fraction'>22/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/24</span>
+                <span class='fraction'>22/24</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,62 +95,62 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Character } from '../interfaces/interface';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >const API_BASE = 'https://rickandmortyapi.com/api';</span>
+const API_BASE = 'https://rickandmortyapi.com/api';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >const getCharacters = async (</span>
-<span class="cstat-no" title="statement not covered" >  name: string</span>
-<span class="cstat-no" title="statement not covered" >): Promise&lt;Character[] | undefined&gt; =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const url = name</span>
-<span class="cstat-no" title="statement not covered" >    ? `${API_BASE}/character/?name=${name}`</span>
-<span class="cstat-no" title="statement not covered" >    : `${API_BASE}/character/?page=${1}`;</span>
-<span class="cstat-no" title="statement not covered" >  const res = await fetch(url);</span>
-<span class="cstat-no" title="statement not covered" >  const data = await res.json();</span>
-<span class="cstat-no" title="statement not covered" >  if (!data.results || data.results.length === 0) {</span>
+const getCharacters = async (
+  name: string
+): Promise&lt;Character[] | undefined&gt; =&gt; {
+  const url = name
+    ? `${API_BASE}/character/?name=${name}`
+    : `${API_BASE}/character/?page=${1}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (!data.results || data.results.length === 0) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    throw new Error('No characters found');</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  return data.results.map(transformCharacterData);</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+  return data.results.map(transformCharacterData);
+};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >const transformCharacterData = (character: Character): Character =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return {</span>
-<span class="cstat-no" title="statement not covered" >    id: character.id,</span>
-<span class="cstat-no" title="statement not covered" >    name: character.name,</span>
-<span class="cstat-no" title="statement not covered" >    image: character.image,</span>
-<span class="cstat-no" title="statement not covered" >    status: character.status,</span>
-<span class="cstat-no" title="statement not covered" >    gender: character.gender,</span>
-<span class="cstat-no" title="statement not covered" >    species: character.species,</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+const transformCharacterData = (character: Character): Character =&gt; {
+  return {
+    id: character.id,
+    name: character.name,
+    image: character.image,
+    status: character.status,
+    gender: character.gender,
+    species: character.species,
+  };
+};
 &nbsp;
 export { getCharacters };
 &nbsp;</pre></td></tr></table></pre>
@@ -160,7 +160,7 @@ export { getCharacters };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-17T00:07:54.895Z
+                at 2025-07-18T00:39:42.623Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
