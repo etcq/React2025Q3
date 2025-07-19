@@ -25,7 +25,7 @@ class Search extends Component {
   componentDidMount(): void {
     this.setState((prevState) => ({
       ...prevState,
-      query: localStorage.getItem('search-query'),
+      query: localStorage.getItem('search-query') || '',
     }));
     this.handleClick();
   }
