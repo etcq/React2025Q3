@@ -5,13 +5,13 @@ import SearchForm from '../../components/search-form/search-form';
 import Search from '../../pages/search/search';
 
 describe('SearchForm render', () => {
-  it('should render input', () => {
+  it('Should render input', () => {
     render(<SearchForm query="" setQuery={() => {}} clickFn={() => {}} />);
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
     expect(screen.getByText('Search')).toBeInTheDocument();
   });
 
-  it('should render button', () => {
+  it('Should render button', () => {
     render(<SearchForm query="" setQuery={() => {}} clickFn={() => {}} />);
     expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
@@ -63,8 +63,8 @@ describe('SearchForm input values', () => {
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
-    await fireEvent.input(input, { target: { value: 'Rick' } });
-    await fireEvent.click(button);
+    fireEvent.input(input, { target: { value: 'Rick' } });
+    fireEvent.click(button);
     expect(localStorage.getItem('search-query')).toBe('Rick');
   });
 
@@ -72,8 +72,8 @@ describe('SearchForm input values', () => {
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
-    await fireEvent.input(input, { target: { value: 'Rick' } });
-    await fireEvent.click(button);
+    fireEvent.input(input, { target: { value: 'Rick' } });
+    fireEvent.click(button);
     expect(localStorage.getItem('search-query')).toBe('Rick');
   });
 });
@@ -93,10 +93,10 @@ describe('LocalStorage Integration', () => {
   it('Overwrites existing localStorage value when new search is performed', async () => {
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
-    expect(localStorage.getItem('search-query')).toBe('initial-query');
     const button = screen.getByRole('button', { name: 'Search' });
-    await fireEvent.input(input, { target: { value: 'new query' } });
-    await fireEvent.click(button);
+    expect(localStorage.getItem('search-query')).toBe('initial-query');
+    fireEvent.input(input, { target: { value: 'new query' } });
+    fireEvent.click(button);
     expect(localStorage.getItem('search-query')).toBe('new query');
   });
 });

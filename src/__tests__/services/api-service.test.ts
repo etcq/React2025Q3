@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { getCharacters } from '../../core/services/api-service';
 
 describe('API service work', () => {
@@ -6,5 +6,19 @@ describe('API service work', () => {
     const characters = await getCharacters('');
     expect(characters).toBeDefined();
     expect(characters?.length).toBe(20);
+  });
+  it('Gets characters by name', async () => {
+    const characters = await getCharacters('rick');
+    expect(Array.isArray(characters)).toBe(true);
+    expect(characters[0].name).toMatch(/rick/i);
+    expect(characters[1].name).toMatch(/rick/i);
+    expect(characters[2].name).toMatch(/rick/i);
+    expect(characters[3].name).not.toMatch(/morty/i);
+  });
+  it('If no characters are found, throw an error.', async () => {
+    const spyError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    await expect(getCharacters('charnotfound')).rejects.toThrowError();
+    expect(spyError).toBeCalled();
+    spyError.mockRestore();
   });
 });
