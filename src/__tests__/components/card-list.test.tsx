@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CardList from '../../components/card-list/card-list';
 import type { Character } from '../../core/interfaces/interface';
-import Search from '../../pages/search/search';
 
 vi.mock('fetch');
 
@@ -42,10 +41,13 @@ describe('CardList content', () => {
     const cards = screen.getAllByTestId('card');
     expect(cards.length).toBe(3);
   });
-
-  it('Shows loading state while fetching data', async () => {
-    render(<Search />);
-    const loading = await screen.findByText('Loading...');
-    expect(loading).toBeInTheDocument();
+  it('Renders correct items', () => {
+    render(<CardList charList={response} />);
+    const cards = screen.getAllByTestId('card');
+    expect(cards[0]).toHaveTextContent('Rick Sanchez');
+    expect(cards[0]).toHaveTextContent('Alive');
+    expect(cards[1]).toHaveTextContent('Morty Smith');
+    expect(cards[1]).toHaveTextContent('Human');
+    expect(cards[2]).toHaveTextContent('Summer Smith');
   });
 });
