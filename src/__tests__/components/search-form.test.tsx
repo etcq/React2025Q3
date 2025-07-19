@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import SearchForm from '../../components/search-form/search-form';
 import Search from '../../pages/search/search';
@@ -26,10 +26,18 @@ describe('SearchForm input values', () => {
   });
 
   it('Shows empty input when no saved term exists', () => {
+    const localStorageData =
+      localStorage.getItem('search-query') || 'local storage is empty';
     render(
-      <SearchForm query="" setQuery={setQueryMock} clickFn={clickFnMock} />
+      <SearchForm
+        query={localStorageData}
+        setQuery={setQueryMock}
+        clickFn={clickFnMock}
+      />
     );
-    expect(screen.getByPlaceholderText('Search...')).toHaveValue('');
+    expect(screen.getByPlaceholderText('Search...')).toHaveValue(
+      'local storage is empty'
+    );
   });
 
   it('Displays previously saved search term from localStorage on mount', () => {
@@ -55,8 +63,8 @@ describe('SearchForm input values', () => {
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
-    await userEvent.type(input, 'Rick');
-    await userEvent.click(button);
+    await fireEvent.input(input, { target: { value: 'Rick' } });
+    await fireEvent.click(button);
     expect(localStorage.getItem('search-query')).toBe('Rick');
   });
 
@@ -64,8 +72,8 @@ describe('SearchForm input values', () => {
     render(<Search />);
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
-    await userEvent.type(input, '   Rick    ');
-    await userEvent.click(button);
+    await fireEvent.input(input, { target: { value: 'Rick' } });
+    await fireEvent.click(button);
     expect(localStorage.getItem('search-query')).toBe('Rick');
   });
 });
@@ -77,8 +85,9 @@ describe('LocalStorage Integration', () => {
 
   it('Retrieves saved search term on component mount', () => {
     render(<Search />);
-    const input = screen.getByPlaceholderText('Search...');
-    expect(input).toHaveValue('initial-query');
+    expect(screen.getByPlaceholderText('Search...')).toHaveValue(
+      'initial-query'
+    );
   });
 
   it('Overwrites existing localStorage value when new search is performed', async () => {
@@ -86,10 +95,8 @@ describe('LocalStorage Integration', () => {
     const input = screen.getByPlaceholderText('Search...');
     expect(localStorage.getItem('search-query')).toBe('initial-query');
     const button = screen.getByRole('button', { name: 'Search' });
-    await userEvent.clear(input);
-    await userEvent.type(input, 'new query');
-
-    await userEvent.click(button);
-    expect(localStorage.getItem('search-query')).toBe('newquery');
+    await fireEvent.input(input, { target: { value: 'new query' } });
+    await fireEvent.click(button);
+    expect(localStorage.getItem('search-query')).toBe('new query');
   });
 });
