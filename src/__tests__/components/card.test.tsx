@@ -15,8 +15,23 @@ describe('Card content', () => {
     };
 
     render(<Card data={character} />);
-    expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-    expect(screen.getByText('Alive')).toBeInTheDocument();
-    expect(screen.getByText('Human')).toBeInTheDocument();
+    const img = screen.getByRole('img');
+    expect(screen.getByText(character.name)).toBeInTheDocument();
+    expect(screen.getByText(character.status)).toBeInTheDocument();
+    expect(screen.getByText(character.species)).toBeInTheDocument();
+    expect(screen.getByText(character.gender)).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', character.image);
+  });
+  it('Render another status', () => {
+    const character: Character = {
+      id: 1,
+      name: 'Rick Sanchez',
+      status: 'Dead',
+      species: 'Human',
+      gender: 'Male',
+      image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    };
+    render(<Card data={character} />);
+    expect(screen.getByText('Dead')).toBeInTheDocument();
   });
 });
