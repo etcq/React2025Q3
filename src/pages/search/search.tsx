@@ -25,7 +25,7 @@ class Search extends Component {
   componentDidMount(): void {
     this.setState((prevState) => ({
       ...prevState,
-      query: localStorage.getItem('search-query'),
+      query: localStorage.getItem('search-query') || '',
     }));
     this.handleClick();
   }
@@ -42,6 +42,11 @@ class Search extends Component {
       .finally(() => this.setState({ loading: false }));
   };
 
+  setQuery = (query: string): void => {
+    this.setState({ query });
+    localStorage.setItem('search-query', query);
+  };
+
   render() {
     return (
       <div
@@ -52,7 +57,7 @@ class Search extends Component {
         <span className={style['search-subheader']}>characters database</span>
         <SearchForm
           query={this.state.query}
-          setQuery={(newQuery: string) => this.setState({ query: newQuery })}
+          setQuery={this.setQuery}
           clickFn={this.handleClick}
         />
         <div className={style['search-results']}>
