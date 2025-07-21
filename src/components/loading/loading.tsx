@@ -1,15 +1,13 @@
-import { Component } from 'react';
+import type { JSX } from 'react';
 import Spinner from '../ui/spinner/spinner.tsx';
 import style from './loading.module.scss';
 
-class Loading extends Component {
-  render() {
-    return (
-      <div className={style.loading}>
-        <Spinner />
-        <p>Loading...</p>
-      </div>
-    );
-  }
-}
+const Loading = (): JSX.Element => {
+  return (
+    <div className={style.loading}>
+      <Spinner />
+      <p>Loading...</p>
+    </div>
+  );
+};
 export default Loading;

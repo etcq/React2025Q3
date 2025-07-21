@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { type FC, useCallback, useEffect, useState } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
 import CardList from '../../components/card-list/card-list';
@@ -9,74 +9,63 @@ import bgPath from '../../assets/image/rick-and-morty-bg.jpg';
 import Loading from '../../components/loading/loading.tsx';
 import Button from '../../components/ui/button/button.tsx';
 
-interface ISearchState {
-  charList: Character[] | undefined;
-  query: string;
-  loading: boolean;
-}
+const Search: FC = () => {
+  const [query, setQuery] = useState('');
+  const [charList, setCharList] = useState<Character[]>([]);
+  const [isLoading, setLoading] = useState(false);
 
-class Search extends Component {
-  state: ISearchState = {
-    query: '',
-    charList: undefined,
-    loading: false,
-  };
+  const handleClick = useCallback(
+    (name: string = query) => {
+      setLoading(true);
+      getCharacters(name)
+        .then((newCharList) => {
+          setCharList(newCharList);
+        })
+        .catch(() => {
+          setCharList([]);
+        })
+        .finally(() => setLoading(false));
+    },
+    [query]
+  );
 
-  componentDidMount(): void {
-    this.setState((prevState) => ({
-      ...prevState,
-      query: localStorage.getItem('search-query') || '',
-    }));
-    this.handleClick();
-  }
-
-  handleClick = (query = this.state.query): void => {
-    this.setState({ loading: true });
-    getCharacters(query)
-      .then((newCharList) => {
-        this.setState({ charList: newCharList });
-      })
-      .catch(() => {
-        this.setState({ charList: [] });
-      })
-      .finally(() => this.setState({ loading: false }));
-  };
-
-  setQuery = (query: string): void => {
-    this.setState({ query });
+  useEffect(() => {
+    setQuery(localStorage.getItem('search-query') || '');
+    handleClick();
+  }, [handleClick, setQuery]);
+  const handleChangeQuery = (query: string): void => {
+    setQuery(query);
     localStorage.setItem('search-query', query);
   };
 
-  render() {
-    return (
-      <div
-        className={style.search}
-        style={{ background: `url(${bgPath}) center center/cover no-repeat` }}
-      >
-        <h1 className={style['search-header']}>Rick and Morty</h1>
-        <span className={style['search-subheader']}>characters database</span>
-        <SearchForm
-          query={this.state.query}
-          setQuery={this.setQuery}
-          clickFn={this.handleClick}
-        />
-        <div className={style['search-results']}>
-          {this.state.loading ? (
-            <Loading />
-          ) : (
-            <ErrorBoundary>
-              <CardList charList={this.state.charList} />
-            </ErrorBoundary>
-          )}
-        </div>
-        <Button
-          callback={() => this.handleClick('qwe213')}
-          text="Error"
-          className={style['error-button']}
-        />
+  return (
+    <div
+      className={style.search}
+      style={{ background: `url(${bgPath}) center center/cover no-repeat` }}
+    >
+      <h1 className={style['search-header']}>Rick and Morty</h1>
+      <span className={style['search-subheader']}>characters database</span>
+      <SearchForm
+        query={query}
+        setQuery={handleChangeQuery}
+        clickFn={handleClick}
+      />
+      <div className={style['search-results']}>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <ErrorBoundary>
+            <CardList charList={charList} />
+          </ErrorBoundary>
+        )}
       </div>
-    );
-  }
-}
+      <Button
+        callback={() => handleClick('qwe213')}
+        text="Error"
+        className={style['error-button']}
+      />
+    </div>
+  );
+};
 
 export default Search;

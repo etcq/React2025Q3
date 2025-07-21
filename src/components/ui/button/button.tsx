@@ -1,4 +1,4 @@
-import { Component, type ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, FC } from 'react';
 import style from './button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -6,21 +6,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
 }
 
-class Button extends Component<ButtonProps> {
-  handleClick = () => {
-    this.props.callback();
+const Button: FC<ButtonProps> = (props: ButtonProps) => {
+  const handleClick = () => {
+    props.callback();
   };
-
-  render() {
-    return (
-      <button
-        className={this.props.className || style.button}
-        onClick={this.handleClick}
-      >
-        {this.props.text}
-      </button>
-    );
-  }
-}
+  return (
+    <button className={props.className || style.button} onClick={handleClick}>
+      {props.text}
+    </button>
+  );
+};
 
 export default Button;
