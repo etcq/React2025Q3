@@ -1,15 +1,20 @@
 import { useRef, useEffect, type FC } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
-import { useLocalStorage } from '../../core/hooks/useLocalStorage';
-import { LOCAL_STORAGE_KEY } from '../../core/constants/constants';
 
 interface ISearchFormProps {
-  clickFn: (query: string) => void;
+  clickFn: (query: string, page: number) => void;
+  setPage: (page: number) => void;
+  savedQuery: string;
+  setQueryLS: (query: string) => void;
 }
 
-const SearchForm: FC<ISearchFormProps> = ({ clickFn }) => {
-  const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
+const SearchForm: FC<ISearchFormProps> = ({
+  clickFn,
+  setPage,
+  savedQuery,
+  setQueryLS,
+}) => {
   const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -17,6 +22,13 @@ const SearchForm: FC<ISearchFormProps> = ({ clickFn }) => {
       input.current.value = savedQuery;
     }
   }, [savedQuery]);
+
+  const handleClick = () => {
+    const inputValue = input.current?.value.trim() || '';
+    setPage(1);
+    setQueryLS(inputValue);
+    clickFn(inputValue, 1);
+  };
 
   return (
     <div className={style['search-form']}>
@@ -26,14 +38,7 @@ const SearchForm: FC<ISearchFormProps> = ({ clickFn }) => {
         placeholder="Search..."
         ref={input}
       ></input>
-      <Button
-        callback={() => {
-          const inputValue = input.current?.value.trim() || '';
-          setQueryLS(inputValue);
-          clickFn(inputValue);
-        }}
-        text="Search"
-      />
+      <Button callback={handleClick} text="Search" />
     </div>
   );
 };

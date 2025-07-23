@@ -10,29 +10,34 @@ import Loading from '../../components/loading/loading.tsx';
 import Button from '../../components/ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
+import { usePagination } from '../../core/hooks/usePagination.ts';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
-  const { savedQuery } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const { page, setPage, maxPage, setMaxPage, prevPage, nextPage } =
+    usePagination();
 
   const handleClick = useCallback(
-    (name: string = savedQuery) => {
+    (name: string = savedQuery, queryPage: number = page) => {
+      console.log(savedQuery, queryPage);
       setLoading(true);
-      getCharacters(name)
-        .then((newCharList) => {
-          setCharList(newCharList);
+      getCharacters(name, queryPage)
+        .then((response) => {
+          setCharList(response.character);
+          setMaxPage(response.maxPage);
         })
         .catch(() => {
           setCharList([]);
         })
         .finally(() => setLoading(false));
     },
-    [savedQuery]
+    [savedQuery, page, setMaxPage]
   );
 
   useEffect(() => {
-    handleClick(savedQuery);
+    handleClick();
   }, [handleClick, savedQuery]);
 
   return (
@@ -42,8 +47,19 @@ const Search: FC = () => {
     >
       <h1 className={style['search-header']}>Rick and Morty</h1>
       <span className={style['search-subheader']}>characters database</span>
-      <SearchForm clickFn={handleClick} />
+      <SearchForm
+        clickFn={handleClick}
+        setPage={setPage}
+        savedQuery={savedQuery}
+        setQueryLS={setQueryLS}
+      />
       <div className={style['search-results']}>
+        <Button
+          callback={prevPage}
+          text="Prev Page"
+          className={style['next-page-button']}
+          disabled={page <= 1}
+        />
         {isLoading ? (
           <Loading />
         ) : (
@@ -51,6 +67,12 @@ const Search: FC = () => {
             <CardList charList={charList} />
           </ErrorBoundary>
         )}
+        <Button
+          callback={nextPage}
+          text="Next Page"
+          className={style['next-page-button']}
+          disabled={page >= maxPage}
+        />
       </div>
       <Button
         callback={() => handleClick('qwe213')}

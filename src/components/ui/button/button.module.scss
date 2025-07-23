@@ -8,4 +8,8 @@
   &:hover {
     background-color: $c-light-font;
   }
+  &:disabled {
+    background-color: $c-font;
+    cursor: not-allowed;
+  }
 }
