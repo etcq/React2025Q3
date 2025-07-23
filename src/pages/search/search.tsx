@@ -8,14 +8,16 @@ import { getCharacters } from '../../core/services/api-service.ts';
 import bgPath from '../../assets/image/rick-and-morty-bg.jpg';
 import Loading from '../../components/loading/loading.tsx';
 import Button from '../../components/ui/button/button.tsx';
+import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
+import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
 
 const Search: FC = () => {
-  const [query, setQuery] = useState('');
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
+  const { savedQuery } = useLocalStorage(LOCAL_STORAGE_KEY);
 
   const handleClick = useCallback(
-    (name: string = query) => {
+    (name: string = savedQuery) => {
       setLoading(true);
       getCharacters(name)
         .then((newCharList) => {
@@ -26,17 +28,12 @@ const Search: FC = () => {
         })
         .finally(() => setLoading(false));
     },
-    [query]
+    [savedQuery]
   );
 
   useEffect(() => {
-    setQuery(localStorage.getItem('search-query') || '');
-    handleClick();
-  }, [handleClick, setQuery]);
-  const handleChangeQuery = (query: string): void => {
-    setQuery(query);
-    localStorage.setItem('search-query', query);
-  };
+    handleClick(savedQuery);
+  }, [handleClick, savedQuery]);
 
   return (
     <div
@@ -45,11 +42,7 @@ const Search: FC = () => {
     >
       <h1 className={style['search-header']}>Rick and Morty</h1>
       <span className={style['search-subheader']}>characters database</span>
-      <SearchForm
-        query={query}
-        setQuery={handleChangeQuery}
-        clickFn={handleClick}
-      />
+      <SearchForm clickFn={handleClick} />
       <div className={style['search-results']}>
         {isLoading ? (
           <Loading />
