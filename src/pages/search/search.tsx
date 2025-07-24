@@ -12,12 +12,14 @@ import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
 import { usePagination } from '../../core/hooks/usePagination.ts';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
+import { CharacterDetailed } from '../../components/character-detailed/character-detailed.tsx';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const [currentCharacterId, setCurrentCharacterId] = useState(0);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
     usePagination();
 
@@ -83,9 +85,20 @@ const Search: FC = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <ErrorBoundary>
-            <CardList charList={charList} />
-          </ErrorBoundary>
+          <div className={style['list-wrapper']}>
+            <ErrorBoundary>
+              <CardList
+                charList={charList}
+                setCharacter={setCurrentCharacterId}
+              />
+            </ErrorBoundary>
+            {currentCharacterId && (
+              <CharacterDetailed
+                id={currentCharacterId}
+                setCharacter={setCurrentCharacterId}
+              />
+            )}
+          </div>
         )}
       </div>
       <Button
