@@ -7,7 +7,10 @@ export const usePagination = () => {
   const [searchParams, setSearchParams] = useSearchParams({ page: '1' });
 
   useEffect(() => {
-    setSearchParams({ page: String(page) });
+    setSearchParams((searchParams) => {
+      searchParams.set('page', `${page}`);
+      return searchParams;
+    });
   }, [page, setSearchParams]);
 
   const nextPage = () => {

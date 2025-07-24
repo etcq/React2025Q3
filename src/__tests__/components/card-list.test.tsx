@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CardList from '../../components/card-list/card-list';
 import type { Character } from '../../core/interfaces/interface';
+import { MemoryRouter } from 'react-router';
 
 const response: Character[] = [
   {
@@ -32,12 +33,20 @@ const response: Character[] = [
 
 describe('CardList content', () => {
   it('Renders correct number of items when data is provided', () => {
-    render(<CardList charList={response} />);
+    render(
+      <MemoryRouter>
+        <CardList charList={response} />
+      </MemoryRouter>
+    );
     const cards = screen.getAllByTestId('card');
     expect(cards.length).toBe(3);
   });
   it('Renders correct items', () => {
-    render(<CardList charList={response} />);
+    render(
+      <MemoryRouter>
+        <CardList charList={response} />
+      </MemoryRouter>
+    );
     const cards = screen.getAllByTestId('card');
     expect(cards[0]).toHaveTextContent('Rick Sanchez');
     expect(cards[0]).toHaveTextContent('Alive');

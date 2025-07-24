@@ -7,12 +7,14 @@ import { MemoryRouter } from 'react-router';
 describe('SearchForm render', () => {
   it('Should render input', () => {
     render(
-      <SearchForm
-        clickFn={() => {}}
-        setQueryLS={() => {}}
-        resetPage={() => {}}
-        savedQuery=""
-      />
+      <MemoryRouter>
+        <SearchForm
+          clickFn={() => {}}
+          setQueryLS={() => {}}
+          resetPage={() => {}}
+          savedQuery=""
+        />
+      </MemoryRouter>
     );
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
     expect(screen.getByText('Search')).toBeInTheDocument();
@@ -20,12 +22,14 @@ describe('SearchForm render', () => {
 
   it('Should render button', () => {
     render(
-      <SearchForm
-        clickFn={() => {}}
-        setQueryLS={() => {}}
-        resetPage={() => {}}
-        savedQuery=""
-      />
+      <MemoryRouter>
+        <SearchForm
+          clickFn={() => {}}
+          setQueryLS={() => {}}
+          resetPage={() => {}}
+          savedQuery=""
+        />
+      </MemoryRouter>
     );
     expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
@@ -42,24 +46,28 @@ describe('SearchForm input values', () => {
   it('Shows empty input when no saved term exists', () => {
     localStorage.clear();
     render(
-      <SearchForm
-        clickFn={clickFnMock}
-        setQueryLS={setQueryLS}
-        resetPage={() => {}}
-        savedQuery=""
-      />
+      <MemoryRouter>
+        <SearchForm
+          clickFn={clickFnMock}
+          setQueryLS={setQueryLS}
+          resetPage={() => {}}
+          savedQuery=""
+        />
+      </MemoryRouter>
     );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue('');
   });
 
   it('Displays previously saved search term from localStorage on mount', () => {
     render(
-      <SearchForm
-        clickFn={clickFnMock}
-        setQueryLS={() => {}}
-        resetPage={() => {}}
-        savedQuery="test-query"
-      />
+      <MemoryRouter>
+        <SearchForm
+          clickFn={clickFnMock}
+          setQueryLS={setQueryLS}
+          resetPage={() => {}}
+          savedQuery="test-query"
+        />
+      </MemoryRouter>
     );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue('test-query');
   });

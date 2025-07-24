@@ -26,6 +26,16 @@ const getCharacters = async (
   };
 };
 
+const getCharacter = async (id: number): Promise<Character> => {
+  const url = `${API_BASE}/character/${id}`;
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error("Can't get character data");
+  }
+  const data = await res.json();
+  return data;
+};
+
 const transformCharacterData = (character: Character): Character => {
   return {
     id: character.id,
@@ -37,4 +47,4 @@ const transformCharacterData = (character: Character): Character => {
   };
 };
 
-export { getCharacters };
+export { getCharacters, getCharacter };

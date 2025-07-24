@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Card from '../../components/card-list/card/card';
 import type { Character } from '../../core/interfaces/interface';
+import { MemoryRouter } from 'react-router';
 
 describe('Card content', () => {
   it('Renders correct character data', () => {
@@ -14,7 +15,11 @@ describe('Card content', () => {
       image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
     };
 
-    render(<Card data={character} />);
+    render(
+      <MemoryRouter>
+        <Card data={character} />
+      </MemoryRouter>
+    );
     const img = screen.getByRole('img');
     expect(screen.getByText(character.name)).toBeInTheDocument();
     expect(screen.getByText(character.status)).toBeInTheDocument();
@@ -31,7 +36,11 @@ describe('Card content', () => {
       gender: 'Male',
       image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
     };
-    render(<Card data={character} />);
+    render(
+      <MemoryRouter>
+        <Card data={character} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Dead')).toBeInTheDocument();
   });
 });

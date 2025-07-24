@@ -1,17 +1,17 @@
 import type { FC } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
+import { useNavigate } from 'react-router';
 
-const Card: FC<{ data: Character; setCharacter: (id: number) => void }> = ({
-  data,
-  setCharacter,
-}) => {
+const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
+  const navigate = useNavigate();
+
   return (
     <div
       className={styles.card}
       data-testid="card"
-      onClick={() => setCharacter(id)}
+      onClick={() => void navigate(`/${id}`)}
     >
       <img className={styles['card-avatar']} src={image} alt={name} />
       <div className={styles['card-info']}>

@@ -1,9 +1,7 @@
 import { type FC, useCallback, useEffect, useState } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
-import CardList from '../../components/card-list/card-list';
 import type { Character } from '../../core/interfaces/interface.ts';
-import ErrorBoundary from '../../components/error-boundary/error-boundary';
 import { getCharacters } from '../../core/services/api-service.ts';
 import bgPath from '../../assets/image/rick-and-morty-bg.jpg';
 import Loading from '../../components/loading/loading.tsx';
@@ -12,19 +10,19 @@ import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
 import { usePagination } from '../../core/hooks/usePagination.ts';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
-import { CharacterDetailed } from '../../components/character-detailed/character-detailed.tsx';
+import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
-  const [currentCharacterId, setCurrentCharacterId] = useState(0);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
     usePagination();
 
   const handleClick = useCallback(
     (name: string = savedQuery, queryPage: number = page) => {
+      console.log(savedQuery);
       setShowControls(false);
       setLoading(true);
       getCharacters(name, queryPage)
@@ -82,24 +80,7 @@ const Search: FC = () => {
             </Button>
           </div>
         )}
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <div className={style['list-wrapper']}>
-            <ErrorBoundary>
-              <CardList
-                charList={charList}
-                setCharacter={setCurrentCharacterId}
-              />
-            </ErrorBoundary>
-            {currentCharacterId && (
-              <CharacterDetailed
-                id={currentCharacterId}
-                setCharacter={setCurrentCharacterId}
-              />
-            )}
-          </div>
-        )}
+        {isLoading ? <Loading /> : <ResultLayout charList={charList} />}
       </div>
       <Button
         callback={() => handleClick('qwe213')}
