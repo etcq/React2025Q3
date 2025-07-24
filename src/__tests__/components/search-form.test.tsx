@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import SearchForm from '../../components/search-form/search-form';
 import Search from '../../pages/search/search';
+import { MemoryRouter } from 'react-router';
 
 describe('SearchForm render', () => {
   it('Should render input', () => {
@@ -9,7 +10,7 @@ describe('SearchForm render', () => {
       <SearchForm
         clickFn={() => {}}
         setQueryLS={() => {}}
-        setPage={() => {}}
+        resetPage={() => {}}
         savedQuery=""
       />
     );
@@ -22,7 +23,7 @@ describe('SearchForm render', () => {
       <SearchForm
         clickFn={() => {}}
         setQueryLS={() => {}}
-        setPage={() => {}}
+        resetPage={() => {}}
         savedQuery=""
       />
     );
@@ -44,7 +45,7 @@ describe('SearchForm input values', () => {
       <SearchForm
         clickFn={clickFnMock}
         setQueryLS={setQueryLS}
-        setPage={() => {}}
+        resetPage={() => {}}
         savedQuery=""
       />
     );
@@ -56,7 +57,7 @@ describe('SearchForm input values', () => {
       <SearchForm
         clickFn={clickFnMock}
         setQueryLS={() => {}}
-        setPage={() => {}}
+        resetPage={() => {}}
         savedQuery="test-query"
       />
     );
@@ -64,7 +65,11 @@ describe('SearchForm input values', () => {
   });
 
   it('Saves search term to localStorage when search button is clicked', async () => {
-    render(<Search />);
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
     fireEvent.input(input, { target: { value: 'Rick' } });
@@ -73,7 +78,11 @@ describe('SearchForm input values', () => {
   });
 
   it('Trims whitespace from search input before saving', async () => {
-    render(<Search />);
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
     fireEvent.input(input, { target: { value: 'Rick' } });
@@ -88,14 +97,22 @@ describe('LocalStorage Integration', () => {
   });
 
   it('Retrieves saved search term on component mount', () => {
-    render(<Search />);
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue(
       'initial-query'
     );
   });
 
   it('Overwrites existing localStorage value when new search is performed', async () => {
-    render(<Search />);
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText('Search...');
     const button = screen.getByRole('button', { name: 'Search' });
     expect(localStorage.getItem('search-query')).toBe('initial-query');
