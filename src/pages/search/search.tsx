@@ -11,24 +11,29 @@ import Button from '../../components/ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
 import { usePagination } from '../../core/hooks/usePagination.ts';
+import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
     usePagination();
 
   const handleClick = useCallback(
     (name: string = savedQuery, queryPage: number = page) => {
+      setShowControls(false);
       setLoading(true);
       getCharacters(name, queryPage)
         .then((response) => {
           setCharList(response.characters);
           setMaxPage(response.maxPage);
+          setShowControls(true);
         })
         .catch(() => {
           setCharList([]);
+          setShowControls(false);
         })
         .finally(() => setLoading(false));
     },
@@ -53,12 +58,28 @@ const Search: FC = () => {
         setQueryLS={setQueryLS}
       />
       <div className={style['search-results']}>
-        <Button
-          callback={prevPage}
-          text="Prev Page"
-          className={style['next-page-button']}
-          disabled={page <= 1}
-        />
+        {showControls && (
+          <div className={style['search-controls']}>
+            <Button
+              callback={prevPage}
+              className={style['page-button']}
+              disabled={page <= 1}
+            >
+              <GrFormPreviousLink />
+            </Button>
+            <span className={style['search-controls-counter']}>
+              {page} / {maxPage}
+            </span>
+            <Button
+              callback={nextPage}
+              text="Next Page"
+              className={style['page-button']}
+              disabled={page >= maxPage}
+            >
+              <GrFormNextLink />
+            </Button>
+          </div>
+        )}
         {isLoading ? (
           <Loading />
         ) : (
@@ -66,17 +87,12 @@ const Search: FC = () => {
             <CardList charList={charList} />
           </ErrorBoundary>
         )}
-        <Button
-          callback={nextPage}
-          text="Next Page"
-          className={style['next-page-button']}
-          disabled={page >= maxPage}
-        />
       </div>
       <Button
         callback={() => handleClick('qwe213')}
         text="Error"
         className={style['error-button']}
+        isError={true}
       />
     </div>
   );

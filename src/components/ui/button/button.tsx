@@ -3,21 +3,30 @@ import style from './button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   callback: () => void;
-  text: string;
+  text?: string;
   disabled?: boolean;
+  isError?: boolean;
 }
 
-const Button: FC<ButtonProps> = (props: ButtonProps) => {
+const Button: FC<ButtonProps> = ({
+  callback,
+  className,
+  disabled,
+  children,
+  isError,
+  ...props
+}) => {
   const handleClick = () => {
-    props.callback();
+    callback();
   };
   return (
     <button
-      className={props.className || style.button}
+      {...props}
+      className={`${style.button} ${isError && style['error-button']} ${className} `}
       onClick={handleClick}
-      disabled={props.disabled}
+      disabled={disabled}
     >
-      {props.text}
+      {children ?? props.text}
     </button>
   );
 };
