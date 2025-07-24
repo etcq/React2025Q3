@@ -4,14 +4,14 @@ import style from './search-form.module.scss';
 
 interface ISearchFormProps {
   clickFn: (query: string, page: number) => void;
-  setPage: (page: number) => void;
+  resetPage: () => void;
   savedQuery: string;
   setQueryLS: (query: string) => void;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
   clickFn,
-  setPage,
+  resetPage,
   savedQuery,
   setQueryLS,
 }) => {
@@ -25,7 +25,7 @@ const SearchForm: FC<ISearchFormProps> = ({
 
   const handleClick = () => {
     const inputValue = input.current?.value.trim() || '';
-    setPage(1);
+    resetPage();
     setQueryLS(inputValue);
     clickFn(inputValue, 1);
   };

@@ -16,12 +16,11 @@ const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
   const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
-  const { page, setPage, maxPage, setMaxPage, prevPage, nextPage } =
+  const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
     usePagination();
 
   const handleClick = useCallback(
     (name: string = savedQuery, queryPage: number = page) => {
-      console.log(savedQuery, queryPage);
       setLoading(true);
       getCharacters(name, queryPage)
         .then((response) => {
@@ -49,7 +48,7 @@ const Search: FC = () => {
       <span className={style['search-subheader']}>characters database</span>
       <SearchForm
         clickFn={handleClick}
-        setPage={setPage}
+        resetPage={resetPage}
         savedQuery={savedQuery}
         setQueryLS={setQueryLS}
       />
