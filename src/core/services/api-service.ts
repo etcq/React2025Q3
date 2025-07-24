@@ -4,7 +4,7 @@ const API_BASE = 'https://rickandmortyapi.com/api';
 
 interface ICharacterResponse {
   maxPage: number;
-  character: Character[];
+  characters: Character[];
 }
 
 const getCharacters = async (
@@ -22,7 +22,7 @@ const getCharacters = async (
   }
   return {
     maxPage: data.info.pages,
-    character: data.results.map(transformCharacterData),
+    characters: data.results.map(transformCharacterData),
   };
 };
 

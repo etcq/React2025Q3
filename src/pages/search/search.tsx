@@ -25,7 +25,7 @@ const Search: FC = () => {
       setLoading(true);
       getCharacters(name, queryPage)
         .then((response) => {
-          setCharList(response.character);
+          setCharList(response.characters);
           setMaxPage(response.maxPage);
         })
         .catch(() => {

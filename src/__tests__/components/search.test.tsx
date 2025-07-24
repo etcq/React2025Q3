@@ -32,7 +32,7 @@ describe('Search page API Integration Tests', () => {
     const searchButton = screen.getByRole('button', { name: 'Search' });
     fireEvent.input(input, { target: { value: 'new-name' } });
     fireEvent.click(searchButton);
-    expect(apiCallSpy).toBeCalledWith('new-name');
+    expect(apiCallSpy).toBeCalledWith('new-name', 1);
   });
   it('Handles successful API responses', async () => {
     render(<Search />);

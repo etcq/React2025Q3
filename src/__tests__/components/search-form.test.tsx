@@ -5,19 +5,34 @@ import Search from '../../pages/search/search';
 
 describe('SearchForm render', () => {
   it('Should render input', () => {
-    render(<SearchForm clickFn={() => {}} />);
+    render(
+      <SearchForm
+        clickFn={() => {}}
+        setQueryLS={() => {}}
+        setPage={() => {}}
+        savedQuery=""
+      />
+    );
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
     expect(screen.getByText('Search')).toBeInTheDocument();
   });
 
   it('Should render button', () => {
-    render(<SearchForm clickFn={() => {}} />);
+    render(
+      <SearchForm
+        clickFn={() => {}}
+        setQueryLS={() => {}}
+        setPage={() => {}}
+        savedQuery=""
+      />
+    );
     expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
 });
 
 describe('SearchForm input values', () => {
   const clickFnMock = vi.fn();
+  const setQueryLS = vi.fn();
 
   beforeEach(() => {
     localStorage.clear();
@@ -25,13 +40,26 @@ describe('SearchForm input values', () => {
 
   it('Shows empty input when no saved term exists', () => {
     localStorage.clear();
-    render(<SearchForm clickFn={clickFnMock} />);
+    render(
+      <SearchForm
+        clickFn={clickFnMock}
+        setQueryLS={setQueryLS}
+        setPage={() => {}}
+        savedQuery=""
+      />
+    );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue('');
   });
 
   it('Displays previously saved search term from localStorage on mount', () => {
-    localStorage.setItem('search-query', 'test-query');
-    render(<SearchForm clickFn={() => {}} />);
+    render(
+      <SearchForm
+        clickFn={clickFnMock}
+        setQueryLS={() => {}}
+        setPage={() => {}}
+        savedQuery="test-query"
+      />
+    );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue('test-query');
   });
 
