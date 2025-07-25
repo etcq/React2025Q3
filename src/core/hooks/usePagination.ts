@@ -1,17 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router';
+import { useState } from 'react';
 
 export const usePagination = () => {
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams({ page: '1' });
-
-  useEffect(() => {
-    setSearchParams((searchParams) => {
-      searchParams.set('page', `${page}`);
-      return searchParams;
-    });
-  }, [page, setSearchParams]);
 
   const nextPage = () => {
     if (page < maxPage) {
@@ -31,7 +22,6 @@ export const usePagination = () => {
 
   return {
     page,
-    searchParams,
     resetPage,
     maxPage,
     setMaxPage,

@@ -1,28 +1,14 @@
 @use '../../assets/style/variables.scss' as *;
 @use '../../assets/style/mixins.scss' as *;
 
-.search {
+.search { 
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #f0f0f0;
-  width: 1200px;
   margin: 0 auto;
   min-height: 800px;
-  margin-top: 10vh;
 
-  &-header {
-    color: $c-dark-bg;
-    font-size: 3rem;
-    margin: 0;
-  }
-
-  &-subheader {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
 
   &-results {
     width: 90%;
@@ -33,20 +19,4 @@
     flex-direction: column;
     align-items: center;
   }
-
-  &-controls {
-    padding: 15px;
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    &-counter {
-      color: $c-font;
-      font-size: 2rem;
-    }
-    .page-button {
-      font-size: 2rem;
-      width: 60px;
-    }
-  }
 }
-

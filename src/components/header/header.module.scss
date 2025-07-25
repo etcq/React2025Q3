@@ -1,0 +1,29 @@
+@use '../../assets/style/variables.scss' as *;
+
+.header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  &-main {
+    color: $c-dark-bg;
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  &-secondary {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  &-about-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 4px solid $c-dark-bg;
+  }
+}

@@ -5,7 +5,6 @@ import type { Character } from '../../core/interfaces/interface.ts';
 
 const CardList: FC<{
   charList: Character[];
-  // setCharacter: (id: number) => void;
 }> = ({ charList }) => {
   useEffect(() => {
     if (Array.isArray(charList) && charList.length === 0) {

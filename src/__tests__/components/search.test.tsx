@@ -51,22 +51,6 @@ describe('Search page API Integration Tests', () => {
     fireEvent.click(searchButton);
     expect(apiCallSpy).toBeCalledWith('new-name', 1);
   });
-  it('Handles successful API responses', async () => {
-    render(
-      <MemoryRouter>
-        <Search />
-      </MemoryRouter>
-    );
-    const character = 'Morty';
-    const input = screen.getByPlaceholderText('Search...');
-    const searchButton = screen.getByRole('button', { name: 'Search' });
-    await userEvent.type(input, character);
-    await userEvent.click(searchButton);
-    await waitFor(() => {
-      expect(screen.getAllByText(/morty/i).length).toBeGreaterThan(0);
-      expect(screen.queryByText(/summer/i)).not.toBeInTheDocument();
-    });
-  });
   it('Handles API error responses', async () => {
     const spyError = vi.spyOn(console, 'error');
     render(

@@ -1,7 +1,6 @@
 import { useRef, useEffect, type FC } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
-import { useSearchParams } from 'react-router';
 
 interface ISearchFormProps {
   clickFn: (query: string, page: number) => void;
@@ -17,7 +16,6 @@ const SearchForm: FC<ISearchFormProps> = ({
   setQueryLS,
 }) => {
   const input = useRef<HTMLInputElement>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (input.current) {
@@ -29,16 +27,6 @@ const SearchForm: FC<ISearchFormProps> = ({
     const inputValue = input.current?.value.trim() || '';
     resetPage();
     setQueryLS(inputValue);
-    if (inputValue === '') {
-      searchParams.delete('search');
-      setSearchParams(searchParams);
-    } else {
-      setSearchParams((searchParams) => {
-        searchParams.set('search', `${inputValue}`);
-        return searchParams;
-      });
-    }
-
     clickFn(inputValue, 1);
   };
 

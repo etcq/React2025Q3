@@ -3,14 +3,14 @@ import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
 import type { Character } from '../../core/interfaces/interface.ts';
 import { getCharacters } from '../../core/services/api-service.ts';
-import bgPath from '../../assets/image/rick-and-morty-bg.jpg';
 import Loading from '../../components/loading/loading.tsx';
 import Button from '../../components/ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
 import { usePagination } from '../../core/hooks/usePagination.ts';
-import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
+import { useQueryUpdate } from '../../core/hooks/useQuery.ts';
+import { SearchControls } from '../../components/search-controls/search-controls.tsx';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
@@ -19,10 +19,10 @@ const Search: FC = () => {
   const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
     usePagination();
+  useQueryUpdate(page, savedQuery);
 
   const handleClick = useCallback(
     (name: string = savedQuery, queryPage: number = page) => {
-      console.log(savedQuery);
       setShowControls(false);
       setLoading(true);
       getCharacters(name, queryPage)
@@ -42,15 +42,10 @@ const Search: FC = () => {
 
   useEffect(() => {
     handleClick();
-  }, [handleClick, savedQuery]);
+  }, [handleClick]);
 
   return (
-    <div
-      className={style.search}
-      style={{ background: `url(${bgPath}) center center/cover no-repeat` }}
-    >
-      <h1 className={style['search-header']}>Rick and Morty</h1>
-      <span className={style['search-subheader']}>characters database</span>
+    <div className={style.search}>
       <SearchForm
         clickFn={handleClick}
         resetPage={resetPage}
@@ -59,26 +54,12 @@ const Search: FC = () => {
       />
       <div className={style['search-results']}>
         {showControls && (
-          <div className={style['search-controls']}>
-            <Button
-              callback={prevPage}
-              className={style['page-button']}
-              disabled={page <= 1}
-            >
-              <GrFormPreviousLink />
-            </Button>
-            <span className={style['search-controls-counter']}>
-              {page} / {maxPage}
-            </span>
-            <Button
-              callback={nextPage}
-              text="Next Page"
-              className={style['page-button']}
-              disabled={page >= maxPage}
-            >
-              <GrFormNextLink />
-            </Button>
-          </div>
+          <SearchControls
+            page={page}
+            maxPage={maxPage}
+            prevPage={prevPage}
+            nextPage={nextPage}
+          />
         )}
         {isLoading ? <Loading /> : <ResultLayout charList={charList} />}
       </div>
