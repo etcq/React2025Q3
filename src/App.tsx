@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="" element={<Search />}>
-            <Route path=":id" element={<CharacterDetailed />} />
+            <Route path="/detailed/:id" element={<CharacterDetailed />} />
           </Route>
           <Route path="about" element={<AboutMe />} />
           <Route path="*" element={<ErrorMessage />} />

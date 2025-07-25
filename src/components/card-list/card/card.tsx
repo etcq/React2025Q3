@@ -11,7 +11,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
     <div
       className={styles.card}
       data-testid="card"
-      onClick={() => void navigate(`/${id}`)}
+      onClick={() => void navigate(`/detailed/${id}`)}
     >
       <img className={styles['card-avatar']} src={image} alt={name} />
       <div className={styles['card-info']}>
