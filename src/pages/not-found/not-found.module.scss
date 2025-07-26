@@ -1,0 +1,33 @@
+@use '../../assets/style/mixins' as *;
+@use '../../assets/style/variables' as *;
+
+.page-wrapper {
+  @include page-wrapper;
+}
+
+.not-found {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 600px;
+
+  &_img {
+    width: 30%;
+    height: auto;
+  }
+
+  &_description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+
+    .title {
+      margin: 0;
+      font-size: 3rem;
+    }
+  }
+}
