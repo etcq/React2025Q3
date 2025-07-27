@@ -1,0 +1,16 @@
+@use '../../assets/style/variables.scss' as *;
+
+.search-controls {
+  padding: 15px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  &-counter {
+    color: $c-font;
+    font-size: 2rem;
+  }
+  .page-button {
+    font-size: 2rem;
+    width: 60px;
+  }
+}

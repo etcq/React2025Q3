@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import Search from '../../pages/search/search';
 import userEvent from '@testing-library/user-event';
 import { type Mock } from 'vitest';
+import { MemoryRouter } from 'react-router';
 
 vi.mock('fetch');
 
@@ -20,7 +21,11 @@ describe('ErrorBoundary component', () => {
       ok: true,
       json: async () => ({}),
     });
-    render(<Search />);
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
     await waitFor(() => {
       expect(screen.getByAltText('sad rick')).toBeInTheDocument();
     });
@@ -42,7 +47,11 @@ describe('ErrorBoundary component', () => {
         ],
       }),
     });
-    render(<Search />);
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
     const button = screen.getByRole('button', { name: /error/i });
     await waitFor(() => {
       expect(screen.queryByAltText('sad rick')).not.toBeInTheDocument();

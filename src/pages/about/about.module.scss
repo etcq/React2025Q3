@@ -1,0 +1,42 @@
+@use '../../assets/style/mixins' as *;
+@use '../../assets/style/variables.scss' as *;
+
+.page-wrapper {
+  @include page-wrapper;
+}
+
+.about {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &-header {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &-github {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 10px;
+    color: $c-font;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: $c-disable;
+    }
+  }
+
+  &-back-btn {
+    @include button(200px, 40px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &-logo {
+    padding-right: 30px;
+  }
+}

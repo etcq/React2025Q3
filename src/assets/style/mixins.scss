@@ -15,3 +15,11 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin page-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  min-height: 70vh;
+  background-color: $c-page-bg;
+  color: $c-font;
+}

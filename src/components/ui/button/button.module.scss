@@ -8,4 +8,18 @@
   &:hover {
     background-color: $c-light-font;
   }
+  &:disabled {
+    background-color: $c-disable;
+    cursor: not-allowed;
+  }
+}
+
+.error-button {
+  @include button(300px, 40px);
+  margin-top: 20px;
+  background-color: red;
+  color: white;
+  &:hover {
+    background-color: darkred;
+  }
 }

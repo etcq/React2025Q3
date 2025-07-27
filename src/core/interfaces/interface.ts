@@ -20,3 +20,8 @@ export interface Character extends ResourceBase {
   image: string;
   episode?: string[];
 }
+
+export interface ICharacterResponse {
+  maxPage: number;
+  characters: Character[];
+}

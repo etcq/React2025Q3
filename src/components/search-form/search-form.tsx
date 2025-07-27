@@ -1,39 +1,46 @@
-import { Component, type ChangeEvent } from 'react';
+import { useRef, useEffect, type FC } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 
 interface ISearchFormProps {
-  query: string;
-  setQuery: (query: string) => void;
-  clickFn: () => void;
+  clickFn: (query: string, page: number) => void;
+  resetPage: () => void;
+  savedQuery: string;
+  setQueryLS: (query: string) => void;
 }
 
-class SearchForm extends Component<ISearchFormProps> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    this.props.setQuery(value.trim());
+const SearchForm: FC<ISearchFormProps> = ({
+  clickFn,
+  resetPage,
+  savedQuery,
+  setQueryLS,
+}) => {
+  const input = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (input.current) {
+      input.current.value = savedQuery;
+    }
+  }, [savedQuery]);
+
+  const handleClick = () => {
+    const inputValue = input.current?.value.trim() || '';
+    resetPage();
+    setQueryLS(inputValue);
+    clickFn(inputValue, 1);
   };
 
-  render() {
-    return (
-      <div className={style['search-form']}>
-        <input
-          type="text"
-          className={style['search-form__input']}
-          onChange={this.handleChange}
-          value={this.props.query}
-          placeholder="Search..."
-        ></input>
-        <Button
-          callback={() => {
-            localStorage.setItem('search-query', this.props.query);
-            this.props.clickFn();
-          }}
-          text="Search"
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={style['search-form']}>
+      <input
+        type="text"
+        className={style['search-form__input']}
+        placeholder="Search..."
+        ref={input}
+      ></input>
+      <Button callback={handleClick} text="Search" />
+    </div>
+  );
+};
 
 export default SearchForm;
