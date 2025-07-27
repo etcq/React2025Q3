@@ -1,14 +1,13 @@
 @use '../../assets/style/variables.scss' as *;
 @use '../../assets/style/mixins.scss' as *;
 
-.search { 
+.search {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   margin: 0 auto;
   min-height: 800px;
-
 
   &-results {
     width: 90%;
