@@ -53,7 +53,6 @@ const Search: FC = () => {
         setQueryLS={setQueryLS}
       />
       <div className={style['search-results']}>
-        <span>{page}</span>
         {showControls && (
           <SearchControls
             page={page}

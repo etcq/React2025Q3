@@ -39,6 +39,10 @@ describe('Search page integration tests', () => {
 });
 
 describe('Search page API Integration Tests', () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('Calls API with correct parameters', () => {
     const apiCallSpy = vi.spyOn(apiService, 'getCharacters');
     render(
@@ -53,17 +57,13 @@ describe('Search page API Integration Tests', () => {
     expect(apiCallSpy).toBeCalledWith('new-name', 1);
   });
   it('Handles API error responses', async () => {
-    vi.spyOn(apiService, 'getCharacters').mockResolvedValue({
-      maxPage: 0,
-      characters: [],
-    });
     const spyError = vi.spyOn(console, 'error');
     render(
       <MemoryRouter>
         <Search />
       </MemoryRouter>
     );
-    const query = 'asdaqwqeqweqwe';
+    const query = 'invalidinput';
     const input = screen.getByPlaceholderText('Search...');
     const searchButton = screen.getByRole('button', { name: 'Search' });
     await userEvent.type(input, query);
@@ -75,8 +75,12 @@ describe('Search page API Integration Tests', () => {
 });
 
 describe('Pagination tests', () => {
-  vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
-  it('Move to prev and next page', async () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('Move page button work', async () => {
+    vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
     render(
       <MemoryRouter>
         <Search />
