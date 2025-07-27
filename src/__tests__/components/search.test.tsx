@@ -53,13 +53,17 @@ describe('Search page API Integration Tests', () => {
     expect(apiCallSpy).toBeCalledWith('new-name', 1);
   });
   it('Handles API error responses', async () => {
+    vi.spyOn(apiService, 'getCharacters').mockResolvedValue({
+      maxPage: 0,
+      characters: [],
+    });
     const spyError = vi.spyOn(console, 'error');
     render(
       <MemoryRouter>
         <Search />
       </MemoryRouter>
     );
-    const query = 'InvalidInput';
+    const query = 'asdaqwqeqweqwe';
     const input = screen.getByPlaceholderText('Search...');
     const searchButton = screen.getByRole('button', { name: 'Search' });
     await userEvent.type(input, query);
