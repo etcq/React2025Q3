@@ -19,16 +19,21 @@ export const SearchControls: FC<IControls> = ({
   return (
     <div className={style['search-controls']}>
       <Button
+        data-testid="prev"
         callback={prevPage}
         className={style['page-button']}
         disabled={page <= 1}
       >
         <GrFormPreviousLink />
       </Button>
-      <span className={style['search-controls-counter']}>
+      <span
+        className={style['search-controls-counter']}
+        data-testid="page-counter"
+      >
         {page} / {maxPage}
       </span>
       <Button
+        data-testid="next"
         callback={nextPage}
         text="Next Page"
         className={style['page-button']}

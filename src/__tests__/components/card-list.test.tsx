@@ -1,41 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CardList from '../../components/card-list/card-list';
-import type { Character } from '../../core/interfaces/interface';
 import { MemoryRouter } from 'react-router';
-
-const response: Character[] = [
-  {
-    gender: 'Male',
-    id: 1,
-    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-    name: 'Rick Sanchez',
-    species: 'Human',
-    status: 'Alive',
-  },
-  {
-    gender: 'Male',
-    id: 2,
-    image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
-    name: 'Morty Smith',
-    species: 'Human',
-    status: 'Alive',
-  },
-  {
-    gender: 'Female',
-    id: 3,
-    image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg',
-    name: 'Summer Smith',
-    species: 'Human',
-    status: 'Alive',
-  },
-];
+import { response } from '../../mocks/mock-data.ts';
 
 describe('CardList content', () => {
   it('Renders correct number of items when data is provided', () => {
     render(
       <MemoryRouter>
-        <CardList charList={response} />
+        <CardList charList={response.characters} />
       </MemoryRouter>
     );
     const cards = screen.getAllByTestId('card');
@@ -44,7 +17,7 @@ describe('CardList content', () => {
   it('Renders correct items', () => {
     render(
       <MemoryRouter>
-        <CardList charList={response} />
+        <CardList charList={response.characters} />
       </MemoryRouter>
     );
     const cards = screen.getAllByTestId('card');

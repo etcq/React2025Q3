@@ -23,7 +23,7 @@ export const CharacterDetailed: FC = () => {
   }, [id]);
 
   return (
-    <div className={style.detailed}>
+    <div className={style.detailed} data-testid="detailed">
       {isLoading ? (
         <Loading />
       ) : (
@@ -33,7 +33,9 @@ export const CharacterDetailed: FC = () => {
             alt={`${character?.name} image`}
             className={style['detailed-img']}
           />
-          <h3 className={style['detailed-name']}>{character?.name}</h3>
+          <h3 className={style['detailed-name']} data-testid="detailed-header">
+            {character?.name}
+          </h3>
           <ul className={style['detailed-info']}>
             <li className={style['detailed-info-item']}>
               Status:{' '}
@@ -56,6 +58,7 @@ export const CharacterDetailed: FC = () => {
           <Button
             className={style['detailed-back-btn']}
             callback={() => void navigate('/')}
+            data-testid="detailed-back-btn"
           >
             <MdClose />
           </Button>

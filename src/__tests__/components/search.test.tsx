@@ -1,9 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Search from '../../pages/search/search';
 import * as apiService from '../../core/services/api-service.ts';
 import { userEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
+import { response } from '../../mocks/mock-data.ts';
 
 describe('Search page integration tests', () => {
   it('Manages loading states during API calls', async () => {
@@ -65,6 +66,32 @@ describe('Search page API Integration Tests', () => {
     await userEvent.click(searchButton);
     await waitFor(() => {
       expect(spyError).toBeCalled();
+    });
+  });
+});
+
+describe('Pagination tests', () => {
+  vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
+  it('Move to prev and next page', async () => {
+    render(
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
+    );
+    await waitFor(() => {
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    });
+    const user = userEvent.setup();
+    const pageCounter = screen.getByTestId('page-counter');
+    const nextButton = screen.getByTestId('next');
+    const prevButton = screen.getByTestId('prev');
+    expect(pageCounter.textContent).toContain('1');
+    expect(prevButton).toBeDisabled();
+    await user.click(nextButton);
+    expect(apiService.getCharacters).toHaveBeenCalledWith(expect.anything(), 2);
+    await waitFor(() => {
+      expect(pageCounter.textContent).toContain('2');
+      expect(prevButton).not.toBeDisabled();
     });
   });
 });

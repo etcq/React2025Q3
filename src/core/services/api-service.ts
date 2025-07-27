@@ -1,12 +1,5 @@
-import type { Character } from '../interfaces/interface';
-
+import type { Character, ICharacterResponse } from '../interfaces/interface';
 const API_BASE = 'https://rickandmortyapi.com/api';
-
-interface ICharacterResponse {
-  maxPage: number;
-  characters: Character[];
-}
-
 const getCharacters = async (
   name: string,
   page: number
@@ -32,8 +25,7 @@ const getCharacter = async (id: number): Promise<Character> => {
   if (!res.ok) {
     throw new Error("Can't get character data");
   }
-  const data = await res.json();
-  return data;
+  return await res.json();
 };
 
 const transformCharacterData = (character: Character): Character => {

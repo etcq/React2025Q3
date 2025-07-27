@@ -22,7 +22,7 @@ const Search: FC = () => {
   useQueryUpdate(page, savedQuery);
 
   const handleClick = useCallback(
-    (name: string = savedQuery, queryPage: number = page) => {
+    (name: string, queryPage: number) => {
       setShowControls(false);
       setLoading(true);
       getCharacters(name, queryPage)
@@ -37,12 +37,12 @@ const Search: FC = () => {
         })
         .finally(() => setLoading(false));
     },
-    [savedQuery, page, setMaxPage]
+    [setMaxPage]
   );
 
   useEffect(() => {
-    handleClick();
-  }, [handleClick]);
+    handleClick(savedQuery, page);
+  }, [handleClick, savedQuery, page]);
 
   return (
     <div className={style.search}>
@@ -53,6 +53,7 @@ const Search: FC = () => {
         setQueryLS={setQueryLS}
       />
       <div className={style['search-results']}>
+        <span>{page}</span>
         {showControls && (
           <SearchControls
             page={page}
@@ -64,7 +65,7 @@ const Search: FC = () => {
         {isLoading ? <Loading /> : <ResultLayout charList={charList} />}
       </div>
       <Button
-        callback={() => handleClick('qwe213')}
+        callback={() => handleClick('qwe213', page)}
         text="Error"
         className={style['error-button']}
         isError={true}

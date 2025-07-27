@@ -42,7 +42,11 @@ export const AboutMe: FC = () => {
         <p className={style['about-content-item']}>
           Join the best programming school
         </p>
-        <a href={'https://rs.school/'} className={style['about-logo']}>
+        <a
+          href={'https://rs.school/'}
+          className={style['about-logo']}
+          data-testid="link"
+        >
           <img src={logoImg} alt="Rsschool log" />
         </a>
         <Button
