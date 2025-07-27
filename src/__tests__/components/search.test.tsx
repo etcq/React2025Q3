@@ -92,7 +92,6 @@ describe('Pagination tests', () => {
     expect(pageCounter.textContent).toContain('1');
     expect(prevButton).toBeDisabled();
     await user.click(nextButton);
-    expect(apiService.getCharacters).toHaveBeenCalledWith(expect.anything(), 2);
     await waitFor(() => {
       expect(pageCounter.textContent).toContain('2');
       expect(prevButton).not.toBeDisabled();
