@@ -18,7 +18,6 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const theme = use(ThemeContext);
-  console.log(theme);
   const handleClick = () => {
     callback();
   };
