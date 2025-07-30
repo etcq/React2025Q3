@@ -1,8 +1,8 @@
-import type { JSX } from 'react';
+import type { FC } from 'react';
 import Spinner from '../ui/spinner/spinner.tsx';
 import style from './loading.module.scss';
 
-const Loading = (): JSX.Element => {
+const Loading: FC = () => {
   return (
     <div className={style.loading}>
       <Spinner />

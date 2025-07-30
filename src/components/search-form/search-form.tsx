@@ -3,17 +3,17 @@ import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 
 interface ISearchFormProps {
-  clickFn: (query: string, page: number) => void;
+  onSearch: (query: string, page: number) => void;
   resetPage: () => void;
   savedQuery: string;
-  setQueryLS: (query: string) => void;
+  setQueryToLocalStorage: (query: string) => void;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
-  clickFn,
+  onSearch,
   resetPage,
   savedQuery,
-  setQueryLS,
+  setQueryToLocalStorage,
 }) => {
   const input = useRef<HTMLInputElement>(null);
 
@@ -26,8 +26,8 @@ const SearchForm: FC<ISearchFormProps> = ({
   const handleClick = () => {
     const inputValue = input.current?.value.trim() || '';
     resetPage();
-    setQueryLS(inputValue);
-    clickFn(inputValue, 1);
+    setQueryToLocalStorage(inputValue);
+    onSearch(inputValue, 1);
   };
 
   return (

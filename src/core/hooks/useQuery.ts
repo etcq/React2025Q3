@@ -4,18 +4,14 @@ import { useSearchParams } from 'react-router';
 export const useQueryUpdate = (page: number, query: string) => {
   const [, setSearchParams] = useSearchParams();
   useEffect(() => {
-    if (query === '') {
-      setSearchParams((searchParams) => {
+    setSearchParams((searchParams) => {
+      if (query === '') {
         searchParams.delete('search');
-        searchParams.set('page', `${page}`);
-        return searchParams;
-      });
-    } else {
-      setSearchParams((searchParams) => {
+      } else {
         searchParams.set('search', `${query}`);
-        searchParams.set('page', `${page}`);
-        return searchParams;
-      });
-    }
+      }
+      searchParams.set('page', `${page}`);
+      return searchParams;
+    });
   }, [page, query, setSearchParams]);
 };

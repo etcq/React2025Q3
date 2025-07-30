@@ -10,10 +10,10 @@ export const useLocalStorage = (key: string) => {
     }
   }, [key]);
 
-  const setQueryLS = (query: string) => {
+  const setQueryToLocalStorage = (query: string) => {
     localStorage.setItem(key, query);
     setSavedQuery(query);
   };
 
-  return { savedQuery, setQueryLS };
+  return { savedQuery, setQueryToLocalStorage };
 };

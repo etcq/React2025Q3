@@ -16,12 +16,13 @@ const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [showControls, setShowControls] = useState(false);
-  const { savedQuery, setQueryLS } = useLocalStorage(LOCAL_STORAGE_KEY);
+  const { savedQuery, setQueryToLocalStorage } =
+    useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
     usePagination();
   useQueryUpdate(page, savedQuery);
 
-  const handleClick = useCallback(
+  const handleSearch = useCallback(
     (name: string, queryPage: number) => {
       setShowControls(false);
       setLoading(true);
@@ -33,7 +34,6 @@ const Search: FC = () => {
         })
         .catch(() => {
           setCharList([]);
-          setShowControls(false);
         })
         .finally(() => setLoading(false));
     },
@@ -41,16 +41,16 @@ const Search: FC = () => {
   );
 
   useEffect(() => {
-    handleClick(savedQuery, page);
-  }, [handleClick, savedQuery, page]);
+    handleSearch(savedQuery, page);
+  }, [handleSearch, savedQuery, page]);
 
   return (
     <div className={style.search}>
       <SearchForm
-        clickFn={handleClick}
+        onSearch={handleSearch}
         resetPage={resetPage}
         savedQuery={savedQuery}
-        setQueryLS={setQueryLS}
+        setQueryToLocalStorage={setQueryToLocalStorage}
       />
       <div className={style['search-results']}>
         {showControls && (
@@ -64,7 +64,7 @@ const Search: FC = () => {
         {isLoading ? <Loading /> : <ResultLayout charList={charList} />}
       </div>
       <Button
-        callback={() => handleClick('qwe213', page)}
+        callback={() => handleSearch('qwe213', page)}
         text="Error"
         className={style['error-button']}
         isError={true}
