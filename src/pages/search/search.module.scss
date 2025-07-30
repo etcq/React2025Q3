@@ -11,11 +11,19 @@
 
   &-results {
     width: 90%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: $c-dark-page-bg;
     height: 600px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+}
+
+.dark {
+  background-color: $c-dark-page-bg;
+}
+
+.light {
+  background-color: $c-light-page-bg;
 }

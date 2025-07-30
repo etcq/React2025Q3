@@ -22,11 +22,11 @@
     display: inline-flex;
     gap: 5px;
     margin-left: 10px;
-    color: $c-font;
+    color: $c-main-font;
     text-decoration: none;
     &:hover {
       text-decoration: underline;
-      color: $c-disable;
+      color: $c-dark-disable;
     }
   }
 

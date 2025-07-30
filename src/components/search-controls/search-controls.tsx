@@ -1,7 +1,8 @@
-import type { FC } from 'react';
+import { type FC, use } from 'react';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 import style from './search-controls.module.scss';
 import Button from '../ui/button/button';
+import ThemeContext from '../../core/contexts/contexts.ts';
 
 interface IControls {
   page: number;
@@ -16,6 +17,7 @@ export const SearchControls: FC<IControls> = ({
   prevPage,
   nextPage,
 }) => {
+  const theme = use(ThemeContext);
   return (
     <div className={style['search-controls']}>
       <Button
@@ -27,7 +29,7 @@ export const SearchControls: FC<IControls> = ({
         <GrFormPreviousLink />
       </Button>
       <span
-        className={style['search-controls-counter']}
+        className={`${style['search-controls-counter']} ${style[theme]}`}
         data-testid="page-counter"
       >
         {page} / {maxPage}

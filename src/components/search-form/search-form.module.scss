@@ -7,13 +7,27 @@
   align-items: center;
   justify-content: space-evenly;
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.8);
   &__input {
     width: 60%;
     height: 40px;
     border-radius: 4px;
     font-size: 16px;
     padding-left: 20px;
-    background-color: $c-light-bg;
+  }
+}
+
+.dark {
+  background-color: $c-dark-page-bg;
+  .search-form__input {
+    background-color: $c-secondary-bg;
+    color: $c-main-bg;
+  }
+}
+
+.light {
+  background-color: $c-light-page-bg;
+  .search-form__input {
+    background-color: $c-main-bg;
+    color: $c-secondary-bg;
   }
 }

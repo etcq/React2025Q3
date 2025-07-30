@@ -1,4 +1,4 @@
-import { type FC, useCallback, useEffect, useState } from 'react';
+import { type FC, use, useCallback, useEffect, useState } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
 import type { Character } from '../../core/interfaces/interface.ts';
@@ -11,11 +11,13 @@ import { usePagination } from '../../core/hooks/usePagination.ts';
 import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
 import { useQueryUpdate } from '../../core/hooks/useQuery.ts';
 import { SearchControls } from '../../components/search-controls/search-controls.tsx';
+import ThemeContext from '../../core/contexts/contexts.ts';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const theme = use(ThemeContext);
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
@@ -52,7 +54,7 @@ const Search: FC = () => {
         savedQuery={savedQuery}
         setQueryToLocalStorage={setQueryToLocalStorage}
       />
-      <div className={style['search-results']}>
+      <div className={`${style['search-results']} ${style[theme]}`}>
         {showControls && (
           <SearchControls
             page={page}

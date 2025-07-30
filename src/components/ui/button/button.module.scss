@@ -3,13 +3,7 @@
 
 .button {
   @include button(120px, 40px);
-  background-color: $c-font;
-  color: $c-dark-bg;
-  &:hover {
-    background-color: $c-light-font;
-  }
   &:disabled {
-    background-color: $c-disable;
     cursor: not-allowed;
   }
 }
@@ -17,9 +11,31 @@
 .error-button {
   @include button(300px, 40px);
   margin-top: 20px;
-  background-color: red;
-  color: white;
+  background-color: red !important;
+  color: white !important;
   &:hover {
-    background-color: darkred;
+    background-color: darkred !important;
+  }
+}
+
+.dark-btn {
+  background-color: $c-main-font;
+  color: $c-main-bg;
+  &:hover {
+    background-color: $c-secondary-font;
+  }
+  &:disabled {
+    background-color: $c-dark-disable;
+  }
+}
+
+.light-btn {
+  background-color: $c-main-font-light;
+  color: $c-main-bg-light;
+  &:hover {
+    background-color: $c-secondary-font-light;
+  }
+  &:disabled {
+    background-color: $c-light-disable;
   }
 }

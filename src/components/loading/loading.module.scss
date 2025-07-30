@@ -5,6 +5,14 @@
   @include center-flex;
   width: 100%;
   margin-top: 100px;
-  color: $c-light-font;
+  color: $c-secondary-font;
   flex-direction: column;
+}
+
+.dark {
+  color: $c-secondary-font;
+}
+
+.light {
+  color: $c-secondary-font-light;
 }

@@ -1,15 +1,17 @@
-import type { FC } from 'react';
+import { type FC, use } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useNavigate } from 'react-router';
+import ThemeContext from '../../../core/contexts/contexts.ts';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
+  const theme = use(ThemeContext);
   const navigate = useNavigate();
 
   return (
     <div
-      className={styles.card}
+      className={`${styles.card} ${styles[theme]}`}
       data-testid="card"
       onClick={() => void navigate(`/detailed/${id}`)}
     >

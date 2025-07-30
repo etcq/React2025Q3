@@ -6,11 +6,19 @@
   gap: 40px;
   align-items: center;
   &-counter {
-    color: $c-font;
+    color: $c-main-font;
     font-size: 2rem;
   }
   .page-button {
     font-size: 2rem;
     width: 60px;
   }
+}
+
+.dark {
+  color: $c-main-font;
+}
+
+.light {
+  color: $c-main-font-light;
 }

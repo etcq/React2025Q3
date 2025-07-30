@@ -5,8 +5,6 @@
   flex: 0 0 400px;
   width: 100%;
   padding: 15px;
-  background-color: $c-dark-bg;
-  color: $c-font;
   position: relative;
   gap: 1rem;
   flex-direction: column;
@@ -20,7 +18,7 @@
     border-radius: 50%;
     top: 10px;
     right: 10px;
-    border: 2px solid $c-dark-bg;
+    border: 2px solid $c-main-bg;
   }
 
   &-img {
@@ -63,4 +61,14 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
+}
+
+.dark {
+  background-color: $c-main-bg;
+  color: $c-main-font;
+}
+
+.light {
+  background-color: $c-main-bg-light;
+  color: $c-main-font-light;
 }

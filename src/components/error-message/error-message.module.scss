@@ -8,6 +8,14 @@
   padding: 40px;
   &-content {
     text-align: right;
-    color: $c-light-font;
+    color: $c-secondary-font;
   }
+}
+
+.dark {
+  color: $c-secondary-font;
+}
+
+.light {
+  color: $c-secondary-font-light;
 }

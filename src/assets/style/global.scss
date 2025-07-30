@@ -14,15 +14,18 @@
 
   &::-webkit-scrollbar-thumb {
     border-radius: 2rem;
-    background-color: vars.$c-font;
+    background-color: vars.$c-main-font;
     &:hover {
       cursor: ns-resize;
-      background-color: vars.$c-light-font;
+      background-color: vars.$c-secondary-font;
     }
   }
 }
 
-body {
+body,
+html {
+  box-sizing: border-box;
   font-family: 'Oxanium', sans-serif;
-  background-color: vars.$c-dark-bg;
+  padding: 0;
+  margin: 0;
 }

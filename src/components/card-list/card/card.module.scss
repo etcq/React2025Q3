@@ -9,8 +9,6 @@
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid $c-dark-bg;
-  background-color: $c-light-bg;
   gap: 16px;
   &-avatar {
     height: 100%;
@@ -43,4 +41,15 @@
 
 .dead {
   color: darkred;
+}
+
+.dark {
+  border: 1px solid $c-main-bg;
+  background-color: $c-secondary-bg;
+}
+
+.light {
+  border: 1px solid $c-main-bg-light;
+  background-color: $c-main-bg;
+  color: $c-secondary-bg;
 }
