@@ -12,6 +12,7 @@ import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
 import { useQueryUpdate } from '../../core/hooks/useQuery.ts';
 import { SearchControls } from '../../components/search-controls/search-controls.tsx';
 import ThemeContext from '../../core/contexts/contexts.ts';
+import { FlyoutCharacters } from '../../components/flyout-characters/flyout-characters.tsx';
 
 const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
@@ -65,6 +66,7 @@ const Search: FC = () => {
         )}
         {isLoading ? <Loading /> : <ResultLayout charList={charList} />}
       </div>
+      <FlyoutCharacters />
       <Button
         callback={() => handleSearch('qwe213', page)}
         text="Error"

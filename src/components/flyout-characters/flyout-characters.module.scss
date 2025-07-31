@@ -1,0 +1,11 @@
+@use '../../assets/style/variables.scss' as *;
+
+.flyout {
+  background-color: $c-main-font;
+  width: 70%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 30px 30px;
+}
