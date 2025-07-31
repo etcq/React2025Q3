@@ -6,13 +6,17 @@ import bgPathDark from '../../assets/image/rick-and-morty-bg.jpg';
 import bgPathLight from '../../assets/image/rick-and-morty-bg-2.jpg';
 import { Header } from '../header/header';
 import ThemeContext from '../../core/contexts/contexts';
-import Button from '../ui/button/button.tsx';
 import { THEME } from '../../core/constants/constants.ts';
 
 export const MainLayout: FC = () => {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const toggleTheme = () => {
+    setTheme((prevTheme) =>
+      prevTheme === THEME.DARK ? THEME.LIGHT : THEME.DARK
+    );
+  };
   return (
-    <ThemeContext value={theme}>
+    <ThemeContext value={{ theme, toggleTheme }}>
       <div className={`${style.wrapper} ${style[theme]}`}>
         <div
           className={style.layout}
@@ -20,14 +24,6 @@ export const MainLayout: FC = () => {
             background: `url(${theme === THEME.DARK ? bgPathDark : bgPathLight}) center center/cover no-repeat`,
           }}
         >
-          <Button
-            callback={() =>
-              setTheme((theme) =>
-                theme === THEME.DARK ? THEME.LIGHT : THEME.DARK
-              )
-            }
-            text={theme}
-          />
           <Header />
           <main className={style['layout-content']}>
             <Suspense fallback={<Loading />}>

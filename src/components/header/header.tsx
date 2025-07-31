@@ -3,10 +3,11 @@ import style from './header.module.scss';
 import Button from '../ui/button/button';
 import { useNavigate } from 'react-router';
 import ThemeContext from '../../core/contexts/contexts.ts';
+import { ThemeSwitcher } from '../ui/theme-switcher/theme-switcher.tsx';
 
 export const Header: FC = () => {
   const navigate = useNavigate();
-  const theme = use(ThemeContext);
+  const { theme, toggleTheme } = use(ThemeContext);
 
   return (
     <div className={`${style.header} ${style[theme]}`}>
@@ -18,6 +19,7 @@ export const Header: FC = () => {
       >
         About Me
       </Button>
+      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
     </div>
   );
 };

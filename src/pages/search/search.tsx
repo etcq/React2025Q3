@@ -17,7 +17,7 @@ const Search: FC = () => {
   const [charList, setCharList] = useState<Character[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [showControls, setShowControls] = useState(false);
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =

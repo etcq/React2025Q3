@@ -12,7 +12,7 @@ export const CharacterDetailed: FC = () => {
   const [character, setCharacter] = useState<Character>();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (id) {

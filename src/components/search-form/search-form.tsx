@@ -17,7 +17,7 @@ const SearchForm: FC<ISearchFormProps> = ({
   setQueryToLocalStorage,
 }) => {
   const input = useRef<HTMLInputElement>(null);
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   useEffect(() => {
     if (input.current) {
       input.current.value = savedQuery;

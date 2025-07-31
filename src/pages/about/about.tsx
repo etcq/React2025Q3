@@ -1,14 +1,16 @@
-import type { FC } from 'react';
+import { type FC, use } from 'react';
 import style from './about.module.scss';
 import logoImg from '../../assets/image/logo.svg';
 import { FaGithub } from 'react-icons/fa';
 import Button from '../../components/ui/button/button';
 import { useNavigate } from 'react-router';
+import ThemeContext from '../../core/contexts/contexts';
 
 export const AboutMe: FC = () => {
   const navigate = useNavigate();
+  const { theme } = use(ThemeContext);
   return (
-    <div className={style['page-wrapper']}>
+    <div className={`${style['page-wrapper']} ${style[theme]}`}>
       <div className={style.about}>
         <h2 className={style['about-header']}>About Me</h2>
         <p className={style['about-content-item']}>Hello my name is Anton</p>

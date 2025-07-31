@@ -17,7 +17,7 @@ export const SearchControls: FC<IControls> = ({
   prevPage,
   nextPage,
 }) => {
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   return (
     <div className={style['search-controls']}>
       <Button

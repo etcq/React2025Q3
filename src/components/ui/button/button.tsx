@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = ({
   isError,
   ...props
 }) => {
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   const handleClick = () => {
     callback();
   };

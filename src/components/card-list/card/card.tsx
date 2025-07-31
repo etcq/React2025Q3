@@ -6,7 +6,7 @@ import ThemeContext from '../../../core/contexts/contexts.ts';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   const navigate = useNavigate();
 
   return (

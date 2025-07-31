@@ -3,7 +3,7 @@ import ThemeContext from '../../../core/contexts/contexts.ts';
 import { THEME } from '../../../core/constants/constants.ts';
 
 const Spinner: FC = () => {
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   const color = theme == THEME.DARK ? '#88e23b' : '#4d7a0f';
   return (
     <svg

@@ -7,7 +7,7 @@ import ThemeContext from '../../core/contexts/contexts.ts';
 const CardList: FC<{
   charList: Character[];
 }> = ({ charList }) => {
-  const theme = use(ThemeContext);
+  const { theme } = use(ThemeContext);
   useEffect(() => {
     if (Array.isArray(charList) && charList.length === 0) {
       throw new Error('No characters to display');
