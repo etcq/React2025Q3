@@ -1,11 +1,22 @@
 @use '../../assets/style/variables.scss' as *;
 
 .flyout {
-  background-color: $c-main-font;
+  background-color: $c-dark-page-bg;
+  color: $c-main-font;
   width: 70%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0 0 30px 30px;
+  gap: 14px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.light {
+  background-color: $c-light-page-bg;
+  color: $c-main-font-light;
 }

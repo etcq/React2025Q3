@@ -1,4 +1,4 @@
-import { type FC, use, useRef } from 'react';
+import { type FC, use, useRef, type ChangeEvent } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useNavigate } from 'react-router';
@@ -18,7 +18,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
   const checkbox = useRef(null);
   const navigate = useNavigate();
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       selectCharacters(data);
     } else {
@@ -50,12 +50,10 @@ const Card: FC<{ data: Character }> = ({ data }) => {
         </div>
       </div>
       <input
+        className={styles['card-checkbox']}
         type="checkbox"
         ref={checkbox}
-        onChange={(event) => {
-          handleCheckboxChange(event);
-          console.log(characters, 'characters in card.tsx');
-        }}
+        onChange={handleCheckboxChange}
         checked={characters.some((character) => character.id === id)}
       />
     </div>

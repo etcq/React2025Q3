@@ -4,14 +4,12 @@ import style from './search-form.module.scss';
 import ThemeContext from '../../core/contexts/contexts.ts';
 
 interface ISearchFormProps {
-  onSearch: (query: string, page: number) => void;
   resetPage: () => void;
   savedQuery: string;
   setQueryToLocalStorage: (query: string) => void;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
-  onSearch,
   resetPage,
   savedQuery,
   setQueryToLocalStorage,
@@ -28,7 +26,6 @@ const SearchForm: FC<ISearchFormProps> = ({
     const inputValue = input.current?.value.trim() || '';
     resetPage();
     setQueryToLocalStorage(inputValue);
-    onSearch(inputValue, 1);
   };
 
   return (

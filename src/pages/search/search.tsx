@@ -50,7 +50,6 @@ const Search: FC = () => {
   return (
     <div className={style.search}>
       <SearchForm
-        onSearch={handleSearch}
         resetPage={resetPage}
         savedQuery={savedQuery}
         setQueryToLocalStorage={setQueryToLocalStorage}
