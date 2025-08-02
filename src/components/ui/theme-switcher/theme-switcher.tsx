@@ -10,6 +10,7 @@ export const ThemeSwitcher: FC<{
       className={`${style['theme-switcher-grid']} ${style[theme]}`}
       id="theme-switcher-grid"
       aria-label="Switch theme"
+      data-testid="theme-switcher"
       onClick={toggleTheme}
     >
       <div className={style.sun} aria-hidden="true"></div>

@@ -17,7 +17,10 @@ export const MainLayout: FC = () => {
   };
   return (
     <ThemeContext value={{ theme, toggleTheme }}>
-      <div className={`${style.wrapper} ${style[theme]}`}>
+      <div
+        className={`${style.wrapper} ${style[theme]}`}
+        data-testid="main-wrapper"
+      >
         <div
           className={style.layout}
           style={{
