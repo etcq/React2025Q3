@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import SearchForm from '../../components/search-form/search-form';
 import Search from '../../pages/search/search';
 import { MemoryRouter } from 'react-router';
@@ -55,14 +55,14 @@ describe('SearchForm input values', () => {
   it('Displays previously saved search term from localStorage on mount', () => {
     render(
       <MemoryRouter>
-        <SearchForm
-          setQueryToLocalStorage={() => {}}
-          resetPage={() => {}}
-          savedQuery=""
-        />
+        <Search />
       </MemoryRouter>
     );
-    expect(screen.getByPlaceholderText('Search...')).toHaveValue('test-query');
+    waitFor(() => {
+      expect(screen.getByPlaceholderText('Search...')).toHaveValue(
+        'test-query'
+      );
+    });
   });
 
   it('Saves search term to localStorage when search button is clicked', async () => {
