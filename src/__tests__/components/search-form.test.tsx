@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import SearchForm from '../../components/search-form/search-form';
 import Search from '../../pages/search/search';
@@ -9,8 +9,7 @@ describe('SearchForm render', () => {
     render(
       <MemoryRouter>
         <SearchForm
-          clickFn={() => {}}
-          setQueryLS={() => {}}
+          setQueryToLocalStorage={() => {}}
           resetPage={() => {}}
           savedQuery=""
         />
@@ -24,8 +23,7 @@ describe('SearchForm render', () => {
     render(
       <MemoryRouter>
         <SearchForm
-          clickFn={() => {}}
-          setQueryLS={() => {}}
+          setQueryToLocalStorage={() => {}}
           resetPage={() => {}}
           savedQuery=""
         />
@@ -36,9 +34,6 @@ describe('SearchForm render', () => {
 });
 
 describe('SearchForm input values', () => {
-  const clickFnMock = vi.fn();
-  const setQueryLS = vi.fn();
-
   beforeEach(() => {
     localStorage.clear();
   });
@@ -48,8 +43,7 @@ describe('SearchForm input values', () => {
     render(
       <MemoryRouter>
         <SearchForm
-          clickFn={clickFnMock}
-          setQueryLS={setQueryLS}
+          setQueryToLocalStorage={() => {}}
           resetPage={() => {}}
           savedQuery=""
         />
@@ -62,10 +56,9 @@ describe('SearchForm input values', () => {
     render(
       <MemoryRouter>
         <SearchForm
-          clickFn={clickFnMock}
-          setQueryLS={setQueryLS}
+          setQueryToLocalStorage={() => {}}
           resetPage={() => {}}
-          savedQuery="test-query"
+          savedQuery=""
         />
       </MemoryRouter>
     );
