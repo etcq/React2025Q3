@@ -6,12 +6,11 @@ import Button from '../ui/button/button.tsx';
 import { convertToCSV } from '../../core/utils/convert-to-csv.ts';
 
 export const FlyoutCharacters: FC = () => {
-  const characters = useCharactersStore((state) => state.characters);
+  const { characters, unselectAllCharacters } = useCharactersStore(
+    (state) => state
+  );
   const { theme } = use(ThemeContext);
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
-  const unselectAllCharacters = useCharactersStore(
-    (state) => state.unselectAllCharacters
-  );
 
   const downloadCharactersInfo = () => {
     const csvData = convertToCSV(characters);
@@ -23,6 +22,7 @@ export const FlyoutCharacters: FC = () => {
       URL.revokeObjectURL(url);
     }
   };
+
   return (
     <div
       className={`${styles.flyout} ${styles[theme]} ${characters.length === 0 && styles.hidden}`}

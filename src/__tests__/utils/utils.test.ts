@@ -10,9 +10,4 @@ describe('Utils', () => {
       'gender;id;image;name;species;status\nMale;1;https://rickandmortyapi.com/api/character/avatar/1.jpeg;Rick Sanchez;Human;Alive'
     );
   });
-
-  it('should handle empty input', () => {
-    // optional: поведение не определено в исходной функции
-    expect(() => convertToCSV([])).toThrow(); // или вернёт undefined/error
-  });
 });

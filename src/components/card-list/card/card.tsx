@@ -7,13 +7,9 @@ import { useCharactersStore } from '../../../core/stores/stores.ts';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
-  const characters = useCharactersStore((state) => state.characters);
-  const selectCharacters = useCharactersStore(
-    (state) => state.selectCharacters
-  );
-  const unselectCharacter = useCharactersStore(
-    (state) => state.unselectCharacter
-  );
+  const { characters, selectCharacters, unselectCharacter } =
+    useCharactersStore((state) => state);
+
   const { theme } = use(ThemeContext);
   const checkbox = useRef(null);
   const navigate = useNavigate();
