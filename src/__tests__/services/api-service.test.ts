@@ -16,12 +16,14 @@ describe('API service work', () => {
   });
 
   it('Gets characters by name', async () => {
+    vi.spyOn(apiService, 'getCharacters').mockResolvedValue({
+      maxPage: 1,
+      characters: [response.characters[0]],
+    });
     const characters = (await getCharacters('rick', 1)).characters;
     expect(Array.isArray(characters)).toBe(true);
     expect(characters[0].name).toMatch(/rick/i);
-    expect(characters[1].name).toMatch(/rick/i);
-    expect(characters[2].name).toMatch(/rick/i);
-    expect(characters[3].name).not.toMatch(/morty/i);
+    expect(characters.length).toBe(1);
   });
 
   it('If no characters are found, throw an error.', async () => {

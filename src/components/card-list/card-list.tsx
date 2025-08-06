@@ -1,17 +1,13 @@
-import { type FC, useEffect } from 'react';
+import { type FC } from 'react';
 import style from './card-list.module.scss';
 import Card from './card/card.tsx';
 import type { Character } from '../../core/interfaces/interface.ts';
 
-const CardList: FC<{
+interface ICardListProps {
   charList: Character[] | undefined;
-}> = ({ charList }) => {
-  useEffect(() => {
-    if (Array.isArray(charList) && charList.length === 0) {
-      throw new Error('No characters to display');
-    }
-  }, [charList]);
+}
 
+const CardList: FC<ICardListProps> = ({ charList }) => {
   return (
     <div className={style['card-list']}>
       {charList &&

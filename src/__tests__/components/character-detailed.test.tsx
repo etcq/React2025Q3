@@ -47,7 +47,6 @@ describe('Character detailed', () => {
     );
     const header = await screen.findByTestId('detailed-header');
     expect(header).toBeInTheDocument();
-    screen.debug();
     await waitFor(() => {
       expect(header).toHaveTextContent(characterResponse.name);
     });

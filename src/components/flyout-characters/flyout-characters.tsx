@@ -25,7 +25,6 @@ export const FlyoutCharacters: FC = () => {
     <div
       className={`${styles.flyout} ${characters.length === 0 && styles.hidden}`}
       data-testid="flyout"
-      style={{ visibility: characters.length === 0 ? 'hidden' : 'visible' }}
     >
       <h2>{characters.length} Selected Characters</h2>
       <div className={styles['flyout-buttons']}>

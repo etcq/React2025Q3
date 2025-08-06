@@ -20,7 +20,10 @@ const getCharacters = async (
   };
 };
 
-const getCharacter = async (id: number): Promise<Character> => {
+const getCharacter = async (id: string | undefined): Promise<Character> => {
+  if (!id) {
+    throw new Error('Invalid id');
+  }
   const url = `${API_BASE}${id}`;
   const res = await fetch(url);
   if (!res.ok) {

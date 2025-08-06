@@ -1,4 +1,4 @@
-import { type FC, useRef, type ChangeEvent } from 'react';
+import { type FC, useRef, type ChangeEvent, type MouseEvent } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useNavigate } from 'react-router';
@@ -9,7 +9,6 @@ const Card: FC<{ data: Character }> = ({ data }) => {
   const navigate = useNavigate();
   const { characters, selectCharacters, unselectCharacter } =
     useSelectCharactersStore((state) => state);
-
   const checkbox = useRef(null);
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,15 +19,17 @@ const Card: FC<{ data: Character }> = ({ data }) => {
     }
   };
 
+  const openCharacterDetailed = (event: MouseEvent) => {
+    if (event.target !== checkbox.current) {
+      navigate(`/detailed/${id}`);
+    }
+  };
+
   return (
     <div
       className={styles.card}
       data-testid="card"
-      onClick={(event) => {
-        if (event.target !== checkbox.current) {
-          navigate(`/detailed/${id}`);
-        }
-      }}
+      onClick={openCharacterDetailed}
     >
       <img className={styles['card-avatar']} src={image} alt={name} />
       <div className={styles['card-info']}>
