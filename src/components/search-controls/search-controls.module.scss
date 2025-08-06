@@ -13,12 +13,13 @@
     font-size: 2rem;
     width: 60px;
   }
+  &-counter {
+    color: $c-main-font;
+  }
 }
 
-.dark {
-  color: $c-main-font;
-}
-
-.light {
-  color: $c-main-font-light;
+[data-theme='light'] {
+  .search-controls-counter {
+    color: $c-main-font-light;
+  }
 }

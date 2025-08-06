@@ -4,6 +4,7 @@ import Search from '../../pages/search/search';
 import userEvent from '@testing-library/user-event';
 import { type Mock } from 'vitest';
 import { MemoryRouter } from 'react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 vi.mock('fetch');
 
@@ -21,10 +22,13 @@ describe('ErrorBoundary component', () => {
       ok: true,
       json: async () => ({}),
     });
+    const queryClient = new QueryClient();
     render(
-      <MemoryRouter>
-        <Search />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/invalid-path']}>
+          <Search />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
     await waitFor(() => {
       expect(screen.getByAltText('sad rick')).toBeInTheDocument();
@@ -47,10 +51,13 @@ describe('ErrorBoundary component', () => {
         ],
       }),
     });
+    const queryClient = new QueryClient();
     render(
-      <MemoryRouter>
-        <Search />
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/invalid-path']}>
+          <Search />
+        </MemoryRouter>
+      </QueryClientProvider>
     );
     const button = screen.getByRole('button', { name: /error/i });
     await waitFor(() => {

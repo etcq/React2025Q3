@@ -10,7 +10,7 @@ export const Header: FC = () => {
   const { theme, toggleTheme } = use(ThemeContext);
 
   return (
-    <div className={`${style.header} ${style[theme]}`}>
+    <div className={`${style.header}`}>
       <h1 className={style['header-main']}>Rick and Morty</h1>
       <span className={style['header-secondary']}>characters database</span>
       <Button

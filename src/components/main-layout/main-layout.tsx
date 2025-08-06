@@ -19,8 +19,9 @@ export const MainLayout: FC = () => {
   return (
     <ThemeContext value={{ theme, toggleTheme }}>
       <div
-        className={`${style.wrapper} ${style[theme]}`}
+        className={style.wrapper}
         data-testid="main-wrapper"
+        data-theme={theme}
       >
         <div
           className={style.layout}
@@ -35,8 +36,8 @@ export const MainLayout: FC = () => {
             </Suspense>
           </main>
         </div>
+        <FlyoutCharacters />
       </div>
-      <FlyoutCharacters />
     </ThemeContext>
   );
 };

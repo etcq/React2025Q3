@@ -1,7 +1,6 @@
-import { type FC, use, useEffect, useRef } from 'react';
+import { type FC, useEffect, useRef } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
-import ThemeContext from '../../core/contexts/contexts.ts';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 
 interface ISearchFormProps {
@@ -15,7 +14,7 @@ const SearchForm: FC<ISearchFormProps> = ({
 }) => {
   const input = useRef<HTMLInputElement>(null);
   const resetPage = usePaginationStore((state) => state.resetPage);
-  const { theme } = use(ThemeContext);
+
   useEffect(() => {
     if (input.current) {
       input.current.value = savedQuery;
@@ -29,18 +28,14 @@ const SearchForm: FC<ISearchFormProps> = ({
   };
 
   return (
-    <div className={`${style['search-form']} ${style[theme]}`}>
+    <div className={style['search-form']}>
       <input
         type="text"
         className={style['search-form__input']}
         placeholder="Search..."
         ref={input}
       ></input>
-      <Button
-        callback={handleClick}
-        text="Search"
-        className={style[`${theme}-btn`]}
-      />
+      <Button callback={handleClick} text="Search" />
     </div>
   );
 };

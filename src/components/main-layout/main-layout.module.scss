@@ -1,11 +1,11 @@
 @use '../../assets/style/variables.scss' as *;
 
 
-.dark {
+.wrapper {
   background-color: $c-main-bg;
 }
 
-.light {
+[data-theme='light'] {
   background-color: $c-secondary-bg;
 }
 

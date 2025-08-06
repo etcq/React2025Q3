@@ -1,12 +1,10 @@
-import { type FC, use } from 'react';
+import { type FC } from 'react';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 import style from './search-controls.module.scss';
 import Button from '../ui/button/button';
-import ThemeContext from '../../core/contexts/contexts.ts';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 
 export const SearchControls: FC = () => {
-  const { theme } = use(ThemeContext);
   const { page, maxPage, prevPage, nextPage } = usePaginationStore(
     (state) => state
   );
@@ -21,7 +19,7 @@ export const SearchControls: FC = () => {
         <GrFormPreviousLink />
       </Button>
       <span
-        className={`${style['search-controls-counter']} ${style[theme]}`}
+        className={style['search-controls-counter']}
         data-testid="page-counter"
       >
         {page} / {maxPage}

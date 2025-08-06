@@ -9,4 +9,5 @@ const ThemeContext = createContext<IThemeContext>({
   theme: 'dark',
   toggleTheme: () => {},
 });
+
 export default ThemeContext;

@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC, use } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import style from './character-detailed.module.scss';
 import { useNavigate, useParams } from 'react-router';
 import { getCharacter } from '../../core/services/api-service';
@@ -6,13 +6,11 @@ import { type Character } from '../../core/interfaces/interface';
 import Loading from '../loading/loading';
 import Button from '../ui/button/button';
 import { MdClose } from 'react-icons/md';
-import ThemeContext from '../../core/contexts/contexts.ts';
 
 export const CharacterDetailed: FC = () => {
   const [character, setCharacter] = useState<Character>();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  const { theme } = use(ThemeContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (id) {
@@ -25,7 +23,7 @@ export const CharacterDetailed: FC = () => {
   }, [id]);
 
   return (
-    <div className={`${style.detailed} ${style[theme]}`} data-testid="detailed">
+    <div className={style.detailed} data-testid="detailed">
       {isLoading ? (
         <Loading />
       ) : (

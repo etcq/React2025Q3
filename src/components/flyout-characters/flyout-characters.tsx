@@ -1,7 +1,6 @@
-import { type FC, use, useRef } from 'react';
+import { type FC, useRef } from 'react';
 import styles from './flyout-characters.module.scss';
 import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';
-import ThemeContext from '../../core/contexts/contexts.ts';
 import Button from '../ui/button/button.tsx';
 import { convertToCSV } from '../../core/utils/convert-to-csv.ts';
 
@@ -9,7 +8,6 @@ export const FlyoutCharacters: FC = () => {
   const { characters, unselectAllCharacters } = useSelectCharactersStore(
     (state) => state
   );
-  const { theme } = use(ThemeContext);
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
 
   const downloadCharactersInfo = () => {
@@ -25,7 +23,7 @@ export const FlyoutCharacters: FC = () => {
 
   return (
     <div
-      className={`${styles.flyout} ${styles[theme]} ${characters.length === 0 && styles.hidden}`}
+      className={`${styles.flyout} ${characters.length === 0 && styles.hidden}`}
       data-testid="flyout"
       style={{ visibility: characters.length === 0 ? 'hidden' : 'visible' }}
     >

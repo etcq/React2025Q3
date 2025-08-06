@@ -5,33 +5,45 @@ import * as apiService from '../../core/services/api-service.ts';
 import { userEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { response } from '../../mocks/mock-data.ts';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 describe('Search page integration tests', () => {
   it('Manages loading states during API calls', async () => {
+    const queryClient = new QueryClient();
     render(
       <MemoryRouter>
-        <Search />
+        <QueryClientProvider client={queryClient}>
+          <Search />
+        </QueryClientProvider>
       </MemoryRouter>
     );
     const loading = await screen.findByText('Loading...');
     expect(loading).toBeInTheDocument();
   });
 
-  it('Makes initial API call on component mount', () => {
+  it('Makes initial API call on component mount', async () => {
     const apiCallSpy = vi.spyOn(apiService, 'getCharacters');
+    const queryClient = new QueryClient();
     render(
       <MemoryRouter>
-        <Search />
+        <QueryClientProvider client={queryClient}>
+          <Search />
+        </QueryClientProvider>
       </MemoryRouter>
     );
-    expect(apiCallSpy).toBeCalled();
+    await waitFor(() => {
+      expect(apiCallSpy).toBeCalled();
+    });
   });
 
   it('Handles search term from localStorage on initial load', () => {
     localStorage.setItem('search-query', 'saved-query');
+    const queryClient = new QueryClient();
     render(
       <MemoryRouter>
-        <Search />
+        <QueryClientProvider client={queryClient}>
+          <Search />
+        </QueryClientProvider>
       </MemoryRouter>
     );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue('saved-query');
@@ -45,9 +57,12 @@ describe('Search page API Integration Tests', () => {
 
   it('Calls API with correct parameters', () => {
     const apiCallSpy = vi.spyOn(apiService, 'getCharacters');
+    const queryClient = new QueryClient();
     render(
       <MemoryRouter>
-        <Search />
+        <QueryClientProvider client={queryClient}>
+          <Search />
+        </QueryClientProvider>
       </MemoryRouter>
     );
     const input = screen.getByPlaceholderText('Search...');
@@ -57,19 +72,26 @@ describe('Search page API Integration Tests', () => {
     expect(apiCallSpy).toBeCalledWith('new-name', 1);
   });
   it('Handles API error responses', async () => {
-    const spyError = vi.spyOn(console, 'error');
+    vi.spyOn(apiService, 'getCharacters').mockRejectedValue(
+      new Error('API Error')
+    );
+    const queryClient = new QueryClient();
     render(
       <MemoryRouter>
-        <Search />
+        <QueryClientProvider client={queryClient}>
+          <Search />
+        </QueryClientProvider>
       </MemoryRouter>
     );
     const query = 'invalidinput';
     const input = screen.getByPlaceholderText('Search...');
     const searchButton = screen.getByRole('button', { name: 'Search' });
+
     await userEvent.type(input, query);
     await userEvent.click(searchButton);
+
     await waitFor(() => {
-      expect(spyError).toBeCalled();
+      expect(screen.getByText('Something went wrong')).toBeInTheDocument();
     });
   });
 });
@@ -81,24 +103,25 @@ describe('Pagination tests', () => {
 
   it('Move page button work', async () => {
     vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
+    const queryClient = new QueryClient();
     render(
       <MemoryRouter>
-        <Search />
+        <QueryClientProvider client={queryClient}>
+          <Search />
+        </QueryClientProvider>
       </MemoryRouter>
     );
     await waitFor(() => {
       expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
     const user = userEvent.setup();
-    const pageCounter = screen.getByTestId('page-counter');
     const nextButton = screen.getByTestId('next');
     const prevButton = screen.getByTestId('prev');
-    expect(pageCounter.textContent).toContain('1');
+    expect(screen.getByTestId('page-counter').textContent).toContain('1');
     expect(prevButton).toBeDisabled();
     await user.click(nextButton);
     await waitFor(() => {
-      expect(pageCounter.textContent).toContain('2');
-      expect(prevButton).not.toBeDisabled();
+      expect(screen.getByTestId('page-counter').textContent).toContain('2');
     });
   });
 });

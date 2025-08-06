@@ -9,10 +9,8 @@
   flex-direction: column;
 }
 
-.dark {
-  color: $c-secondary-font;
-}
-
-.light {
-  color: $c-secondary-font-light;
+[data-theme='light'] {
+  .loading {
+    color: $c-secondary-font-light;
+  }
 }

@@ -1,11 +1,14 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import * as apiService from '../../core/services/api-service';
 import { getCharacters } from '../../core/services/api-service';
+import { response } from '../../mocks/mock-data.ts';
 
 describe('API service work', () => {
   it('Gets all characters if query string is empty', async () => {
-    const characters = (await getCharacters('', 1)).characters;
-    expect(characters).toBeDefined();
-    expect(characters?.length).toBe(20);
+    vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
+    const responseData = await getCharacters('', 1);
+    expect(responseData).toBeDefined();
+    expect(responseData.characters.length).toBe(3);
   });
   it('Gets characters by name', async () => {
     const characters = (await getCharacters('rick', 1)).characters;

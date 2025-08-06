@@ -1,13 +1,13 @@
 import type { Character, ICharacterResponse } from '../interfaces/interface';
-const API_BASE = 'https://rickandmortyapi.com/api';
+const API_BASE = 'https://rickandmortyapi.com/api/character/';
 
 const getCharacters = async (
   name: string,
   page: number
 ): Promise<ICharacterResponse> => {
   const url = name
-    ? `${API_BASE}/character/?name=${name}&page=${page}`
-    : `${API_BASE}/character/?page=${page}`;
+    ? `${API_BASE}?name=${name}&page=${page}`
+    : `${API_BASE}?page=${page}`;
   const res = await fetch(url);
   const data = await res.json();
   if (!data.results || data.results.length === 0) {
@@ -21,7 +21,7 @@ const getCharacters = async (
 };
 
 const getCharacter = async (id: number): Promise<Character> => {
-  const url = `${API_BASE}/character/${id}`;
+  const url = `${API_BASE}${id}`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error("Can't get character data");

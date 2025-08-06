@@ -7,27 +7,25 @@
   align-items: center;
   justify-content: space-evenly;
   border-radius: 4px;
+  background-color: $c-dark-page-bg;
   &__input {
     width: 60%;
     height: 40px;
     border-radius: 4px;
     font-size: 16px;
     padding-left: 20px;
-  }
-}
-
-.dark {
-  background-color: $c-dark-page-bg;
-  .search-form__input {
     background-color: $c-secondary-bg;
     color: $c-main-bg;
   }
 }
 
-.light {
-  background-color: $c-light-page-bg;
-  .search-form__input {
-    background-color: $c-main-bg;
-    color: $c-secondary-bg;
+[data-theme='light'] {
+  .search-form {
+    background-color: $c-light-page-bg;
+    &__input {
+      background-color: $c-main-bg;
+      color: $c-secondary-bg;
+    }
   }
 }
+

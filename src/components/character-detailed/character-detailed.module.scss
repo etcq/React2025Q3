@@ -2,6 +2,8 @@
 @use '../../assets/style/mixins.scss' as *;
 
 .detailed {
+  background-color: $c-main-bg;
+  color: $c-main-font;
   flex: 0 0 400px;
   width: 100%;
   padding: 15px;
@@ -63,12 +65,9 @@
   border-radius: 50%;
 }
 
-.dark {
-  background-color: $c-main-bg;
-  color: $c-main-font;
-}
-
-.light {
-  background-color: $c-main-bg-light;
-  color: $c-main-font-light;
+[data-theme='light'] {
+  .detailed {
+    background-color: $c-main-bg-light;
+    color: $c-main-font-light;
+  }
 }

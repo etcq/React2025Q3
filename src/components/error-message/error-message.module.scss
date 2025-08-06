@@ -12,10 +12,9 @@
   }
 }
 
-.dark {
-  color: $c-secondary-font;
+[data-theme='light'] {
+  .error-content {
+    color: $c-secondary-font-light;
+  }
 }
 
-.light {
-  color: $c-secondary-font-light;
-}

@@ -1,6 +1,5 @@
-import { type ButtonHTMLAttributes, type FC, use } from 'react';
+import { type ButtonHTMLAttributes, type FC } from 'react';
 import style from './button.module.scss';
-import ThemeContext from '../../../core/contexts/contexts.ts';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   callback: () => void;
@@ -17,14 +16,13 @@ const Button: FC<ButtonProps> = ({
   isError,
   ...props
 }) => {
-  const { theme } = use(ThemeContext);
   const handleClick = () => {
     callback();
   };
   return (
     <button
       {...props}
-      className={`${style[`${theme}-btn`]} ${isError ? style['error-button'] : style.button} ${className} `}
+      className={`${isError ? style['error-button'] : style.button} ${className} `}
       onClick={handleClick}
       disabled={disabled}
     >

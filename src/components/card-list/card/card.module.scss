@@ -1,6 +1,8 @@
 @use '../../../assets/style/variables.scss' as *;
 
 .card {
+  border: 1px solid $c-main-bg;
+  background-color: $c-secondary-bg;
   display: flex;
   margin: 0 auto 10px auto;
   width: 100%;
@@ -77,20 +79,18 @@
   color: darkred;
 }
 
-.dark {
-  border: 1px solid $c-main-bg;
-  background-color: $c-secondary-bg;
-}
-
-.light {
-  border: 1px solid $c-main-bg-light;
-  background-color: $c-main-bg;
-  color: $c-secondary-bg;
-  .card-checkbox {
-    background: $c-light-page-bg;
-    box-shadow: inset 0 0 5px rgb(255 255 255 / 0.2);
-    &:checked {
-      background-color: $c-main-font;
+[data-theme='light'] {
+  .card {
+    border: 1px solid $c-main-bg-light;
+    background-color: $c-main-bg;
+    color: $c-secondary-bg;
+    .card-checkbox {
+      background: $c-light-page-bg;
+      box-shadow: inset 0 0 5px rgb(255 255 255 / 0.2);
+      &:checked {
+        background-color: $c-main-font;
+      }
     }
   }
 }
+

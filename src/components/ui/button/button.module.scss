@@ -3,8 +3,14 @@
 
 .button {
   @include button(120px, 40px);
+  background-color: $c-main-font;
+  color: $c-main-bg;
+  &:hover {
+    background-color: $c-secondary-font;
+  }
   &:disabled {
     cursor: not-allowed;
+    background-color: $c-dark-disable;
   }
 }
 
@@ -18,24 +24,16 @@
   }
 }
 
-.dark-btn {
-  background-color: $c-main-font;
-  color: $c-main-bg;
-  &:hover {
-    background-color: $c-secondary-font;
-  }
-  &:disabled {
-    background-color: $c-dark-disable;
+[data-theme='light'] {
+  .button {
+    background-color: $c-main-font-light;
+    color: $c-main-bg-light;
+    &:hover {
+      background-color: $c-secondary-font-light;
+    }
+    &:disabled {
+      background-color: $c-light-disable;
+    }
   }
 }
 
-.light-btn {
-  background-color: $c-main-font-light;
-  color: $c-main-bg-light;
-  &:hover {
-    background-color: $c-secondary-font-light;
-  }
-  &:disabled {
-    background-color: $c-light-disable;
-  }
-}

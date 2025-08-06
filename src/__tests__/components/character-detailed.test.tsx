@@ -5,19 +5,24 @@ import Search from '../../pages/search/search.tsx';
 import * as apiService from '../../core/services/api-service.ts';
 import { characterResponse, response } from '../../mocks/mock-data.ts';
 import { CharacterDetailed } from '../../components/character-detailed/character-detailed.tsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 describe('Character detailed', () => {
   vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
   vi.spyOn(apiService, 'getCharacter').mockResolvedValue(characterResponse);
+
   it('render after click', async () => {
+    const queryClient = new QueryClient();
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<Search />}>
-            <Route path="detailed/:id" element={<CharacterDetailed />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<Search />}>
+              <Route path="detailed/:id" element={<CharacterDetailed />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
     );
     await waitFor(() => {
       expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
@@ -28,14 +33,17 @@ describe('Character detailed', () => {
     });
   });
   it('render right information', async () => {
+    const queryClient = new QueryClient();
     render(
-      <MemoryRouter initialEntries={['/detailed/1']}>
-        <Routes>
-          <Route path="/" element={<Search />}>
-            <Route path="detailed/:id" element={<CharacterDetailed />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/detailed/1']}>
+          <Routes>
+            <Route path="/" element={<Search />}>
+              <Route path="detailed/:id" element={<CharacterDetailed />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
     );
     const header = await screen.findByTestId('detailed-header');
     expect(header).toBeInTheDocument();
@@ -55,14 +63,17 @@ describe('Character detailed', () => {
     });
   });
   it('back button work', async () => {
+    const queryClient = new QueryClient();
     render(
-      <MemoryRouter initialEntries={['/detailed/1']}>
-        <Routes>
-          <Route path="/" element={<Search />}>
-            <Route path="detailed/:id" element={<CharacterDetailed />} />
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/detailed/1']}>
+          <Routes>
+            <Route path="/" element={<Search />}>
+              <Route path="detailed/:id" element={<CharacterDetailed />} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
     );
     const backBtn = await screen.findByTestId('detailed-back-btn');
     fireEvent.click(backBtn);

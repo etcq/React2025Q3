@@ -30,7 +30,10 @@
   visibility: hidden;
 }
 
-.light {
-  background-color: $c-main-bg-light;
-  color: $c-main-font-light;
+[data-theme='light'] {
+  .flyout {
+    background-color: $c-main-bg-light;
+    color: $c-main-font-light;
+    border-color: $c-secondary-font-light;
+  }
 }

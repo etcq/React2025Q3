@@ -1,18 +1,16 @@
-import { type FC, use, useRef, type ChangeEvent } from 'react';
+import { type FC, useRef, type ChangeEvent } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useNavigate } from 'react-router';
-import ThemeContext from '../../../core/contexts/contexts.ts';
 import { useSelectCharactersStore } from '../../../core/stores/select-characters-store.ts';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
+  const navigate = useNavigate();
   const { characters, selectCharacters, unselectCharacter } =
     useSelectCharactersStore((state) => state);
 
-  const { theme } = use(ThemeContext);
   const checkbox = useRef(null);
-  const navigate = useNavigate();
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -24,7 +22,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
 
   return (
     <div
-      className={`${styles.card} ${styles[theme]}`}
+      className={styles.card}
       data-testid="card"
       onClick={(event) => {
         if (event.target !== checkbox.current) {
