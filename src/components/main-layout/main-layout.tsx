@@ -7,6 +7,7 @@ import bgPathLight from '../../assets/image/rick-and-morty-bg-2.jpg';
 import { Header } from '../header/header';
 import ThemeContext from '../../core/contexts/contexts';
 import { THEME } from '../../core/constants/constants.ts';
+import { FlyoutCharacters } from '../flyout-characters/flyout-characters.tsx';
 
 export const MainLayout: FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -35,6 +36,7 @@ export const MainLayout: FC = () => {
           </main>
         </div>
       </div>
+      <FlyoutCharacters />
     </ThemeContext>
   );
 };

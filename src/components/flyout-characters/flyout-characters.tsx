@@ -30,8 +30,11 @@ export const FlyoutCharacters: FC = () => {
       style={{ visibility: characters.length === 0 ? 'hidden' : 'visible' }}
     >
       <h2>{characters.length} Selected Characters</h2>
-      <Button callback={unselectAllCharacters}>Unselect All</Button>
-      <Button callback={downloadCharactersInfo}>Download</Button>
+      <div className={styles['flyout-buttons']}>
+        <Button callback={unselectAllCharacters}>Unselect All</Button>
+        <Button callback={downloadCharactersInfo}>Download</Button>
+      </div>
+
       <a
         ref={downloadRef}
         download={`${characters.length}_items.csv`}

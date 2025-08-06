@@ -1,4 +1,4 @@
-import { type FC, use, useCallback, useEffect } from 'react';
+import { type FC, use, useEffect } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
 import { getCharacters } from '../../core/services/api-service.ts';
@@ -10,7 +10,7 @@ import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
 import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
 import { SearchControls } from '../../components/search-controls/search-controls.tsx';
 import ThemeContext from '../../core/contexts/contexts.ts';
-import { FlyoutCharacters } from '../../components/flyout-characters/flyout-characters.tsx';
+// import { FlyoutCharacters } from '../../components/flyout-characters/flyout-characters.tsx';
 import { useQuery } from '@tanstack/react-query';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 import ErrorMessage from '../../components/error-message/error-message.tsx';
@@ -22,21 +22,18 @@ const Search: FC = () => {
   const { page, setMaxPage } = usePaginationStore((state) => state);
 
   const { data, isPending, isError } = useQuery({
-    queryKey: ['characters', page, savedQuery],
+    queryKey: ['characters', savedQuery, page],
     queryFn: () => getCharacters(savedQuery, page),
+    staleTime: 1000 * 60 * 30,
   });
 
   useParamsUpdate(page, savedQuery);
 
-  const handleSearch = useCallback(() => {
+  useEffect(() => {
     if (data) {
-      setMaxPage(data?.maxPage);
+      setMaxPage(data.maxPage);
     }
   }, [setMaxPage, data]);
-
-  useEffect(() => {
-    handleSearch();
-  }, [handleSearch, savedQuery, page]);
 
   return (
     <div className={style.search}>
@@ -56,7 +53,6 @@ const Search: FC = () => {
           </>
         )}
       </div>
-      <FlyoutCharacters />
       <Button
         callback={() => setQueryToLocalStorage('invalid')}
         text="Error"

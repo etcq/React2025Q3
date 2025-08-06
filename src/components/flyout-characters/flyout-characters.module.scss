@@ -1,15 +1,29 @@
 @use '../../assets/style/variables.scss' as *;
 
 .flyout {
-  background-color: $c-dark-page-bg;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $c-main-bg;
   color: $c-main-font;
-  width: 70%;
-  height: 50px;
+  width: 400px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0 0 30px 30px;
-  gap: 14px;
+  border-radius: 20px;
+  flex-direction: column;
+  border: 2px solid $c-main-font;
+  gap: 10px;
+
+  &-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  h2 {
+    margin: 0;
+  }
 }
 
 .hidden {
@@ -17,6 +31,6 @@
 }
 
 .light {
-  background-color: $c-light-page-bg;
+  background-color: $c-main-bg-light;
   color: $c-main-font-light;
 }
