@@ -4,12 +4,17 @@ import { getCharacters } from '../../core/services/api-service';
 import { response } from '../../mocks/mock-data.ts';
 
 describe('API service work', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('Gets all characters if query string is empty', async () => {
     vi.spyOn(apiService, 'getCharacters').mockResolvedValue(response);
     const responseData = await getCharacters('', 1);
     expect(responseData).toBeDefined();
     expect(responseData.characters.length).toBe(3);
   });
+
   it('Gets characters by name', async () => {
     const characters = (await getCharacters('rick', 1)).characters;
     expect(Array.isArray(characters)).toBe(true);
@@ -18,6 +23,7 @@ describe('API service work', () => {
     expect(characters[2].name).toMatch(/rick/i);
     expect(characters[3].name).not.toMatch(/morty/i);
   });
+
   it('If no characters are found, throw an error.', async () => {
     const spyError = vi.spyOn(console, 'error').mockImplementation(() => {});
     await expect(getCharacters('charnotfound', 1)).rejects.toThrowError();

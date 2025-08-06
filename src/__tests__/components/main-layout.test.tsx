@@ -13,10 +13,8 @@ describe('MainLayout', () => {
     const themeSwitcher = screen.getByTestId('theme-switcher');
     const mainLayout = screen.getByTestId('main-wrapper');
     expect(themeSwitcher).toBeInTheDocument();
-    expect(mainLayout.className).toContain('dark');
-    expect(mainLayout.className).not.toContain('light');
+    expect(mainLayout.getAttribute('data-theme')).toBe('dark');
     fireEvent.click(themeSwitcher);
-    expect(mainLayout.className).toContain('light');
-    expect(mainLayout.className).not.toContain('dark');
+    expect(mainLayout.getAttribute('data-theme')).toBe('light');
   });
 });
