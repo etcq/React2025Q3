@@ -3,12 +3,12 @@ import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useNavigate } from 'react-router';
 import ThemeContext from '../../../core/contexts/contexts.ts';
-import { useCharactersStore } from '../../../core/stores/stores.ts';
+import { useSelectCharactersStore } from '../../../core/stores/select-characters-store.ts';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
   const { characters, selectCharacters, unselectCharacter } =
-    useCharactersStore((state) => state);
+    useSelectCharactersStore((state) => state);
 
   const { theme } = use(ThemeContext);
   const checkbox = useRef(null);

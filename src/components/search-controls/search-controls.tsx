@@ -3,21 +3,13 @@ import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 import style from './search-controls.module.scss';
 import Button from '../ui/button/button';
 import ThemeContext from '../../core/contexts/contexts.ts';
+import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 
-interface IControls {
-  page: number;
-  maxPage: number;
-  prevPage: () => void;
-  nextPage: () => void;
-}
-
-export const SearchControls: FC<IControls> = ({
-  page,
-  maxPage,
-  prevPage,
-  nextPage,
-}) => {
+export const SearchControls: FC = () => {
   const { theme } = use(ThemeContext);
+  const { page, maxPage, prevPage, nextPage } = usePaginationStore(
+    (state) => state
+  );
   return (
     <div className={style['search-controls']}>
       <Button

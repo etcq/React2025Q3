@@ -5,7 +5,7 @@ import type { Character } from '../../core/interfaces/interface.ts';
 import ThemeContext from '../../core/contexts/contexts.ts';
 
 const CardList: FC<{
-  charList: Character[];
+  charList: Character[] | undefined;
 }> = ({ charList }) => {
   const { theme } = use(ThemeContext);
   useEffect(() => {
@@ -16,9 +16,8 @@ const CardList: FC<{
 
   return (
     <div className={`${style['card-list']} ${style[theme]}`}>
-      {charList.map((char) => (
-        <Card data={char} key={String(char.id)} />
-      ))}
+      {charList &&
+        charList.map((char) => <Card data={char} key={String(char.id)} />)}
     </div>
   );
 };

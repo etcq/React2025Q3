@@ -8,7 +8,7 @@ interface ICharacter {
   unselectAllCharacters: () => void;
 }
 
-export const useCharactersStore = create<ICharacter>()((set) => ({
+export const useSelectCharactersStore = create<ICharacter>()((set) => ({
   characters: [],
   selectCharacters: (newCharacter: Character) =>
     set((state) => ({

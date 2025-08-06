@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 
-export const useQueryUpdate = (page: number, query: string) => {
+export const useParamsUpdate = (page: number, query: string) => {
   const [, setSearchParams] = useSearchParams();
   useEffect(() => {
     setSearchParams((searchParams) => {

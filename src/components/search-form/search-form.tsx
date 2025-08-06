@@ -2,19 +2,19 @@ import { type FC, use, useEffect, useRef } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 import ThemeContext from '../../core/contexts/contexts.ts';
+import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 
 interface ISearchFormProps {
-  resetPage: () => void;
   savedQuery: string;
   setQueryToLocalStorage: (query: string) => void;
 }
 
 const SearchForm: FC<ISearchFormProps> = ({
-  resetPage,
   savedQuery,
   setQueryToLocalStorage,
 }) => {
   const input = useRef<HTMLInputElement>(null);
+  const resetPage = usePaginationStore((state) => state.resetPage);
   const { theme } = use(ThemeContext);
   useEffect(() => {
     if (input.current) {

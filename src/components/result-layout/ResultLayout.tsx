@@ -5,7 +5,9 @@ import type { Character } from '../../core/interfaces/interface';
 import style from './result-layout.module.scss';
 import ErrorBoundary from '../error-boundary/error-boundary';
 
-export const ResultLayout: FC<{ charList: Character[] }> = ({ charList }) => {
+export const ResultLayout: FC<{ charList: Character[] | undefined }> = ({
+  charList,
+}) => {
   return (
     <div className={style['list-wrapper']}>
       <ErrorBoundary>

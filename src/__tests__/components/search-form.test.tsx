@@ -8,11 +8,7 @@ describe('SearchForm render', () => {
   it('Should render input', () => {
     render(
       <MemoryRouter>
-        <SearchForm
-          setQueryToLocalStorage={() => {}}
-          resetPage={() => {}}
-          savedQuery=""
-        />
+        <SearchForm setQueryToLocalStorage={() => {}} savedQuery="" />
       </MemoryRouter>
     );
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
@@ -22,11 +18,7 @@ describe('SearchForm render', () => {
   it('Should render button', () => {
     render(
       <MemoryRouter>
-        <SearchForm
-          setQueryToLocalStorage={() => {}}
-          resetPage={() => {}}
-          savedQuery=""
-        />
+        <SearchForm setQueryToLocalStorage={() => {}} savedQuery="" />
       </MemoryRouter>
     );
     expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
@@ -42,11 +34,7 @@ describe('SearchForm input values', () => {
     localStorage.clear();
     render(
       <MemoryRouter>
-        <SearchForm
-          setQueryToLocalStorage={() => {}}
-          resetPage={() => {}}
-          savedQuery=""
-        />
+        <SearchForm setQueryToLocalStorage={() => {}} savedQuery="" />
       </MemoryRouter>
     );
     expect(screen.getByPlaceholderText('Search...')).toHaveValue('');

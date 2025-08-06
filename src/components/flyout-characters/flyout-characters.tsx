@@ -1,12 +1,12 @@
 import { type FC, use, useRef } from 'react';
 import styles from './flyout-characters.module.scss';
-import { useCharactersStore } from '../../core/stores/stores.ts';
+import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';
 import ThemeContext from '../../core/contexts/contexts.ts';
 import Button from '../ui/button/button.tsx';
 import { convertToCSV } from '../../core/utils/convert-to-csv.ts';
 
 export const FlyoutCharacters: FC = () => {
-  const { characters, unselectAllCharacters } = useCharactersStore(
+  const { characters, unselectAllCharacters } = useSelectCharactersStore(
     (state) => state
   );
   const { theme } = use(ThemeContext);

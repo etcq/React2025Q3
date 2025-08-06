@@ -1,73 +1,64 @@
-import { type FC, use, useCallback, useEffect, useState } from 'react';
+import { type FC, use, useCallback, useEffect } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
-import type { Character } from '../../core/interfaces/interface.ts';
 import { getCharacters } from '../../core/services/api-service.ts';
 import Loading from '../../components/loading/loading.tsx';
 import Button from '../../components/ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/useLocalStorage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
-import { usePagination } from '../../core/hooks/usePagination.ts';
 import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
-import { useQueryUpdate } from '../../core/hooks/useQuery.ts';
+import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
 import { SearchControls } from '../../components/search-controls/search-controls.tsx';
 import ThemeContext from '../../core/contexts/contexts.ts';
 import { FlyoutCharacters } from '../../components/flyout-characters/flyout-characters.tsx';
+import { useQuery } from '@tanstack/react-query';
+import { usePaginationStore } from '../../core/stores/pagination-store.ts';
+import ErrorMessage from '../../components/error-message/error-message.tsx';
 
 const Search: FC = () => {
-  const [charList, setCharList] = useState<Character[]>([]);
-  const [isLoading, setLoading] = useState(false);
-  const [showControls, setShowControls] = useState(false);
   const { theme } = use(ThemeContext);
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
-  const { page, resetPage, maxPage, setMaxPage, prevPage, nextPage } =
-    usePagination();
-  useQueryUpdate(page, savedQuery);
+  const { page, setMaxPage } = usePaginationStore((state) => state);
 
-  const handleSearch = useCallback(
-    (name: string, queryPage: number) => {
-      setShowControls(false);
-      setLoading(true);
-      getCharacters(name, queryPage)
-        .then((response) => {
-          setCharList(response.characters);
-          setMaxPage(response.maxPage);
-          setShowControls(true);
-        })
-        .catch(() => {
-          setCharList([]);
-        })
-        .finally(() => setLoading(false));
-    },
-    [setMaxPage]
-  );
+  const { data, isPending, isError } = useQuery({
+    queryKey: ['characters', page, savedQuery],
+    queryFn: () => getCharacters(savedQuery, page),
+  });
+
+  useParamsUpdate(page, savedQuery);
+
+  const handleSearch = useCallback(() => {
+    if (data) {
+      setMaxPage(data?.maxPage);
+    }
+  }, [setMaxPage, data]);
 
   useEffect(() => {
-    handleSearch(savedQuery, page);
+    handleSearch();
   }, [handleSearch, savedQuery, page]);
 
   return (
     <div className={style.search}>
       <SearchForm
-        resetPage={resetPage}
         savedQuery={savedQuery}
         setQueryToLocalStorage={setQueryToLocalStorage}
       />
       <div className={`${style['search-results']} ${style[theme]}`}>
-        {showControls && (
-          <SearchControls
-            page={page}
-            maxPage={maxPage}
-            prevPage={prevPage}
-            nextPage={nextPage}
-          />
+        {isPending ? (
+          <Loading />
+        ) : isError ? (
+          <ErrorMessage />
+        ) : (
+          <>
+            <SearchControls />
+            <ResultLayout charList={data?.characters} />
+          </>
         )}
-        {isLoading ? <Loading /> : <ResultLayout charList={charList} />}
       </div>
       <FlyoutCharacters />
       <Button
-        callback={() => handleSearch('qwe213', page)}
+        callback={() => setQueryToLocalStorage('invalid')}
         text="Error"
         className={style['error-button']}
         isError={true}
