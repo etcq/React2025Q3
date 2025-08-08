@@ -59,13 +59,10 @@
     top: 60px;
     right: 10px;
     border: 2px solid $c-main-bg;
-              background-color: red;
-  color: white;
+    background-color: red;
+    color: white;
       &:hover {
-
-  &:hover {
-    background-color: darkred !important;
-  }
+        background-color: darkred !important;
       }
   }
 }
