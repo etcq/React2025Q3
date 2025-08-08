@@ -1,29 +1,23 @@
 import { type FC, useEffect } from 'react';
 import style from './search.module.scss';
 import SearchForm from '../../components/search-form/search-form';
-import { getCharacters } from '../../core/services/api-service.ts';
 import Loading from '../../components/loading/loading.tsx';
 import Button from '../../components/ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/use-local-storage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
 import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
 import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
-import { SearchControls } from '../../components/search-controls/search-controls.tsx';
-import { useQuery } from '@tanstack/react-query';
+import { PaginationControls } from '../../components/pagination-controls/pagination-controls.tsx';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 import ErrorMessage from '../../components/error-message/error-message.tsx';
+import { useQueryCharacters } from '../../core/hooks/query-hooks/use-query-characters.ts';
 
 const Search: FC = () => {
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, setMaxPage } = usePaginationStore((state) => state);
-
-  const { data, isPending, isError } = useQuery({
-    queryKey: ['characters', savedQuery, page],
-    queryFn: () => getCharacters(savedQuery, page),
-    staleTime: 1000 * 60 * 30,
-    retry: false,
-  });
+  const { data, isPending, isError, isFetching, resetListData } =
+    useQueryCharacters(savedQuery, page);
 
   useParamsUpdate(page, savedQuery);
 
@@ -40,23 +34,31 @@ const Search: FC = () => {
         setQueryToLocalStorage={setQueryToLocalStorage}
       />
       <div className={style['search-results']}>
-        {isPending ? (
+        {isPending || isFetching ? (
           <Loading />
         ) : isError ? (
           <ErrorMessage />
         ) : (
           <>
-            <SearchControls />
+            <PaginationControls />
             <ResultLayout charList={data?.characters} />
           </>
         )}
       </div>
-      <Button
-        callback={() => setQueryToLocalStorage('invalid')}
-        text="Error"
-        className={style['error-button']}
-        isError={true}
-      />
+      <div className={style['search-feature']}>
+        <Button
+          callback={() => setQueryToLocalStorage('invalid')}
+          text="Error"
+          className={style['error-button']}
+          isError={true}
+        />
+        <Button
+          callback={resetListData}
+          className={style['search-feature-reset-btn']}
+        >
+          Refetch characters list
+        </Button>
+      </div>
     </div>
   );
 };

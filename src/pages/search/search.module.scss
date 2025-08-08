@@ -7,16 +7,26 @@
   align-items: center;
   padding: 20px;
   margin: 0 auto;
-  min-height: 800px;
+  min-height: 600px;
 
   &-results {
     width: 90%;
     background-color: $c-dark-page-bg;
-    height: 600px;
+    height: 500px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  &-feature {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    &-reset-btn {
+      width: 250px !important;
+    }
   }
 }
 

@@ -16,7 +16,6 @@
 
 .error-button {
   @include button(300px, 40px);
-  margin-top: 20px;
   background-color: red !important;
   color: white !important;
   &:hover {

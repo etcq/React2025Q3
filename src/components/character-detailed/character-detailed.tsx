@@ -1,27 +1,22 @@
 import { type FC } from 'react';
 import style from './character-detailed.module.scss';
 import { useNavigate, useParams } from 'react-router';
-import { getCharacter } from '../../core/services/api-service';
 import Loading from '../loading/loading';
 import Button from '../ui/button/button';
 import { MdClose } from 'react-icons/md';
-import { useQuery } from '@tanstack/react-query';
 import { DetailedError } from './detailed-error/detailed-error';
+import { useQueryDetailedCharacter } from '../../core/hooks/query-hooks/use-query-detailed-character';
+import { RiResetLeftFill } from 'react-icons/ri';
 
 export const CharacterDetailed: FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const { data, isPending, isError } = useQuery({
-    queryKey: ['character-detailed', id],
-    queryFn: () => getCharacter(id),
-    staleTime: 1000 * 60 * 30,
-    retry: false,
-  });
+  const { data, isPending, isFetching, isError, resetData } =
+    useQueryDetailedCharacter(id);
 
   return (
     <div className={style.detailed} data-testid="detailed">
-      {isPending ? (
+      {isPending || isFetching ? (
         <Loading />
       ) : isError ? (
         <DetailedError />
@@ -61,6 +56,9 @@ export const CharacterDetailed: FC = () => {
         data-testid="detailed-back-btn"
       >
         <MdClose />
+      </Button>
+      <Button callback={resetData} className={style['detailed-reset-btn']}>
+        <RiResetLeftFill />
       </Button>
     </div>
   );

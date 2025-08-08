@@ -26,12 +26,12 @@
   &-img {
     display: block;
     margin: 0 auto;
-    width: 70%;
+    width: 32%;
     border-radius: 8px;
     object-fit: cover;
   }
 
-  .detailed-name {
+  &-name {
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
@@ -44,8 +44,29 @@
   }
 
   &-info-item {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     font-size: 1rem;
+  }
+
+  &-reset-btn {
+    position: absolute;
+    @include center-flex;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    font-size: 2rem;
+    border-radius: 50%;
+    top: 60px;
+    right: 10px;
+    border: 2px solid $c-main-bg;
+              background-color: red;
+  color: white;
+      &:hover {
+
+  &:hover {
+    background-color: darkred !important;
+  }
+      }
   }
 }
 

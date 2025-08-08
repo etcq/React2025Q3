@@ -1,10 +1,10 @@
 import { type FC } from 'react';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
-import style from './search-controls.module.scss';
-import Button from '../ui/button/button';
+import style from './pagination-controls.module.scss';
+import Button from '../ui/button/button.tsx';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 
-export const SearchControls: FC = () => {
+export const PaginationControls: FC = () => {
   const { page, maxPage, prevPage, nextPage } = usePaginationStore(
     (state) => state
   );
