@@ -7,6 +7,7 @@ export const useQueryDetailedCharacter = (id: string | undefined) => {
     queryKey: ['character-detailed', id],
     queryFn: () => getCharacter(id),
     staleTime: 1000 * 60 * 30,
+    enabled: !!id,
     retry: false,
   });
 
