@@ -1,3 +1,5 @@
+'use client';
+
 import { type FC, use } from 'react';
 import style from './header.module.scss';
 import ThemeContext from '../../core/contexts/contexts.ts';

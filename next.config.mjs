@@ -6,6 +6,6 @@ const nextConfig = {
     unoptimized: true,
   },
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
-}
+};
 
-export default nextConfig
+export default nextConfig;

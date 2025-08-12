@@ -1,3 +1,5 @@
+'use client';
+
 import { type FC, useRef } from 'react';
 import styles from './flyout-characters.module.scss';
 import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';

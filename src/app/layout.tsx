@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 import TanstackProvider from '../components/providers/tanstack-provider';
 import { IChildrenNode } from '../core/interfaces/interface';
 import { Montserrat } from 'next/font/google';
-import { MainLayout } from '../components/main-layout/main-layout';
 import '../assets/style/global.scss';
+import ThemeProvider from '../components/providers/theme-provider';
+import style from './root-layout.module.scss';
+import { FlyoutCharacters } from '../components/flyout-characters/flyout-characters';
+import { Header } from '../components/header/header';
 
 const montserrat = Montserrat({
   weight: ['400', '700'],
@@ -23,7 +26,15 @@ export default function RootLayout({ children }: IChildrenNode) {
     <html lang="en" className={montserrat.className}>
       <body>
         <TanstackProvider>
-          <MainLayout>{children}</MainLayout>
+          <ThemeProvider>
+            <div className={style.wrapper} data-testid="main-wrapper">
+              <div className={style.layout}>
+                <Header />
+                <main className={style['layout-content']}>{children}</main>
+              </div>
+              <FlyoutCharacters />
+            </div>
+          </ThemeProvider>
         </TanstackProvider>
       </body>
     </html>

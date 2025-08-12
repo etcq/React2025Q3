@@ -1,4 +1,4 @@
-@use '../../assets/style/variables.scss' as *;
+@use '../assets/style/variables.scss' as *;
 
 .wrapper {
   background-color: $c-main-bg;
@@ -10,11 +10,19 @@
   height: 100vh;
 }
 
-[data-theme='light'].wrapper {
-  background-color: $c-secondary-bg;
+[data-theme='light'] {
+  .wrapper {
+    background-color: $c-secondary-bg;
+  }
+
+  .layout {
+    background: url('/backgrounds/rick-and-morty-bg-2.jpg') center center/cover no-repeat;
+  }
 }
 
+
 .layout {
+  background: url('/backgrounds/rick-and-morty-bg.jpg') center center/cover no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
