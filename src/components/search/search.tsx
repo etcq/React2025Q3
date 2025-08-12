@@ -1,15 +1,17 @@
+'use client';
+
 import { type FC, useEffect } from 'react';
 import style from './search.module.scss';
-import SearchForm from '../../components/search-form/search-form';
-import Loading from '../../components/loading/loading.tsx';
-import Button from '../../components/ui/button/button.tsx';
+import SearchForm from '../search-form/search-form.tsx';
+import Loading from '../loading/loading.tsx';
+import Button from '../ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/use-local-storage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
-import { ResultLayout } from '../../components/result-layout/ResultLayout.tsx';
-import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
-import { PaginationControls } from '../../components/pagination-controls/pagination-controls.tsx';
+import { ResultLayout } from '../result-layout/ResultLayout.tsx';
+// import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
+import { PaginationControls } from '../pagination-controls/pagination-controls.tsx';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
-import ErrorMessage from '../../components/error-message/error-message.tsx';
+import ErrorMessage from '../error-message/error-message.tsx';
 import { useQueryCharacters } from '../../core/hooks/query-hooks/use-query-characters.ts';
 
 const Search: FC = () => {
@@ -19,7 +21,7 @@ const Search: FC = () => {
   const { data, isPending, isError, isFetching, resetListData } =
     useQueryCharacters(savedQuery, page);
 
-  useParamsUpdate(page, savedQuery);
+  // useParamsUpdate(page, savedQuery);
 
   useEffect(() => {
     if (data) {

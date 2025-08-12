@@ -1,12 +1,13 @@
+'use client';
+
 import { type FC } from 'react';
 import style from './about.module.scss';
-import logoImg from '../../assets/image/logo.svg';
 import { FaGithub } from 'react-icons/fa';
-import Button from '../../components/ui/button/button';
-import { useNavigate } from 'react-router';
+import Button from '../ui/button/button.tsx';
+import Image from 'next/image';
 
 export const AboutMe: FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className={style['page-wrapper']}>
       <div className={style.about}>
@@ -47,14 +48,12 @@ export const AboutMe: FC = () => {
           className={style['about-logo']}
           data-testid="link"
         >
-          <img src={logoImg} alt="Rsschool log" />
+          <Image src="/logo.svg" alt="Rsschool log" width={300} height={300} />
         </a>
         <Button
           className={style['about-back-btn']}
           type="button"
-          callback={() => {
-            void navigate('/');
-          }}
+          callback={() => {}}
         >
           Back to main
         </Button>

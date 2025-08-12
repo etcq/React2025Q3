@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import * as apiService from '../../core/services/api-service';
 import { response } from '../../mocks/mock-data';
 import { renderHook, waitFor } from '@testing-library/react';

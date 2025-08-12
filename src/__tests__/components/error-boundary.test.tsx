@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterAll, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import Search from '../../pages/search/search';
+import Search from '../../components/search/search';
 import userEvent from '@testing-library/user-event';
 import { type Mock } from 'vitest';
 import { MemoryRouter } from 'react-router';

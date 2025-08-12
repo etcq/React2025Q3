@@ -7,6 +7,7 @@ import { MdClose } from 'react-icons/md';
 import { DetailedError } from './detailed-error/detailed-error';
 import { useQueryDetailedCharacter } from '../../core/hooks/query-hooks/use-query-detailed-character';
 import { RiResetLeftFill } from 'react-icons/ri';
+import Image from 'next/image';
 
 export const CharacterDetailed: FC = () => {
   const { id } = useParams();
@@ -22,10 +23,12 @@ export const CharacterDetailed: FC = () => {
         <DetailedError />
       ) : (
         <>
-          <img
-            src={data?.image}
+          <Image
+            src={data ? data.image : ''}
             alt={`${data?.name} image`}
             className={style['detailed-img']}
+            width={300}
+            height={300}
           />
           <h3 className={style['detailed-name']} data-testid="detailed-header">
             {data?.name}

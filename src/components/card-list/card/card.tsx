@@ -1,12 +1,11 @@
 import { type FC, useRef, type ChangeEvent, type MouseEvent } from 'react';
 import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
-import { useNavigate } from 'react-router';
 import { useSelectCharactersStore } from '../../../core/stores/select-characters-store.ts';
+import Image from 'next/image';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const { id, name, image, status, gender, species } = data;
-  const navigate = useNavigate();
   const { characters, selectCharacters, unselectCharacter } =
     useSelectCharactersStore((state) => state);
   const checkbox = useRef(null);
@@ -21,7 +20,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
 
   const openCharacterDetailed = (event: MouseEvent) => {
     if (event.target !== checkbox.current) {
-      navigate(`/detailed/${id}`);
+      return;
     }
   };
 
@@ -31,7 +30,13 @@ const Card: FC<{ data: Character }> = ({ data }) => {
       data-testid="card"
       onClick={openCharacterDetailed}
     >
-      <img className={styles['card-avatar']} src={image} alt={name} />
+      <Image
+        className={styles['card-avatar']}
+        src={image}
+        alt={name}
+        width={200}
+        height={200}
+      />
       <div className={styles['card-info']}>
         <div className={styles['card-main_info']}>
           <span>{name}</span>

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { FlyoutCharacters } from '../../components/flyout-characters/flyout-characters.tsx';
 import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';

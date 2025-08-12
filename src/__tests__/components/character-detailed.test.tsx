@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
-import Search from '../../pages/search/search.tsx';
+import Search from '../../components/search/search.tsx';
 import * as apiService from '../../core/services/api-service.ts';
 import { characterResponse, response } from '../../mocks/mock-data.ts';
 import { CharacterDetailed } from '../../components/character-detailed/character-detailed.tsx';

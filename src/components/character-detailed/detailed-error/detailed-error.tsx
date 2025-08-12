@@ -1,13 +1,20 @@
 import type { FC } from 'react';
-import errorImg from '../../../assets/image/not-found.png';
+import errorImg from '/not-found.png';
 import style from './detailed-error.module.scss';
+import Image from 'next/image';
 
 export const DetailedError: FC = () => {
   return (
     <div className={style['detailed-error']}>
       <h2>Oops</h2>
       <h3>Character not found</h3>
-      <img className={style['detailed-error-img']} src={errorImg} alt="error" />
+      <Image
+        className={style['detailed-error-img']}
+        src={errorImg}
+        alt="error"
+        width={400}
+        height={500}
+      />
     </div>
   );
 };

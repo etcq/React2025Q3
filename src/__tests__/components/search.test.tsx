@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, afterEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import Search from '../../pages/search/search';
+import Search from '../../components/search/search';
 import * as apiService from '../../core/services/api-service.ts';
 import { userEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';

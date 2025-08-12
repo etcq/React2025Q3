@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, afterEach } from 'vitest';
 import * as apiService from '../../core/services/api-service';
 import { getCharacters } from '../../core/services/api-service';
 import { response } from '../../mocks/mock-data.ts';

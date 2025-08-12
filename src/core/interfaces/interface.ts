@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface ResourceBase {
   id: number;
   name: string;
@@ -24,4 +26,8 @@ export interface Character extends ResourceBase {
 export interface ICharacterResponse {
   maxPage: number;
   characters: Character[];
+}
+
+export interface IChildrenNode {
+  children: ReactNode;
 }

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import SearchForm from '../../components/search-form/search-form';
-import Search from '../../pages/search/search';
+import Search from '../../components/search/search';
 import { MemoryRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 

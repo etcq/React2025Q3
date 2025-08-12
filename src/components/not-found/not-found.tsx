@@ -1,8 +1,9 @@
 import { type FC } from 'react';
 import styles from './not-found.module.scss';
-import Button from '../../components/ui/button/button.tsx';
+import Button from '../ui/button/button.tsx';
 import { useNavigate } from 'react-router';
-import imgPath from '../../assets/image/not-found.png';
+import imgPath from '/not-found.png';
+import Image from 'next/image';
 
 export const NotFoundPage: FC = () => {
   const navigate = useNavigate();
@@ -22,10 +23,12 @@ export const NotFoundPage: FC = () => {
             Back to main
           </Button>
         </div>
-        <img
+        <Image
           src={imgPath}
           className={styles['not-found_img']}
           alt="Not found"
+          width={400}
+          height={400}
         />
       </div>
     </div>

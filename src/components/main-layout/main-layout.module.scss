@@ -10,7 +10,7 @@
   height: 100vh;
 }
 
-[data-theme='light'] {
+[data-theme='light'].wrapper {
   background-color: $c-secondary-bg;
 }
 

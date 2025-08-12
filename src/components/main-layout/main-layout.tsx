@@ -1,13 +1,12 @@
-import { type FC, Suspense, useState } from 'react';
+'use client';
+
+import { type FC, useState } from 'react';
 import style from './main-layout.module.scss';
-import { Outlet } from 'react-router';
-import Loading from '../loading/loading';
-import bgPathDark from '../../assets/image/rick-and-morty-bg.jpg';
-import bgPathLight from '../../assets/image/rick-and-morty-bg-2.jpg';
 import { Header } from '../header/header';
 import ThemeContext from '../../core/contexts/contexts';
 import { THEME } from '../../core/constants/constants.ts';
 import { FlyoutCharacters } from '../flyout-characters/flyout-characters.tsx';
+import Search from '../search/search.tsx';
 
 export const MainLayout: FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -26,14 +25,12 @@ export const MainLayout: FC = () => {
         <div
           className={style.layout}
           style={{
-            background: `url(${theme === THEME.DARK ? bgPathDark : bgPathLight}) center center/cover no-repeat`,
+            background: `url(${theme === THEME.DARK ? '/backgrounds/rick-and-morty-bg.jpg' : '/backgrounds/rick-and-morty-bg-2.jpg'}) center center/cover no-repeat`,
           }}
         >
           <Header />
           <main className={style['layout-content']}>
-            <Suspense fallback={<Loading />}>
-              <Outlet />
-            </Suspense>
+            <Search />
           </main>
         </div>
         <FlyoutCharacters />
