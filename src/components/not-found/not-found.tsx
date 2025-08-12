@@ -1,31 +1,23 @@
 import { type FC } from 'react';
-import styles from './not-found.module.scss';
-import Button from '../ui/button/button.tsx';
-import { useNavigate } from 'react-router';
-import imgPath from '/not-found.png';
+import style from './not-found.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const NotFoundPage: FC = () => {
-  const navigate = useNavigate();
   return (
-    <div className={styles['page-wrapper']}>
-      <div className={styles['not-found']}>
-        <div className={styles['not-found_description']}>
-          <h2 className={styles.title}>Error 404</h2>
-          <h2 className={styles.title}>Page is not found</h2>
+    <div className={style['page-wrapper']}>
+      <div className={style['not-found']}>
+        <div className={style['not-found_description']}>
+          <h2 className={style.title}>Error 404</h2>
+          <h2 className={style.title}>Page is not found</h2>
           <p>We can&#39;t find the page you were looking for.</p>
-          <Button
-            type="button"
-            callback={() => {
-              void navigate('/');
-            }}
-          >
+          <Link href="/" className={style['not-found-btn']}>
             Back to main
-          </Button>
+          </Link>
         </div>
         <Image
-          src={imgPath}
-          className={styles['not-found_img']}
+          src="/not-found.png"
+          className={style['not-found_img']}
           alt="Not found"
           width={400}
           height={400}

@@ -1,4 +1,3 @@
-import sadRickImage from '/sad-rick.png';
 import style from './error-message.module.scss';
 import Image from 'next/image';
 
@@ -13,9 +12,11 @@ const ErrorMessage = (props: { message?: string }) => {
         )}
       </div>
       <Image
-        src={sadRickImage}
+        src="/sad-rick.png"
         alt="sad rick"
         className={style['error-image']}
+        width={400}
+        height={500}
       />
     </div>
   );

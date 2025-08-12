@@ -3,11 +3,10 @@
 import { type FC } from 'react';
 import style from './about.module.scss';
 import { FaGithub } from 'react-icons/fa';
-import Button from '../ui/button/button.tsx';
+import Link from 'next/link';
 import Image from 'next/image';
 
 export const AboutMe: FC = () => {
-  // const navigate = useNavigate();
   return (
     <div className={style['page-wrapper']}>
       <div className={style.about}>
@@ -48,15 +47,11 @@ export const AboutMe: FC = () => {
           className={style['about-logo']}
           data-testid="link"
         >
-          <Image src="/logo.svg" alt="Rsschool log" width={300} height={300} />
+          <Image src="/logo.svg" alt="Rsschool log" width={150} height={150} />
         </a>
-        <Button
-          className={style['about-back-btn']}
-          type="button"
-          callback={() => {}}
-        >
+        <Link href="/" className={style['about-back-btn']}>
           Back to main
-        </Button>
+        </Link>
       </div>
     </div>
   );

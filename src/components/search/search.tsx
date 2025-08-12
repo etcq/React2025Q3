@@ -7,21 +7,19 @@ import Loading from '../loading/loading.tsx';
 import Button from '../ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/use-local-storage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
-import { ResultLayout } from '../result-layout/ResultLayout.tsx';
-// import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
 import { PaginationControls } from '../pagination-controls/pagination-controls.tsx';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 import ErrorMessage from '../error-message/error-message.tsx';
 import { useQueryCharacters } from '../../core/hooks/query-hooks/use-query-characters.ts';
+import { IChildrenNode } from '../../core/interfaces/interface.ts';
+import CardList from '../card-list/card-list.tsx';
 
-const Search: FC = () => {
+const Search: FC<IChildrenNode> = ({ children }) => {
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, setMaxPage } = usePaginationStore((state) => state);
   const { data, isPending, isError, isFetching, resetListData } =
     useQueryCharacters(savedQuery, page);
-
-  // useParamsUpdate(page, savedQuery);
 
   useEffect(() => {
     if (data) {
@@ -43,7 +41,10 @@ const Search: FC = () => {
         ) : (
           <>
             <PaginationControls />
-            <ResultLayout charList={data?.characters} />
+            <div className={style['list-wrapper']}>
+              <CardList charList={data?.characters} />
+              {children}
+            </div>
           </>
         )}
       </div>

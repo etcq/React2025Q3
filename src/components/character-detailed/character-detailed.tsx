@@ -1,17 +1,16 @@
+'use client';
+
 import { type FC } from 'react';
 import style from './character-detailed.module.scss';
-import { useNavigate, useParams } from 'react-router';
 import Loading from '../loading/loading';
-import Button from '../ui/button/button';
 import { MdClose } from 'react-icons/md';
 import { DetailedError } from './detailed-error/detailed-error';
 import { useQueryDetailedCharacter } from '../../core/hooks/query-hooks/use-query-detailed-character';
 import { RiResetLeftFill } from 'react-icons/ri';
 import Image from 'next/image';
+import Link from 'next/link';
 
-export const CharacterDetailed: FC = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+export const CharacterDetailed: FC<{ id: string }> = ({ id }) => {
   const { data, isPending, isFetching, isError, resetData } =
     useQueryDetailedCharacter(id);
 
@@ -27,8 +26,8 @@ export const CharacterDetailed: FC = () => {
             src={data ? data.image : ''}
             alt={`${data?.name} image`}
             className={style['detailed-img']}
-            width={300}
-            height={300}
+            width={100}
+            height={120}
           />
           <h3 className={style['detailed-name']} data-testid="detailed-header">
             {data?.name}
@@ -53,16 +52,16 @@ export const CharacterDetailed: FC = () => {
           </ul>
         </>
       )}
-      <Button
+      <Link
         className={style['detailed-back-btn']}
-        callback={() => void navigate('/')}
+        href="/"
         data-testid="detailed-back-btn"
       >
         <MdClose />
-      </Button>
-      <Button callback={resetData} className={style['detailed-reset-btn']}>
+      </Link>
+      <button onClick={resetData} className={style['detailed-reset-btn']}>
         <RiResetLeftFill />
-      </Button>
+      </button>
     </div>
   );
 };

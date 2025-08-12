@@ -6,9 +6,9 @@ import { Header } from '../header/header';
 import ThemeContext from '../../core/contexts/contexts';
 import { THEME } from '../../core/constants/constants.ts';
 import { FlyoutCharacters } from '../flyout-characters/flyout-characters.tsx';
-import Search from '../search/search.tsx';
+import { IChildrenNode } from '../../core/interfaces/interface.ts';
 
-export const MainLayout: FC = () => {
+export const MainLayout: FC<IChildrenNode> = ({ children }: IChildrenNode) => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const toggleTheme = () => {
     setTheme((prevTheme) =>
@@ -29,9 +29,7 @@ export const MainLayout: FC = () => {
           }}
         >
           <Header />
-          <main className={style['layout-content']}>
-            <Search />
-          </main>
+          <main className={style['layout-content']}>{children}</main>
         </div>
         <FlyoutCharacters />
       </div>

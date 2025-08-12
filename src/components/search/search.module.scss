@@ -30,6 +30,15 @@
   }
 }
 
+.list-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80%;
+  padding: 20px;
+}
+
+
 [data-theme='light'] {
   .search-results {
     background-color: $c-light-page-bg;

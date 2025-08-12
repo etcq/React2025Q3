@@ -3,8 +3,10 @@ import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useSelectCharactersStore } from '../../../core/stores/select-characters-store.ts';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
+  const router = useRouter();
   const { id, name, image, status, gender, species } = data;
   const { characters, selectCharacters, unselectCharacter } =
     useSelectCharactersStore((state) => state);
@@ -20,7 +22,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
 
   const openCharacterDetailed = (event: MouseEvent) => {
     if (event.target !== checkbox.current) {
-      return;
+      router.push(`/detailed/${id}`);
     }
   };
 

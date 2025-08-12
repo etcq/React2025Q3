@@ -3,15 +3,7 @@
 
 .button {
   @include button(120px, 40px);
-  background-color: $c-main-font;
-  color: $c-main-bg;
-  &:hover {
-    background-color: $c-secondary-font;
-  }
-  &:disabled {
-    cursor: not-allowed;
-    background-color: $c-dark-disable;
-  }
+
 }
 
 .error-button {
