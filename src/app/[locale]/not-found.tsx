@@ -1,9 +1,8 @@
-import { type FC } from 'react';
+import Link from 'next/link';
 import style from './not-found.module.scss';
 import Image from 'next/image';
-import Link from 'next/link';
 
-export const NotFoundPage: FC = () => {
+export default function NotFound() {
   return (
     <div className={style['page-wrapper']}>
       <div className={style['not-found']}>
@@ -25,4 +24,4 @@ export const NotFoundPage: FC = () => {
       </div>
     </div>
   );
-};
+}
