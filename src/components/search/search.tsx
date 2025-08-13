@@ -13,6 +13,7 @@ import ErrorMessage from '../error-message/error-message.tsx';
 import { useQueryCharacters } from '../../core/hooks/query-hooks/use-query-characters.ts';
 import { IChildrenNode } from '../../core/interfaces/interface.ts';
 import CardList from '../card-list/card-list.tsx';
+import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
 
 const Search: FC<IChildrenNode> = ({ children }) => {
   const { savedQuery, setQueryToLocalStorage } =
@@ -20,7 +21,7 @@ const Search: FC<IChildrenNode> = ({ children }) => {
   const { page, setMaxPage } = usePaginationStore((state) => state);
   const { data, isPending, isError, error, isFetching, resetListData } =
     useQueryCharacters(savedQuery, page);
-
+  useParamsUpdate(page, savedQuery);
   useEffect(() => {
     if (data) {
       setMaxPage(data.maxPage);

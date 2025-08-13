@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useParamsUpdate = (page: number, query: string) => {
-  const [, setSearchParams] = useSearchParams();
+  const searchParams = useSearchParams();
+  const path = usePathname();
+  const { replace } = useRouter();
 
   useEffect(() => {
-    setSearchParams((searchParams) => {
-      if (query === '') {
-        searchParams.delete('search');
-      } else {
-        searchParams.set('search', `${query}`);
-      }
-      searchParams.set('page', `${page}`);
-      return searchParams;
-    });
-  }, [page, query, setSearchParams]);
+    const params = new URLSearchParams(searchParams);
+    if (query === '') {
+      params.delete('search');
+    } else {
+      params.set('search', `${query}`);
+    }
+    params.set('page', `${page}`);
+    replace(`${path}?${params.toString()}`);
+  }, [page, query, searchParams, path, replace]);
 };
