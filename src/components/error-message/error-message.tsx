@@ -1,3 +1,5 @@
+'use client';
+
 import style from './error-message.module.scss';
 import Image from 'next/image';
 

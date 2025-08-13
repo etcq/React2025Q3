@@ -18,7 +18,7 @@ const Search: FC<IChildrenNode> = ({ children }) => {
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
   const { page, setMaxPage } = usePaginationStore((state) => state);
-  const { data, isPending, isError, isFetching, resetListData } =
+  const { data, isPending, isError, error, isFetching, resetListData } =
     useQueryCharacters(savedQuery, page);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Search: FC<IChildrenNode> = ({ children }) => {
         {isPending || isFetching ? (
           <Loading />
         ) : isError ? (
-          <ErrorMessage />
+          <ErrorMessage message={error?.message} />
         ) : (
           <>
             <PaginationControls />

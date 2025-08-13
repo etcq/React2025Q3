@@ -3,7 +3,7 @@ import { getCharacters } from '../../services/api-service';
 
 export const useQueryCharacters = (savedQuery: string, page: number) => {
   const queryClient = useQueryClient();
-  const { data, isPending, isFetching, isError } = useQuery({
+  const { data, isPending, isFetching, isError, error } = useQuery({
     queryKey: ['characters', savedQuery, page],
     queryFn: () => getCharacters(savedQuery, page),
     staleTime: 1000 * 60 * 30,
@@ -17,5 +17,5 @@ export const useQueryCharacters = (savedQuery: string, page: number) => {
     });
   };
 
-  return { data, isPending, isFetching, isError, resetListData };
+  return { data, isPending, isFetching, isError, resetListData, error };
 };
