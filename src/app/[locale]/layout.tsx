@@ -1,9 +1,6 @@
-import type { Metadata } from 'next';
 import TanstackProvider from '../../components/providers/tanstack-provider';
-import { Montserrat } from 'next/font/google';
-import '../../assets/style/global.scss';
 import ThemeProvider from '../../components/providers/theme-provider';
-import style from './root-layout.module.scss';
+import style from './locale-layout.module.scss';
 import FlyoutCharacters from '../../components/flyout-characters/flyout-characters';
 import { Header } from '../../components/header/header';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
@@ -11,6 +8,7 @@ import { routing } from '../../i18n/routing';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { setRequestLocale } from 'next-intl/server';
+import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({
   weight: ['400', '700'],
@@ -19,11 +17,6 @@ const montserrat = Montserrat({
   subsets: ['cyrillic', 'latin'],
   display: 'swap',
 });
-
-export const metadata: Metadata = {
-  title: 'Rick and Morty DB',
-  description: 'characters data base',
-};
 
 export default async function LocaleLayout({
   children,

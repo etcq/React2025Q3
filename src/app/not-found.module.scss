@@ -1,18 +1,17 @@
 @use '../assets/style/mixins' as *;
 @use '../assets/style/variables' as *;
 
-.page-wrapper {
-  @include page-wrapper;
-}
 
 .not-found {
+  background-color: $c-main-bg;
+  color: $c-main-font;
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: center;
-  max-width: 900px;
   margin: 0 auto;
-  height: 800px;
+  width: 100vw;
+  height: 100vh;
 
   &_img {
     width: 30%;

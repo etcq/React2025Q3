@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { IChildrenNode } from '../core/interfaces/interface';
+import type { IChildrenNode } from '../core/interfaces/interface';
+import '../assets/style/global.scss';
 
 export const metadata: Metadata = {
   title: 'Rick and Morty DB',
