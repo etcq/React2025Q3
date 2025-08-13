@@ -3,5 +3,43 @@
     "headerText": "Rick and Morty",
     "subtext": "characters database",
     "about": "About Me"
+  },
+  "About": {
+    "header": "About me",
+    "hello": "Hello my name is Anton",
+    "bio-1": "I live in Yekaterinburg, Russia, and currently work in the electric electric power industry. While I was a student, I became interested in programming, but it was only recently that I decided to take it seriously. What I love about programming is the endless learning process - there is always something new to learn, interesting challenges, and the feeling of accomplishment when you finally solve a problem after putting in a lot of effort.",
+    "bio-2": "In 2024, I enrolled in RS School (Stage 0) to create a structured path for my web development skills. My goals are to master React (with all its supporting libraries) and to become proficient in Full Stack development using Node.js and databases.",
+    "invite": "Join the best programming school",
+    "back": "back to main"
+  },
+  "SearchForm": {
+    "search": "Search"
+  },
+  "Search": {
+    "error": "Error",
+    "refetch": "Refetch characters list"
+  },
+  "Loading": {
+    "loading": "Loading"
+  },
+  "Detailed": {
+    "status": "Status",
+    "species": "Species",
+    "gender": "Gender",
+    "location": "Last location"
+  },
+  "DetailedError": {
+    "oops": "Oops",
+    "not-found": "Character not found"
+  },
+  "Error": {
+    "header": "Something went wrong",
+    "message": "Please try again later.",
+    "error": "Error"
+  },
+  "FlyoutCharacters": {
+    "selected": "Selected characters",
+    "unselect": "Unselect all",
+    "download": "Download"
   }
 }

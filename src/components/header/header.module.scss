@@ -5,41 +5,47 @@
   position: relative;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   gap: 5px;
-  color: $c-main-bg;
+  background-color: $c-dark-page-bg;
+  color: $c-main-font;
+
+  &-text {
+    padding: 10px 20px;
+  }
 
   &-main {
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 0;
   }
 
   &-secondary {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 5px;
   }
 
+  &-feature {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 40px;
+  }
+
   &-about-btn {
     @include button(120px, 40px);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: 4px solid;
-    border-color: $c-main-bg;
   }
 }
 
 [data-theme='light'] {
   .header {
-    color: $c-secondary-bg;
-    .header-main,
-    .header-secondary {
-      -webkit-text-stroke: 2px $c-main-bg;
-    }
-    .header-about-btn {
-      border-color: $c-secondary-bg;
+    background-color: $c-light-page-bg;
+    color: $c-main-font-light;
+    &-about-btn {
+      @include button-light;
     }
   }
+
 }

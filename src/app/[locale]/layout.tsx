@@ -4,7 +4,7 @@ import { Montserrat } from 'next/font/google';
 import '../../assets/style/global.scss';
 import ThemeProvider from '../../components/providers/theme-provider';
 import style from './root-layout.module.scss';
-import { FlyoutCharacters } from '../../components/flyout-characters/flyout-characters';
+import FlyoutCharacters from '../../components/flyout-characters/flyout-characters';
 import { Header } from '../../components/header/header';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { routing } from '../../i18n/routing';

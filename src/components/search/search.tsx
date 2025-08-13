@@ -7,21 +7,26 @@ import Loading from '../loading/loading.tsx';
 import Button from '../ui/button/button.tsx';
 import { useLocalStorage } from '../../core/hooks/use-local-storage.ts';
 import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
-import { PaginationControls } from '../pagination-controls/pagination-controls.tsx';
+import PaginationControls from '../pagination-controls/pagination-controls.tsx';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 import ErrorMessage from '../error-message/error-message.tsx';
 import { useQueryCharacters } from '../../core/hooks/query-hooks/use-query-characters.ts';
-import { IChildrenNode } from '../../core/interfaces/interface.ts';
+import type { IChildrenNode } from '../../core/interfaces/interface.ts';
 import CardList from '../card-list/card-list.tsx';
 import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
+import { useTranslations } from 'next-intl';
 
 const Search: FC<IChildrenNode> = ({ children }) => {
+  const f = useTranslations('Search');
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
+
   const { page, setMaxPage } = usePaginationStore((state) => state);
   const { data, isPending, isError, error, isFetching, resetListData } =
     useQueryCharacters(savedQuery, page);
+
   useParamsUpdate(page, savedQuery);
+
   useEffect(() => {
     if (data) {
       setMaxPage(data.maxPage);
@@ -52,16 +57,15 @@ const Search: FC<IChildrenNode> = ({ children }) => {
       <div className={style['search-feature']}>
         <Button
           callback={() => setQueryToLocalStorage('invalid')}
-          text="Error"
+          text={f('error')}
           className={style['error-button']}
           isError={true}
         />
         <Button
           callback={resetListData}
           className={style['search-feature-reset-btn']}
-        >
-          Refetch characters list
-        </Button>
+          text={f('refetch')}
+        />
       </div>
     </div>
   );

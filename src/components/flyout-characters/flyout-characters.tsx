@@ -1,12 +1,14 @@
 'use client';
 
-import { type FC, useRef } from 'react';
+import { useRef } from 'react';
 import styles from './flyout-characters.module.scss';
 import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';
 import Button from '../ui/button/button.tsx';
 import { convertToCSV } from '../../core/utils/convert-to-csv.ts';
+import { useTranslations } from 'next-intl';
 
-export const FlyoutCharacters: FC = () => {
+export default function FlyoutCharacters() {
+  const f = useTranslations('FlyoutCharacters');
   const { characters, unselectAllCharacters } = useSelectCharactersStore(
     (state) => state
   );
@@ -29,10 +31,12 @@ export const FlyoutCharacters: FC = () => {
       data-testid="flyout"
       style={{ visibility: characters.length === 0 ? 'hidden' : 'visible' }}
     >
-      <h2>{characters.length} Selected Characters</h2>
+      <h2>
+        {characters.length} {f('selected')}
+      </h2>
       <div className={styles['flyout-buttons']}>
-        <Button callback={unselectAllCharacters}>Unselect All</Button>
-        <Button callback={downloadCharactersInfo}>Download</Button>
+        <Button callback={unselectAllCharacters}>{f('unselect')}</Button>
+        <Button callback={downloadCharactersInfo}>{f('download')}</Button>
       </div>
 
       <a
@@ -44,4 +48,4 @@ export const FlyoutCharacters: FC = () => {
       </a>
     </div>
   );
-};
+}

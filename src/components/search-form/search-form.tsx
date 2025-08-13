@@ -2,7 +2,7 @@ import { type FC, useEffect, useRef } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface ISearchFormProps {
   savedQuery: string;
@@ -14,10 +14,9 @@ const SearchForm: FC<ISearchFormProps> = ({
   setQueryToLocalStorage,
 }) => {
   const input = useRef<HTMLInputElement>(null);
+  const f = useTranslations('SearchForm');
   const resetPage = usePaginationStore((state) => state.resetPage);
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+
   useEffect(() => {
     if (input.current) {
       input.current.value = savedQuery;
@@ -26,13 +25,6 @@ const SearchForm: FC<ISearchFormProps> = ({
 
   const handleClick = () => {
     const inputValue = input.current?.value.trim() || '';
-    const params = new URLSearchParams(searchParams);
-    if (inputValue) {
-      params.set('search', inputValue);
-    } else {
-      params.delete('search');
-    }
-    replace(`${pathname}?${params.toString()}`);
     resetPage();
     setQueryToLocalStorage(inputValue);
   };
@@ -42,10 +34,10 @@ const SearchForm: FC<ISearchFormProps> = ({
       <input
         type="text"
         className={style['search-form__input']}
-        placeholder="Search..."
+        placeholder={`${f('search')}...`}
         ref={input}
       ></input>
-      <Button callback={handleClick} text="Search" />
+      <Button callback={handleClick} text={f('search')} />
     </div>
   );
 };

@@ -1,12 +1,13 @@
-import type { FC } from 'react';
+import { useTranslations } from 'next-intl';
 import style from './detailed-error.module.scss';
 import Image from 'next/image';
 
-export const DetailedError: FC = () => {
+export default function DetailedError() {
+  const f = useTranslations('DetailedError');
   return (
     <div className={style['detailed-error']}>
-      <h2>Oops</h2>
-      <h3>Character not found</h3>
+      <h2>{f('oops')}</h2>
+      <h3>{f('not-found')}</h3>
       <Image
         className={style['detailed-error-img']}
         src="/not-found.png"
@@ -16,4 +17,4 @@ export const DetailedError: FC = () => {
       />
     </div>
   );
-};
+}

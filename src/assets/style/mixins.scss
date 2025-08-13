@@ -34,3 +34,14 @@
     background-color: $c-dark-disable;
   }
 }
+
+@mixin button-light {
+  background-color: $c-main-font-light;
+  color: $c-main-bg-light;
+  &:hover {
+    background-color: $c-secondary-font-light;
+  }
+  &:disabled {
+    background-color: $c-light-disable;
+  }
+}

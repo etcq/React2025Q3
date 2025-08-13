@@ -1,4 +1,4 @@
-import { CharacterDetailed } from '../../../../components/character-detailed/character-detailed';
+import { CharacterDetailed } from '../../../../../components/character-detailed/character-detailed';
 
 interface IParams {
   params: Promise<{ id: string }>;

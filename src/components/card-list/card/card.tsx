@@ -3,7 +3,7 @@ import type { Character } from '../../../core/interfaces/interface.ts';
 import styles from './card.module.scss';
 import { useSelectCharactersStore } from '../../../core/stores/select-characters-store.ts';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '../../../i18n/navigation.ts';
 
 const Card: FC<{ data: Character }> = ({ data }) => {
   const router = useRouter();

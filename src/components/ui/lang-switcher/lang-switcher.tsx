@@ -1,12 +1,14 @@
-import { useTransition, ChangeEvent } from 'react';
-import { routing } from '../../i18n/routing';
+import { useTransition, type ChangeEvent } from 'react';
+import { routing } from '../../../i18n/routing.ts';
 import style from './lang-switcher.module.scss';
-import { usePathname, useRouter } from '../../i18n/navigation.ts';
+import { usePathname, useRouter } from '../../../i18n/navigation.ts';
+import { useLocale } from 'next-intl';
 
 export default function LangSwitcher() {
   const router = useRouter();
   const [, startTransition] = useTransition();
   const pathname = usePathname();
+  const locale = useLocale();
 
   function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value;
@@ -18,7 +20,7 @@ export default function LangSwitcher() {
   return (
     <select
       className={style['lang-switcher']}
-      defaultValue={routing.defaultLocale}
+      defaultValue={locale}
       onChange={onSelectChange}
     >
       {routing.locales.map((locale) => (

@@ -7,26 +7,24 @@ import { ThemeSwitcher } from '../ui/theme-switcher/theme-switcher.tsx';
 // import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Link } from '../../i18n/navigation.ts';
-import LangSwitcher from '../lang-switcher/lang-switcher.tsx';
+import LangSwitcher from '../ui/lang-switcher/lang-switcher.tsx';
 
 export const Header: FC = () => {
   const { theme, toggleTheme } = use(ThemeContext);
   const t = useTranslations('Header');
   return (
     <div className={`${style.header}`}>
-      <h1 className={style['header-main']}>{t('headerText')}</h1>
-      <span className={style['header-secondary']}>{t('subtext')}</span>
-      <Link href={'/about'} className={style['header-about-btn']}>
-        {t('about')}
-      </Link>
-      <Link href={'/'} locale="ru">
-        Switch ru
-      </Link>
-      <Link href={'/'} locale="en">
-        Switch en
-      </Link>
-      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
-      <LangSwitcher />
+      <div className={style['header-text']}>
+        <h1 className={style['header-main']}>{t('headerText')}</h1>
+        <span className={style['header-secondary']}>{t('subtext')}</span>
+      </div>
+      <div className={style['header-feature']}>
+        <Link href={'/about'} className={style['header-about-btn']}>
+          {t('about')}
+        </Link>
+        <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
+        <LangSwitcher />
+      </div>
     </div>
   );
 };

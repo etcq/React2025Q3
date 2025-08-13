@@ -1,13 +1,13 @@
-import { type FC } from 'react';
+import { useTranslations } from 'next-intl';
 import Spinner from '../ui/spinner/spinner.tsx';
 import style from './loading.module.scss';
 
-const Loading: FC = () => {
+export default function Loading() {
+  const f = useTranslations('Loading');
   return (
     <div className={style.loading}>
       <Spinner />
-      <p>Loading...</p>
+      <p>{`${f('loading')}...`}</p>
     </div>
   );
-};
-export default Loading;
+}
