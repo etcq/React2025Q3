@@ -4,8 +4,8 @@ import { useRef } from 'react';
 import styles from './flyout-characters.module.scss';
 import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';
 import Button from '../ui/button/button.tsx';
-import { convertToCSV } from '../../core/utils/convert-to-csv.ts';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export default function FlyoutCharacters() {
   const f = useTranslations('FlyoutCharacters');
@@ -13,17 +13,6 @@ export default function FlyoutCharacters() {
     (state) => state
   );
   const downloadRef = useRef<HTMLAnchorElement | null>(null);
-
-  const downloadCharactersInfo = () => {
-    const csvData = convertToCSV(characters);
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    if (downloadRef.current) {
-      downloadRef.current.href = url;
-      downloadRef.current.click();
-      URL.revokeObjectURL(url);
-    }
-  };
 
   return (
     <div
@@ -36,7 +25,12 @@ export default function FlyoutCharacters() {
       </h2>
       <div className={styles['flyout-buttons']}>
         <Button callback={unselectAllCharacters}>{f('unselect')}</Button>
-        <Button callback={downloadCharactersInfo}>{f('download')}</Button>
+        <Link
+          href={`/api/characters?count=${characters.length}&ids=${characters}`}
+          download={''}
+        >
+          Download
+        </Link>
       </div>
 
       <a

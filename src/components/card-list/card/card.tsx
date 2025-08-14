@@ -14,7 +14,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      selectCharacters(data);
+      selectCharacters(id);
     } else {
       unselectCharacter(id);
     }
@@ -56,7 +56,7 @@ const Card: FC<{ data: Character }> = ({ data }) => {
         type="checkbox"
         ref={checkbox}
         onChange={handleCheckboxChange}
-        checked={characters.some((character) => character.id === id)}
+        checked={characters.some((character) => character === id)}
       />
     </div>
   );

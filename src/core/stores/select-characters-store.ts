@@ -1,22 +1,21 @@
 import { create } from 'zustand';
-import type { Character } from '../interfaces/interface';
 
 interface ICharacter {
-  characters: Character[];
-  selectCharacters: (newCharacter: Character) => void;
+  characters: number[];
+  selectCharacters: (newCharacterId: number) => void;
   unselectCharacter: (id: number) => void;
   unselectAllCharacters: () => void;
 }
 
 export const useSelectCharactersStore = create<ICharacter>()((set) => ({
   characters: [],
-  selectCharacters: (newCharacter: Character) =>
+  selectCharacters: (newCharacterId: number) =>
     set((state) => ({
-      characters: [...state.characters, newCharacter],
+      characters: [...state.characters, newCharacterId],
     })),
-  unselectCharacter: (id: number) =>
+  unselectCharacter: (characterId: number) =>
     set((state) => ({
-      characters: state.characters.filter((character) => character.id !== id),
+      characters: state.characters.filter((id) => id !== characterId),
     })),
   unselectAllCharacters: () =>
     set(() => ({
