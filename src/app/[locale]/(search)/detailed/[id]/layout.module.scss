@@ -1,0 +1,11 @@
+@use '../../../../../assets/style/variables.scss' as *; 
+
+.wrapper {
+  background-color: $c-main-bg;
+  color: $c-main-font;
+  flex: 0 0 400px;
+  width: 100%;
+  position: relative;
+  gap: 1rem;
+  flex-direction: column;
+} 
