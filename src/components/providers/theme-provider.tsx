@@ -1,7 +1,7 @@
 'use client';
 
 import ThemeContext from '../../core/contexts/contexts';
-import { IChildrenNode } from '../../core/interfaces/interface';
+import type { IChildrenNode } from '../../core/interfaces/interface';
 import { useState } from 'react';
 import { THEME } from '../../core/constants/constants.ts';
 
