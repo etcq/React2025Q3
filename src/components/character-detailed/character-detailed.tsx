@@ -1,16 +1,17 @@
 'use client';
 import style from './character-detailed.module.scss';
-import { MdClose } from 'react-icons/md';
 import { RiResetLeftFill } from 'react-icons/ri';
 import Image from 'next/image';
-import { Link } from '../../i18n/navigation';
 import { useTranslations } from 'next-intl';
 import type { Character } from '../../core/interfaces/interface';
+import { useRouter } from '../../i18n/navigation.ts';
 
 export default function CharacterDetailed({ data }: { data: Character }) {
   const f = useTranslations('Detailed');
+  const router = useRouter();
   const revalidate = async () => {
     await fetch('/api/revalidate', { method: 'POST' });
+    router.refresh();
   };
   return (
     <div className={style.detailed} data-testid="detailed">
@@ -44,13 +45,6 @@ export default function CharacterDetailed({ data }: { data: Character }) {
           </li>
         </ul>
       </>
-      <Link
-        className={style['detailed-back-btn']}
-        href="/"
-        data-testid="detailed-back-btn"
-      >
-        <MdClose />
-      </Link>
       <button onClick={revalidate} className={style['detailed-reset-btn']}>
         <RiResetLeftFill />
       </button>

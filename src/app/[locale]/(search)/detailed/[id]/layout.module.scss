@@ -1,5 +1,5 @@
-@use '../../../../../assets/style/variables.scss' as *; 
-
+@use '../../../../../assets/style/variables.scss' as *;
+@use '../../../../../assets/style/mixins.scss' as *;
 .wrapper {
   background-color: $c-main-bg;
   color: $c-main-font;
@@ -8,4 +8,17 @@
   position: relative;
   gap: 1rem;
   flex-direction: column;
+
+  .back-btn {
+    @include button(40px, 40px);
+    position: absolute;
+    @include center-flex;
+    padding: 10px;
+    font-size: 2rem;
+    border-radius: 50%;
+    top: 10px;
+    right: 10px;
+    border: 2px solid $c-main-bg;
+    z-index: 10;
+  }
 } 
