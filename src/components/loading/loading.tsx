@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import Spinner from '../ui/spinner/spinner.tsx';
 import style from './loading.module.scss';

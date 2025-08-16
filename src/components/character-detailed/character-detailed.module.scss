@@ -2,10 +2,6 @@
 @use '../../assets/style/mixins.scss' as *;
 
 .detailed {
-  background-color: $c-main-bg;
-  color: $c-main-font;
-  flex: 0 0 400px;
-  width: 100%;
   padding: 15px;
   position: relative;
   gap: 1rem;
@@ -25,7 +21,6 @@
   &-img {
     display: block;
     margin: 0 auto;
-    width: 32%;
     border-radius: 8px;
     object-fit: cover;
   }

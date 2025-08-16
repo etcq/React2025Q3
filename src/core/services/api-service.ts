@@ -1,5 +1,5 @@
 import type { Character, ICharacterResponse } from '../interfaces/interface';
-const API_BASE = 'https://rickandmortyapi.com/api/character/';
+import { API_BASE } from '../constants/constants';
 
 const getCharacters = async (
   name: string,
