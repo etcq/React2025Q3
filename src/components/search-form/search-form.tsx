@@ -1,22 +1,20 @@
-import { type FC, useEffect, useRef } from 'react';
+'use client';
+import { useEffect, useRef } from 'react';
 import Button from '../ui/button/button';
 import style from './search-form.module.scss';
 import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 import { useTranslations } from 'next-intl';
+import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
+import { useLocalStorage } from '../../core/hooks/use-local-storage.ts';
+import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
 
-interface ISearchFormProps {
-  savedQuery: string;
-  setQueryToLocalStorage: (query: string) => void;
-}
-
-const SearchForm: FC<ISearchFormProps> = ({
-  savedQuery,
-  setQueryToLocalStorage,
-}) => {
+export default function SearchForm() {
   const input = useRef<HTMLInputElement>(null);
   const f = useTranslations('SearchForm');
-  const resetPage = usePaginationStore((state) => state.resetPage);
-
+  const { savedQuery, setQueryToLocalStorage } =
+    useLocalStorage(LOCAL_STORAGE_KEY);
+  const { page, resetPage } = usePaginationStore((state) => state);
+  useParamsUpdate(page, savedQuery);
   useEffect(() => {
     if (input.current) {
       input.current.value = savedQuery;
@@ -40,6 +38,4 @@ const SearchForm: FC<ISearchFormProps> = ({
       <Button callback={handleClick} text={f('search')} />
     </div>
   );
-};
-
-export default SearchForm;
+}

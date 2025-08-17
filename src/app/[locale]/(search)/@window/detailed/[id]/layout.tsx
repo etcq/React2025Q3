@@ -1,6 +1,6 @@
-import type { IChildrenNode } from '../../../../../core/interfaces/interface';
-import style from './layout.module.scss';
-import { Link } from '../../../../../i18n/navigation.ts';
+import type { IChildrenNode } from '../../../../../../core/interfaces/interface.ts';
+import { Link } from '../../../../../../i18n/navigation.ts';
+import style from './detailed-layout.module.scss';
 import { MdClose } from 'react-icons/md';
 
 export default function DetailedLayout({ children }: IChildrenNode) {

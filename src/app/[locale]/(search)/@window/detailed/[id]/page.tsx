@@ -1,8 +1,9 @@
 import { Suspense } from 'react';
-import CharacterDetailed from '../../../../../components/character-detailed/character-detailed';
-import { getCachedData } from '../../../../../lib/data/get-cached-data.ts';
-import type { Character } from '../../../../../core/interfaces/interface';
-import Loading from '../../../../../components/loading/loading.tsx';
+import CharacterDetailed from '../../../../../../components/character-detailed/character-detailed.tsx';
+import { getCachedData } from '../../../../../../lib/data/get-cached-data.ts';
+import type { Character } from '../../../../../../core/interfaces/interface.ts';
+import Loading from '../../../../../../components/loading/loading.tsx';
+
 interface IParams {
   params: Promise<{ id: string }>;
 }

@@ -1,16 +1,30 @@
+'use client';
 import style from './card-list.module.scss';
 import Card from './card/card.tsx';
-import type { Character } from '../../core/interfaces/interface.ts';
+import type { ICharacterResponse } from '../../core/interfaces/interface.ts';
+import { useEffect } from 'react';
+import { usePaginationStore } from '../../core/stores/pagination-store.ts';
 
 interface ICardListProps {
-  charList: Character[] | undefined;
+  data: ICharacterResponse;
 }
 
-export default function CardList({ charList }: ICardListProps) {
+export default function CardList({ data }: ICardListProps) {
+  const { setMaxPage } = usePaginationStore((state) => state);
+  useEffect(() => {
+    if (data) {
+      setMaxPage(data.maxPage);
+    }
+  }, [setMaxPage, data]);
+
   return (
-    <div className={style['card-list']}>
-      {charList &&
-        charList.map((char) => <Card data={char} key={String(char.id)} />)}
-    </div>
+    <>
+      <div className={style['card-list']}>
+        {data.characters &&
+          data.characters.map((char) => (
+            <Card data={char} key={String(char.id)} />
+          ))}
+      </div>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+'use client';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 import style from './pagination-controls.module.scss';
 import Button from '../ui/button/button.tsx';
