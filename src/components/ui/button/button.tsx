@@ -1,21 +1,21 @@
-import { type ButtonHTMLAttributes, type FC } from 'react';
+import { type ButtonHTMLAttributes } from 'react';
 import style from './button.module.scss';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   callback: () => void;
   text?: string;
   disabled?: boolean;
   isError?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({
+export function Button({
   callback,
   className,
   disabled,
   children,
   isError,
   ...props
-}) => {
+}: IButtonProps) {
   const handleClick = () => {
     callback();
   };
@@ -29,6 +29,4 @@ const Button: FC<ButtonProps> = ({
       {children ?? props.text}
     </button>
   );
-};
-
-export default Button;
+}

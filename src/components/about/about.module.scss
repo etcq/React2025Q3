@@ -1,5 +1,5 @@
-@use '../../assets/style/mixins' as *;
-@use '../../assets/style/variables' as *;
+@use '@assets/style/mixins' as *;
+@use '@assets/style/variables' as *;
 
 .page-wrapper {
   @include page-wrapper;

@@ -1,5 +1,5 @@
-@use '../../assets/style/variables.scss' as *;
-@use '../../assets/style/mixins.scss' as *;
+@use '@assets/style/variables.scss' as *;
+@use '@assets/style/mixins.scss' as *;
 
 .error {
   @include center-flex;

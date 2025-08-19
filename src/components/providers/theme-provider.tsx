@@ -1,11 +1,11 @@
 'use client';
 
-import ThemeContext from '../../core/contexts/contexts';
-import { IChildrenNode } from '../../core/interfaces/interface';
+import ThemeContext from '@contexts';
+import type { IChildrenNode } from '@interfaces';
 import { useState } from 'react';
-import { THEME } from '../../core/constants/constants.ts';
+import { THEME } from '@constants';
 
-export default function ThemeProvider({ children }: IChildrenNode) {
+export function ThemeProvider({ children }: IChildrenNode) {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const toggleTheme = () => {
     setTheme((prevTheme) =>

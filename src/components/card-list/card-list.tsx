@@ -1,12 +1,12 @@
 import style from './card-list.module.scss';
-import Card from './card/card.tsx';
-import type { Character } from '../../core/interfaces/interface.ts';
+import { Card } from '@components';
+import type { Character } from '@interfaces';
 
 interface ICardListProps {
   charList: Character[] | undefined;
 }
 
-export default function CardList({ charList }: ICardListProps) {
+export function CardList({ charList }: ICardListProps) {
   return (
     <div className={style['card-list']}>
       {charList &&

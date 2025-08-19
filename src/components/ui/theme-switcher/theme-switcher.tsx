@@ -1,10 +1,11 @@
-import type { FC } from 'react';
 import style from './theme-switcher.module.scss';
 
-export const ThemeSwitcher: FC<{
+interface IThemeSwitcher {
   toggleTheme: () => void;
   theme: 'light' | 'dark';
-}> = ({ theme, toggleTheme }) => {
+}
+
+export function ThemeSwitcher({ theme, toggleTheme }: IThemeSwitcher) {
   return (
     <button
       className={`${style['theme-switcher-grid']} ${style[theme]}`}
@@ -41,4 +42,4 @@ export const ThemeSwitcher: FC<{
       <div className={`${style.star} ${style.star4}`} aria-hidden="true"></div>
     </button>
   );
-};
+}

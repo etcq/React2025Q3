@@ -2,12 +2,12 @@
 
 import { useRef } from 'react';
 import styles from './flyout-characters.module.scss';
-import { useSelectCharactersStore } from '../../core/stores/select-characters-store.ts';
-import Button from '../ui/button/button.tsx';
+import { useSelectCharactersStore } from '@stores/select-characters-store';
+import { Button } from '@ui';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-export default function FlyoutCharacters() {
+export function FlyoutCharacters() {
   const f = useTranslations('FlyoutCharacters');
   const { characters, unselectAllCharacters } = useSelectCharactersStore(
     (state) => state

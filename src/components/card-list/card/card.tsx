@@ -1,11 +1,17 @@
-import { type FC, useRef, type ChangeEvent, type MouseEvent } from 'react';
-import type { Character } from '../../../core/interfaces/interface.ts';
-import styles from './card.module.scss';
-import { useSelectCharactersStore } from '../../../core/stores/select-characters-store.ts';
-import Image from 'next/image';
-import { useRouter } from '../../../i18n/navigation.ts';
+'use client';
 
-const Card: FC<{ data: Character }> = ({ data }) => {
+import { useRef, type ChangeEvent, type MouseEvent } from 'react';
+import type { Character } from '@interfaces';
+import styles from './card.module.scss';
+import { useSelectCharactersStore } from '@stores/select-characters-store';
+import Image from 'next/image';
+import { useRouter } from '@i18n/navigation.ts';
+
+interface ICard {
+  data: Character;
+}
+
+export function Card({ data }: ICard) {
   const router = useRouter();
   const { id, name, image, status, gender, species } = data;
   const { characters, selectCharacters, unselectCharacter } =
@@ -56,10 +62,8 @@ const Card: FC<{ data: Character }> = ({ data }) => {
         type="checkbox"
         ref={checkbox}
         onChange={handleCheckboxChange}
-        checked={characters.some((character) => character === id)}
+        checked={characters.some((characterId) => characterId === id)}
       />
     </div>
   );
-};
-
-export default Card;
+}

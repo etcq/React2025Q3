@@ -1,15 +1,13 @@
 'use client';
 
-import { type FC, use } from 'react';
+import { use } from 'react';
 import style from './header.module.scss';
-import ThemeContext from '../../core/contexts/contexts.ts';
-import { ThemeSwitcher } from '../ui/theme-switcher/theme-switcher.tsx';
-// import Link from 'next/link';
+import ThemeContext from '@contexts';
 import { useTranslations } from 'next-intl';
-import { Link } from '../../i18n/navigation.ts';
-import LangSwitcher from '../ui/lang-switcher/lang-switcher.tsx';
+import { Link } from '@i18n/navigation.ts';
+import { LangSwitcher, ThemeSwitcher } from '@ui';
 
-export const Header: FC = () => {
+export function Header() {
   const { theme, toggleTheme } = use(ThemeContext);
   const t = useTranslations('Header');
   return (
@@ -27,4 +25,4 @@ export const Header: FC = () => {
       </div>
     </div>
   );
-};
+}

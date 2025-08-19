@@ -1,17 +1,20 @@
 'use client';
 
-import { type FC } from 'react';
 import style from './character-detailed.module.scss';
-import Loading from '../loading/loading';
+import { Loading } from '@components';
 import { MdClose } from 'react-icons/md';
-import DetailedError from './detailed-error/detailed-error';
-import { useQueryDetailedCharacter } from '../../core/hooks/query-hooks/use-query-detailed-character';
+import { DetailedError } from './detailed-error/detailed-error';
+import { useQueryDetailedCharacter } from '@hooks/query-hooks/use-query-detailed-character';
 import { RiResetLeftFill } from 'react-icons/ri';
 import Image from 'next/image';
-import { Link } from '../../i18n/navigation';
+import { Link } from '@i18n/navigation';
 import { useTranslations } from 'next-intl';
 
-export const CharacterDetailed: FC<{ id: string }> = ({ id }) => {
+interface ICharacterDetailed {
+  id: string;
+}
+
+export function CharacterDetailed({ id }: ICharacterDetailed) {
   const f = useTranslations('Detailed');
   const { data, isPending, isFetching, isError, resetData } =
     useQueryDetailedCharacter(id);
@@ -66,4 +69,4 @@ export const CharacterDetailed: FC<{ id: string }> = ({ id }) => {
       </button>
     </div>
   );
-};
+}

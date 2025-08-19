@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import style from './detailed-error.module.scss';
 import Image from 'next/image';
 
-export default function DetailedError() {
+export function DetailedError() {
   const f = useTranslations('DetailedError');
   return (
     <div className={style['detailed-error']}>

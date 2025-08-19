@@ -1,8 +1,10 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
-import Spinner from '../ui/spinner/spinner.tsx';
+import { Spinner } from '@ui';
 import style from './loading.module.scss';
 
-export default function Loading() {
+export function Loading() {
   const f = useTranslations('Loading');
   return (
     <div className={style.loading}>

@@ -1,7 +1,9 @@
-import { type FC, useEffect, useRef } from 'react';
-import Button from '../ui/button/button';
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { Button } from '@ui';
 import style from './search-form.module.scss';
-import { usePaginationStore } from '../../core/stores/pagination-store.ts';
+import { usePaginationStore } from '@stores/pagination-store.ts';
 import { useTranslations } from 'next-intl';
 
 interface ISearchFormProps {
@@ -9,10 +11,10 @@ interface ISearchFormProps {
   setQueryToLocalStorage: (query: string) => void;
 }
 
-const SearchForm: FC<ISearchFormProps> = ({
+export function SearchForm({
   savedQuery,
   setQueryToLocalStorage,
-}) => {
+}: ISearchFormProps) {
   const input = useRef<HTMLInputElement>(null);
   const f = useTranslations('SearchForm');
   const resetPage = usePaginationStore((state) => state.resetPage);
@@ -40,6 +42,4 @@ const SearchForm: FC<ISearchFormProps> = ({
       <Button callback={handleClick} text={f('search')} />
     </div>
   );
-};
-
-export default SearchForm;
+}

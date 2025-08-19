@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
-import type { Character } from '../../../core/interfaces/interface';
-import { convertToCSV } from '../../../core/utils/convert-to-csv';
-import { getCharacter } from '../../../core/services/api-service';
+import type { Character } from '@interfaces';
+import { convertToCSV } from '@utils/convert-to-csv';
+import { getCharacter } from '@services/api-service';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;

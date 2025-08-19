@@ -1,9 +1,9 @@
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 import style from './pagination-controls.module.scss';
-import Button from '../ui/button/button.tsx';
-import { usePaginationStore } from '../../core/stores/pagination-store.ts';
+import { Button } from '@ui';
+import { usePaginationStore } from '@stores/pagination-store.ts';
 
-export default function PaginationControls() {
+export function PaginationControls() {
   const { page, maxPage, prevPage, nextPage } = usePaginationStore(
     (state) => state
   );

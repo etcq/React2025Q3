@@ -1,22 +1,24 @@
 'use client';
 
-import { type FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import style from './search.module.scss';
-import SearchForm from '../search-form/search-form.tsx';
-import Loading from '../loading/loading.tsx';
-import Button from '../ui/button/button.tsx';
-import { useLocalStorage } from '../../core/hooks/use-local-storage.ts';
-import { LOCAL_STORAGE_KEY } from '../../core/constants/constants.ts';
-import PaginationControls from '../pagination-controls/pagination-controls.tsx';
-import { usePaginationStore } from '../../core/stores/pagination-store.ts';
-import ErrorMessage from '../error-message/error-message.tsx';
-import { useQueryCharacters } from '../../core/hooks/query-hooks/use-query-characters.ts';
-import type { IChildrenNode } from '../../core/interfaces/interface.ts';
-import CardList from '../card-list/card-list.tsx';
-import { useParamsUpdate } from '../../core/hooks/use-params-update.ts';
+import {
+  ErrorMessage,
+  Loading,
+  CardList,
+  SearchForm,
+  PaginationControls,
+} from '@components';
+import { Button } from '@ui';
+import { useLocalStorage } from '@hooks/use-local-storage.ts';
+import { LOCAL_STORAGE_KEY } from '@constants';
+import { usePaginationStore } from '@stores/pagination-store';
+import { useQueryCharacters } from '@hooks/query-hooks/use-query-characters.ts';
+import type { IChildrenNode } from '@interfaces';
+import { useParamsUpdate } from '@hooks/use-params-update.ts';
 import { useTranslations } from 'next-intl';
 
-const Search: FC<IChildrenNode> = ({ children }) => {
+export function Search({ children }: IChildrenNode) {
   const f = useTranslations('Search');
   const { savedQuery, setQueryToLocalStorage } =
     useLocalStorage(LOCAL_STORAGE_KEY);
@@ -69,6 +71,6 @@ const Search: FC<IChildrenNode> = ({ children }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Search;

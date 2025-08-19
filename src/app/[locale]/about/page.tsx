@@ -1,4 +1,4 @@
-import { AboutMe } from '../../../components/about/about.tsx';
+import { AboutMe } from '@components';
 
 export default function Page() {
   return <AboutMe />;

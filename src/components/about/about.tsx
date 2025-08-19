@@ -1,13 +1,12 @@
 'use client';
 
-import { type FC } from 'react';
 import style from './about.module.scss';
 import { FaGithub } from 'react-icons/fa';
-import { Link } from '../../i18n/navigation';
+import { Link } from '@i18n/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-export const AboutMe: FC = () => {
+export function AboutMe() {
   const f = useTranslations('About');
   return (
     <div className={style['page-wrapper']}>
@@ -46,4 +45,4 @@ export const AboutMe: FC = () => {
       </div>
     </div>
   );
-};
+}

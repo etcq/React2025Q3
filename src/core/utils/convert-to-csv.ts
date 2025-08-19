@@ -1,4 +1,4 @@
-import type { Character } from '../interfaces/interface.ts';
+import type { Character } from '../interfaces/index.ts';
 
 export const convertToCSV = (data: Character[]) => {
   const header = Object.keys(data[0]).join(';');

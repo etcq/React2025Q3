@@ -1,8 +1,8 @@
-import { type FC, use } from 'react';
-import ThemeContext from '../../../core/contexts/contexts.ts';
-import { THEME } from '../../../core/constants/constants.ts';
+import { use } from 'react';
+import ThemeContext from '../../../core/contexts/index.ts';
+import { THEME } from '../../../core/constants/index.ts';
 
-const Spinner: FC = () => {
+export function Spinner() {
   const { theme } = use(ThemeContext);
   const color = theme == THEME.DARK ? '#88e23b' : '#4d7a0f';
   return (
@@ -200,6 +200,4 @@ const Spinner: FC = () => {
       </g>
     </svg>
   );
-};
-
-export default Spinner;
+}

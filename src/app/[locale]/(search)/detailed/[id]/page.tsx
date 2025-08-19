@@ -1,10 +1,10 @@
-import { CharacterDetailed } from '../../../../../components/character-detailed/character-detailed';
+import { CharacterDetailed } from '@components';
 
-interface IParams {
+interface IPageParams {
   params: Promise<{ id: string }>;
 }
 
-export default async function Page({ params }: IParams) {
+export default async function Page({ params }: IPageParams) {
   const { id } = await params;
   return <CharacterDetailed id={id} />;
 }

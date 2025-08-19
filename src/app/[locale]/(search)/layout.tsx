@@ -1,5 +1,5 @@
-import Search from '../../../components/search/search';
-import type { IChildrenNode } from '../../../core/interfaces/interface';
+import { Search } from '@components';
+import type { IChildrenNode } from '@interfaces';
 
 export default function SearchLayout({ children }: IChildrenNode) {
   return <Search>{children}</Search>;

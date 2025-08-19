@@ -1,10 +1,12 @@
-import TanstackProvider from '../../components/providers/tanstack-provider';
-import ThemeProvider from '../../components/providers/theme-provider';
 import style from './locale-layout.module.scss';
-import FlyoutCharacters from '../../components/flyout-characters/flyout-characters';
-import { Header } from '../../components/header/header';
+import {
+  FlyoutCharacters,
+  Header,
+  TanstackProvider,
+  ThemeProvider,
+} from '@components';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { routing } from '../../i18n/routing';
+import { routing } from '@i18n/routing';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { setRequestLocale } from 'next-intl/server';
@@ -18,13 +20,15 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
+interface ILocaleLayout {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
 export default async function LocaleLayout({
   children,
   params,
-}: {
-  children: ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+}: ILocaleLayout) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();

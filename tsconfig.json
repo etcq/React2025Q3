@@ -20,7 +20,21 @@
     "verbatimModuleSyntax": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
-    "plugins": [{ "name": "next" }]
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@interfaces": ["./src/core/interfaces"],
+      "@assets/*": ["./src/assets/*"],
+      "@stores/*": ["./src/core/stores/*"],
+      "@components": ["./src/components"],
+      "@ui": ["./src/components/ui"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@hooks/*": ["./src/core/hooks/*"],
+      "@utils/*": ["./src/core/utils/*"],
+      "@services/*": ["./src/core/services/*"],
+      "@contexts": ["./src/core/contexts"],
+      "@constants": ["./src/core/constants"],
+    }
   },
   "include": ["./src", "./dist/types/**/*.ts", "./next-env.d.ts"],
   "exclude": ["./node_modules"]

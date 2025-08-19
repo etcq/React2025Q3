@@ -1,12 +1,14 @@
+'use client';
+
 import { useTransition, type ChangeEvent } from 'react';
-import { routing } from '../../../i18n/routing.ts';
+import { routing } from '@i18n/routing.ts';
 import style from './lang-switcher.module.scss';
-import { usePathname, useRouter } from '../../../i18n/navigation.ts';
+import { usePathname, useRouter } from '@i18n/navigation.ts';
 import { useLocale } from 'next-intl';
 
-export default function LangSwitcher() {
+export function LangSwitcher() {
   const router = useRouter();
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const locale = useLocale();
 
@@ -22,6 +24,7 @@ export default function LangSwitcher() {
       className={style['lang-switcher']}
       defaultValue={locale}
       onChange={onSelectChange}
+      disabled={isPending}
     >
       {routing.locales.map((locale) => (
         <option key={locale} value={locale}>

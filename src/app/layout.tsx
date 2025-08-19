@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { IChildrenNode } from '../core/interfaces/interface';
+import type { IChildrenNode } from '@interfaces';
 import '../assets/style/global.scss';
 
 export const metadata: Metadata = {
