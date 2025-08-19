@@ -31,6 +31,7 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-compiler/react-compiler': 'error',
+      "@typescript-eslint/consistent-type-imports": "error",
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...eslintPluginNext.configs.recommended.rules,
