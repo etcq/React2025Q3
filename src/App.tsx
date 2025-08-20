@@ -1,7 +1,10 @@
+import { Form } from '@components';
+
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <h1>Form</h1>
+      <Form />
     </>
   );
 }
