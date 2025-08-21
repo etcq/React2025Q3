@@ -1,24 +1,32 @@
-export function GenderPicker() {
+import { errorText, radioButton } from '@/assets/style/classes';
+import type { IPickerProps } from '@interfaces';
+
+export function GenderPicker({ register, error }: IPickerProps) {
   return (
-    <div className="border-1 border-slate-200 p-2 rounded flex justify-center gap-10">
-      <div>
-        <input
-          type="radio"
-          id="man"
-          name="gender"
-          className="appearance-none bg-slate-200 w-3 h-3 rounded-full checked:border-3 checked:border-fuchsia-400 checked:bg-slate-900 mr-1"
-        />
-        <label htmlFor="man">Man</label>
+    <div className="flex flex-col border-1 border-slate-200 p-2 rounded">
+      <div className="flex justify-center gap-12">
+        <div>
+          <input
+            type="radio"
+            id="man"
+            value="man"
+            className={radioButton}
+            {...register('gender')}
+          />
+          <label htmlFor="man">Man</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="woman"
+            value="woman"
+            className={radioButton}
+            {...register('gender')}
+          />
+          <label htmlFor="woman">Woman</label>
+        </div>
       </div>
-      <div>
-        <input
-          type="radio"
-          id="woman"
-          name="gender"
-          className="appearance-none bg-slate-200 w-3 h-3 rounded-full checked:border-3 checked:border-fuchsia-400 checked:bg-slate-900 mr-1"
-        />
-        <label htmlFor="woman">Woman</label>
-      </div>
+      {error && <span className={`${errorText} text-center`}>{error}</span>}
     </div>
   );
 }
