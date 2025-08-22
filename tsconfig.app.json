@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@interfaces": ["./src/core/interfaces"],
-      "@assets/*": ["./src/assets/*"],
+      "@style/*": ["./src/assets/style/*"],
       "@stores/*": ["./src/core/stores/*"],
       "@components": ["./src/components"],
       "@ui": ["./src/components/ui"],

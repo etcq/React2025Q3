@@ -12,3 +12,5 @@ export const ValidationMessages = {
   SPECIAL_CHAR:
     'Field must contain only letters (no special characters or numbers)',
 };
+
+export const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];

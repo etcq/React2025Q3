@@ -1,6 +1,6 @@
 import type { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
-import { ValidationMessages } from '@constants';
+import { fileTypes, ValidationMessages } from '@constants';
 import { countries } from '../stores/country-store';
 
 export type TFormSchema = z.infer<typeof formSchema> & FieldValues;
@@ -50,6 +50,15 @@ export const formSchema = z
     country: z.string().refine((data) => countries.includes(data), {
       message: 'Pick country',
     }),
+    picture: z
+      .instanceof(FileList)
+      .refine((files) => files?.length >= 1, { message: 'Image is required' })
+      .refine((files) => fileTypes.includes(files?.[0]?.type), {
+        message: 'File must be .jpeg, .jpg or .png',
+      })
+      .refine((files) => files?.[0]?.size <= 5000000, {
+        message: 'Max file size is 5MB',
+      }),
   })
   .superRefine((data, ctx) => {
     if (data.password !== data.confirmPassword) {

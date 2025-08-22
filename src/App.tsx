@@ -1,12 +1,7 @@
-import { Form } from '@components';
+import { FormResult } from './components/form-result/form-result';
 
 function App() {
-  return (
-    <>
-      <h1>Form</h1>
-      <Form />
-    </>
-  );
+  return <FormResult />;
 }
 
 export default App;
