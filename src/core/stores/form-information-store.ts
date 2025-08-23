@@ -3,7 +3,7 @@ import type { TFormSchema } from '../schema/form-validation.schema';
 
 export type TConvertedForm = Omit<TFormSchema, 'picture'> & {
   picture: string;
-  shortPicture: string;
+  picture_base64: string;
 };
 
 interface IStoreFromInformation {

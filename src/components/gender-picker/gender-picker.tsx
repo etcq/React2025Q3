@@ -1,7 +1,11 @@
 import { errorText, radioButton } from '@/assets/style/classes';
+import type { TControlledForm } from '@/core/schema/form-validation.schema';
 import type { IPickerProps } from '@interfaces';
 
-export function GenderPicker({ register, error }: IPickerProps) {
+export function GenderPicker({
+  register,
+  errors,
+}: IPickerProps<TControlledForm>) {
   return (
     <div>
       <label htmlFor="genderField">Select your gender</label>
@@ -16,7 +20,7 @@ export function GenderPicker({ register, error }: IPickerProps) {
               id="man"
               value="man"
               className={radioButton}
-              {...register('gender')}
+              {...(register ? register('gender') : { name: 'gender' })}
             />
             <label htmlFor="man">Man</label>
           </div>
@@ -26,12 +30,16 @@ export function GenderPicker({ register, error }: IPickerProps) {
               id="woman"
               value="woman"
               className={radioButton}
-              {...register('gender')}
+              {...(register ? register('gender') : { name: 'gender' })}
             />
             <label htmlFor="woman">Woman</label>
           </div>
         </div>
-        {error && <span className={`${errorText} text-center`}>{error}</span>}
+        {errors?.gender?.message && (
+          <span className={`${errorText} text-center`}>
+            {errors.gender.message}
+          </span>
+        )}
       </fieldset>
     </div>
   );

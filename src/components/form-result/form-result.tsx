@@ -33,8 +33,12 @@ export function FormResult() {
         Open Uncontrolled Form
       </button>
       <div className="flex flex-row flex-wrap gap-4 justify-center p-5">
-        {information.map((information) => (
-          <InformationCard data={information} key={information.name} />
+        {information.map((information, index) => (
+          <InformationCard
+            data={information}
+            key={index}
+            isLast={index === 0}
+          />
         ))}
       </div>
       <Modal>{form}</Modal>
