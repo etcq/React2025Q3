@@ -25,14 +25,3 @@ export const prepareFormData = (formData: FormData) => {
   });
   return result;
 };
-
-export const checkPasswordStrength = (password: string) => {
-  let strength = 0;
-  if (/\d/.test(password)) strength++;
-  if (/[A-Z]/.test(password)) strength++;
-  if (/[a-z]/.test(password)) strength++;
-  if (/[\W_]/.test(password)) strength++;
-  if (password.length >= 8) strength++;
-
-  return strength;
-};
