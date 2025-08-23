@@ -13,7 +13,11 @@ export function Input({ id, showName, error, ...props }: InputProps) {
       <label htmlFor={id} className="mb-1">
         {showName}
       </label>
-      <input {...props} className="bg-slate-300 rounded text-slate-950" />
+      <input
+        {...props}
+        className="bg-slate-300 rounded text-slate-950"
+        id={id}
+      />
       {error && <span className={errorText}>{error}</span>}
     </div>
   );

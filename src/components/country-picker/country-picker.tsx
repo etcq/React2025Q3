@@ -10,8 +10,11 @@ export function CountryPicker({
   const countries = useCountryStore((state) => state.countries);
   return (
     <div className="relative">
-      <label className="mb-5">Select your country</label>
+      <label className="mb-5" htmlFor="country">
+        Select your country
+      </label>
       <select
+        id="country"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block
         w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-slate-500"
         {...(register ? register('country') : { name: 'country' })}

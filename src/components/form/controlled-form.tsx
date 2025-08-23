@@ -44,14 +44,18 @@ export function FormControlled() {
       className="flex flex-col gap-5 w-130 m-auto border-slate-300 border-2 rounded p-5 h-180 bg-slate-950"
     >
       <Input
+        id="name"
         type="text"
+        placeholder="Jogn"
         showName="Name"
         {...register('name')}
         error={errors.name?.message}
       />
       <Input
+        id="email"
         type="email"
         showName="email"
+        placeholder="doe@mail.com"
         {...register('email')}
         error={errors.email?.message}
       />
@@ -63,7 +67,15 @@ export function FormControlled() {
         <label htmlFor="conditions">I access Terms and Conditions rules</label>
       </div>
       <span className={errorText}>{errors.conditions?.message}</span>
-      <input type="file" {...register('picture')} className={fileInput} />
+      <div className="flex flex-col gap-0.5">
+        <label htmlFor="picture">Put your picture</label>
+        <input
+          type="file"
+          {...register('picture')}
+          className={fileInput}
+          id="picture"
+        />
+      </div>
       <span className={errorText}>{errors.picture?.message?.toString()}</span>
       <input
         type="submit"

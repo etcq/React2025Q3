@@ -32,7 +32,10 @@ export function Modal({ children }: { children: ReactNode }) {
   if (!status) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-20 bg-slate-500/50 flex items-center justify-center">
+    <div
+      className="fixed inset-0 z-20 bg-slate-500/50 flex items-center justify-center"
+      data-testid="overlay"
+    >
       <div ref={modal}>{children}</div>
     </div>,
     document.body

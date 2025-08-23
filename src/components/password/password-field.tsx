@@ -16,11 +16,13 @@ export function PasswordField({
       >
         <div className="flex flex-row gap-3">
           <Input
+            placeholder="Abc12Cfw!"
             type="password"
             {...(register ? register('password') : { name: 'password' })}
           />
           <Input
             type="password"
+            placeholder="Abc12Cfw!"
             {...(register ? register('confirmed') : { name: 'confirmed' })}
           />
         </div>

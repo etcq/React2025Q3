@@ -51,12 +51,14 @@ export function UncontrolledForm() {
   return (
     <form className={form} onSubmit={handleSubmit}>
       <Input
+        id="name"
         type="text"
         showName="Name"
         name="name"
         error={errors.name?.message}
       />
       <Input
+        id="email"
         type="email"
         showName="email"
         name="email"
@@ -70,7 +72,10 @@ export function UncontrolledForm() {
         <label htmlFor="conditions">I access Terms and Conditions rules</label>
       </div>
       <span className={errorText}>{errors.conditions?.message}</span>
-      <input type="file" className={fileInput} name="picture" />
+      <div>
+        <label htmlFor="picture">Put your picture</label>
+        <input type="file" className={fileInput} name="picture" id="picture" />
+      </div>
       <span className={errorText}>{errors.picture?.message}</span>
       <input type="submit" value="Send" className={button} />
     </form>
