@@ -24,6 +24,15 @@ export function FormControlled() {
   } = useForm<TControlledForm>({
     resolver: zodResolver(controlledFormSchema),
     mode: 'onChange',
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      confirmed: '',
+      gender: undefined,
+      country: '-',
+      picture: undefined,
+    },
   });
 
   const onSubmit = (data: TFormSchema) => {

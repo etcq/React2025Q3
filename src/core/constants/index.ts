@@ -15,8 +15,10 @@ export const ValidationMessages = {
   WHITESPACE: 'Field must not contain spaces.',
   SPECIAL_CHAR:
     'Field must contain only letters (no special characters or numbers)',
-  SELECT_GENDER: 'Select your gender',
-  SELECT_COUNTRY: 'Select your country',
+  SELECT_GENDER: 'You must select your gender',
+  SELECT_COUNTRY: 'You must select your country',
+  ACCESS_CONDITIONS: 'You should access to terms and conditions',
+  IMAGE_REQUIRED: 'Image is required',
+  IMAGE_FORMAT: 'File must be .jpeg, .jpg or .png',
+  IMAGE_SIZE: 'Max file size is 5MB',
 };
-
-export const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];

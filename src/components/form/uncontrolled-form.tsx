@@ -19,7 +19,6 @@ export function UncontrolledForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = prepareFormData(formData);
-    console.log(data);
     try {
       uncontrolledFormSchema.parse(data);
       if (data && data.picture) {
@@ -42,7 +41,6 @@ export function UncontrolledForm() {
           }
           errors[field].message = err.message;
         });
-        console.log(errors);
         setErrors(errors);
       }
     }
@@ -72,9 +70,15 @@ export function UncontrolledForm() {
         <label htmlFor="conditions">I access Terms and Conditions rules</label>
       </div>
       <span className={errorText}>{errors.conditions?.message}</span>
-      <div>
+      <div className="flex flex-col gap-0.5">
         <label htmlFor="picture">Put your picture</label>
-        <input type="file" className={fileInput} name="picture" id="picture" />
+        <input
+          type="file"
+          className={fileInput}
+          name="picture"
+          id="picture"
+          data-testid="file-input"
+        />
       </div>
       <span className={errorText}>{errors.picture?.message}</span>
       <input type="submit" value="Send" className={button} />

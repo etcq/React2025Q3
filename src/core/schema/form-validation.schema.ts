@@ -1,9 +1,11 @@
 import type { FieldValues } from 'react-hook-form';
 import * as z from 'zod';
-import { fileTypes, ValidationMessages } from '@constants';
-import { countries } from '../stores/country-store';
+import { ValidationMessages } from '@constants';
+import { useCountryStore } from '../stores/country-store';
 
 export type TFormSchema = z.infer<typeof formSchema> & FieldValues;
+export const countries = useCountryStore.getState().countries;
+const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
 export const formSchema = z.object({
   name: z
@@ -68,47 +70,59 @@ export const formSchema = z.object({
 export const controlledFormSchema = formSchema
   .extend({
     conditions: z.literal(true, {
-      message: 'You should access to terms and conditions',
+      message: ValidationMessages.ACCESS_CONDITIONS,
     }),
     picture: z
       .instanceof(FileList)
-      .refine((files) => files?.length >= 1, { message: 'Image is required' })
+      .refine((files) => files?.length >= 1, {
+        message: ValidationMessages.IMAGE_REQUIRED,
+      })
       .refine((files) => fileTypes.includes(files?.[0]?.type), {
-        message: 'File must be .jpeg, .jpg or .png',
+        message: ValidationMessages.IMAGE_FORMAT,
       })
       .refine((files) => files?.[0]?.size <= 5000000, {
-        message: 'Max file size is 5MB',
+        message: ValidationMessages.IMAGE_SIZE,
       }),
   })
   .refine((data) => data.password === data.confirmed, {
     path: ['confirmed'],
     message: ValidationMessages.PASSWORDS_DO_NOT_MATCH,
+    when(payload) {
+      return controlledFormSchema
+        .pick({ password: true, confirmed: true })
+        .safeParse(payload.value).success;
+    },
   });
 
 export const uncontrolledFormSchema = formSchema
   .extend({
     conditions: z.refine((val) => val === 'on', {
-      message: 'You should access to terms and conditions',
+      message: ValidationMessages.ACCESS_CONDITIONS,
     }),
     picture: z
       .instanceof(File)
-      .refine((file) => !!file, { message: 'Image is required' })
       .refine((file) => fileTypes.includes(file?.type), {
-        message: 'File must be .jpeg, .jpg or .png',
+        message: ValidationMessages.IMAGE_FORMAT,
       })
       .refine((files) => files?.size <= 5000000, {
-        message: 'Max file size is 5MB',
+        message: ValidationMessages.IMAGE_SIZE,
       }),
   })
   .refine((data) => data.password === data.confirmed, {
     path: ['confirmed'],
     message: ValidationMessages.PASSWORDS_DO_NOT_MATCH,
+
+    when(payload) {
+      return uncontrolledFormSchema
+        .pick({ password: true, confirmed: true })
+        .safeParse(payload.value).success;
+    },
   });
 
 export type TControlledForm = z.infer<typeof controlledFormSchema> &
   FieldValues;
 
 export type TUncontrolledForm = z.infer<typeof uncontrolledFormSchema> &
-  FieldValues;
+  FieldValues & { picture_base64?: string };
 
 export const fieldNames = Object.keys(uncontrolledFormSchema.shape);

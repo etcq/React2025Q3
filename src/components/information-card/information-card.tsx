@@ -4,7 +4,7 @@ export function InformationCard({
   data,
   isLast,
 }: {
-  data: TConvertedForm;
+  data?: TConvertedForm;
   isLast: boolean;
 }) {
   return (

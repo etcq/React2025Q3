@@ -1,10 +1,12 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'url';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
   test: {
+    root: resolve(__dirname),
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/setup-tests.ts',
@@ -33,7 +35,7 @@ export default defineConfig({
     alias: [
       {
         find: '@',
-        replacement: fileURLToPath(new URL('./src', import.meta.url)),
+        replacement: fileURLToPath(new URL('src', import.meta.url)),
       },
       {
         find: '@interfaces',
