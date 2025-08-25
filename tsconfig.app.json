@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@interfaces": ["./src/core/interfaces"],
+      "@assets/*": ["./src/assets/*"],
+      "@stores/*": ["./src/core/stores/*"],
+      "@components": ["./src/components"],
+      "@ui": ["./src/components/ui"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@hooks/*": ["./src/core/hooks/*"],
+      "@utils/*": ["./src/core/utils/*"],
+      "@services/*": ["./src/core/services/*"],
+      "@contexts": ["./src/core/contexts"],
+      "@constants": ["./src/core/constants"]
+    },
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src", "node_modules/vitest/globals.d.ts"]
+}
