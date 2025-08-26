@@ -21,6 +21,7 @@
       "@assets/*": ["./src/assets/*"],
       "@stores/*": ["./src/core/stores/*"],
       "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
       "@ui": ["./src/components/ui"],
       "@i18n/*": ["./src/i18n/*"],
       "@hooks/*": ["./src/core/hooks/*"],

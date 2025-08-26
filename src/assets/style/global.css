@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
 body {
-  background-color: var(--color-slate-950);
-  color: var(--color-slate-300);
+  background-color: var(--color-slate-300);
+  color: var(--color-slate-950);
 }

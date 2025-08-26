@@ -35,6 +35,12 @@ export default defineConfig({
         ),
       },
       {
+        find: '@components/',
+        replacement: fileURLToPath(
+          new URL('./src/components/', import.meta.url)
+        ),
+      },
+      {
         find: '@hooks',
         replacement: fileURLToPath(
           new URL('./src/core/hooks', import.meta.url)
