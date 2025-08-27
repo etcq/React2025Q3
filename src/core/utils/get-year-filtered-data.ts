@@ -1,5 +1,5 @@
 export function getYearFilteredData(
-  data: { [k: string]: number },
+  data: { [k: string]: number | string },
   filter: string[]
 ): { [k: string]: number | string } {
   const result = filter.map((col) => {

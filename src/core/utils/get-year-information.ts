@@ -3,7 +3,7 @@ import type {
   IYearData,
   ICountryDataPerYearList,
 } from '@interfaces';
-import { getYearFilteredData } from './get-filtered-data';
+import { getYearFilteredData } from './get-year-filtered-data';
 
 export function getCountryInformationPerYear(
   information: IResponseData,
@@ -16,10 +16,12 @@ export function getCountryInformationPerYear(
       return yearData.year === currentYear;
     });
     const yearData = !currentYear ? data.data.pop() : filteredPerYear[0];
-    countryInformation[country] = {
-      isoCode: data.iso_code,
-      yearInformation: getYearFilteredData(yearData, ['year', ...columns]),
-    };
+    if (yearData) {
+      countryInformation[country] = {
+        isoCode: data.iso_code,
+        yearInformation: getYearFilteredData(yearData, ['year', ...columns]),
+      };
+    }
   });
   return countryInformation;
 }
