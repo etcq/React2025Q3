@@ -73,3 +73,5 @@ export interface ICountryDataPerYear {
   isoCode: string;
   yearInformation: { [k: string]: number | string };
 }
+
+export type ICountryDataPerYearList = Record<string, ICountryDataPerYear>;

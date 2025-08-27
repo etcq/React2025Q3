@@ -1,4 +1,4 @@
-export function getFilteredData(
+export function getYearFilteredData(
   data: { [k: string]: number },
   filter: string[]
 ): { [k: string]: number | string } {
