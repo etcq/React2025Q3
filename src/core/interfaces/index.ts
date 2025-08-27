@@ -13,3 +13,5 @@ export interface IPickerProps<T extends FieldValues> {
     | Record<string, { message: string[] | string }>;
   name?: string;
 }
+
+export type ICustomErrorsObj = Record<string, { message: string[] | string }>;

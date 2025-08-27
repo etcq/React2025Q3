@@ -1,16 +1,16 @@
 import { create, type StateCreator } from 'zustand';
 
 interface IStoreModalControls {
-  status: boolean;
-  setModalStatus: (newStatus: boolean) => void;
+  isShown: boolean;
+  setIsShown: (newStatus: boolean) => void;
 }
 
 export const modalControlCreator: StateCreator<IStoreModalControls> = (
   set
 ) => ({
-  status: false,
-  setModalStatus: (newStatus: boolean) =>
-    set((state) => ({ ...state, status: newStatus })),
+  isShown: false,
+  setIsShown: (newShownStatus: boolean) =>
+    set(() => ({ isShown: newShownStatus })),
 });
 
 export const useModalControl =

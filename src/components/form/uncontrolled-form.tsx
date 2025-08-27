@@ -8,13 +8,12 @@ import { useFormInformationStore } from '@/core/stores/form-information-store';
 import { useState, type FormEvent } from 'react';
 import type { $ZodIssue } from 'zod/v4/core';
 import { useModalControl } from '@/core/stores/modal-control-store';
+import type { ICustomErrorsObj } from '@interfaces';
 
 export function UncontrolledForm() {
   const { setInformation } = useFormInformationStore();
-  const { setModalStatus } = useModalControl();
-  const [errors, setErrors] = useState<
-    Record<string, { message: string[] | string }>
-  >({});
+  const { setIsShown } = useModalControl();
+  const [errors, setErrors] = useState<ICustomErrorsObj>({});
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -29,11 +28,11 @@ export function UncontrolledForm() {
             picture_base64: `${img.slice(0, 70)}...`,
           });
         });
-        setModalStatus(false);
+        setIsShown(false);
       }
     } catch (error) {
       if (error instanceof ZodError) {
-        const errors: Record<string, { message: string[] | string }> = {};
+        const errors: ICustomErrorsObj = {};
         error.issues.map((err: $ZodIssue) => {
           const field = String(err.path[0]);
           if (!errors[field]) {

@@ -9,24 +9,26 @@ import { UncontrolledForm } from '../form/uncontrolled-form';
 
 export function FormResult() {
   const information = useFormInformationStore((state) => state.information);
-  const setModalStatus = useModalControl((state) => state.setModalStatus);
+  const setIsShown = useModalControl((state) => state.setIsShown);
   const [form, setForm] = useState(<FormControlled />);
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-center text-5xl">Form results</h1>
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setForm(<FormControlled />);
-          setModalStatus(true);
+          setIsShown(true);
         }}
         className={`${button} w-100`}
       >
         Open Controlled Form
       </button>
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setForm(<UncontrolledForm />);
-          setModalStatus(true);
+          setIsShown(true);
         }}
         className={`${button} w-100`}
       >

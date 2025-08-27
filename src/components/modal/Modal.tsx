@@ -4,11 +4,11 @@ import { createPortal } from 'react-dom';
 
 export function Modal({ children }: { children: ReactNode }) {
   const modal = useRef<HTMLDivElement | null>(null);
-  const { status, setModalStatus } = useModalControl((state) => state);
+  const { isShown, setIsShown } = useModalControl((state) => state);
 
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) =>
-      e.key === 'Escape' ? setModalStatus(false) : null;
+      e.key === 'Escape' ? setIsShown(false) : null;
     document.body.addEventListener('keydown', closeOnEscapeKey);
     const closeMenu = (event: MouseEvent): void => {
       if (
@@ -16,20 +16,17 @@ export function Modal({ children }: { children: ReactNode }) {
         event.target instanceof Node &&
         !modal.current.contains(event.target)
       ) {
-        setModalStatus(false);
+        setIsShown(false);
       }
     };
-    const timeout = setTimeout(() => {
-      document.addEventListener('click', closeMenu);
-    }, 0);
+    document.addEventListener('click', closeMenu);
     return () => {
-      clearTimeout(timeout);
       document.removeEventListener('keydown', closeOnEscapeKey);
       document.removeEventListener('click', closeMenu);
     };
-  }, [setModalStatus, status]);
+  }, [setIsShown, isShown]);
 
-  if (!status) return null;
+  if (!isShown) return null;
 
   return createPortal(
     <div

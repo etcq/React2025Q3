@@ -16,7 +16,7 @@ import { useModalControl } from '@/core/stores/modal-control-store';
 
 export function FormControlled() {
   const { setInformation } = useFormInformationStore();
-  const { setModalStatus } = useModalControl();
+  const { setIsShown } = useModalControl();
   const {
     register,
     handleSubmit,
@@ -44,7 +44,7 @@ export function FormControlled() {
         picture_base64: `${img.slice(0, 70)}...`,
       });
     });
-    setModalStatus(false);
+    setIsShown(false);
   };
 
   return (
@@ -55,7 +55,7 @@ export function FormControlled() {
       <Input
         id="name"
         type="text"
-        placeholder="Jogn"
+        placeholder="John"
         showName="Name"
         {...register('name')}
         error={errors.name?.message}
