@@ -1,3 +1,4 @@
+import { TableCell } from '../table-cell/table-cell';
 import styles from './table-row.module.scss';
 interface ITableRow {
   name: string;
@@ -11,11 +12,11 @@ export function TableRow({ name, iso, yearData }: ITableRow) {
       <td>{name}</td>
       <td>{iso ?? 'N/A'}</td>
       <td>{yearData?.year}</td>
-      <td>{yearData?.population ?? 'N/A'}</td>
+      <TableCell>{yearData?.population ?? 'N/A'}</TableCell>
       {yearData &&
         Object.entries(yearData).map(([param, value]) => {
           if (param === 'year' || param === 'population') return;
-          return <td key={param}>{value ?? 'N/A'}</td>;
+          return <TableCell key={param}>{value ?? 'N/A'}</TableCell>;
         })}
     </tr>
   );

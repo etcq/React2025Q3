@@ -5,3 +5,20 @@
     padding: 5px;
   }
 }
+
+@keyframes highlight {
+  0% {
+    background-color: $color-slate-600;
+  }
+  100% {
+    background-color: transparent;
+  } 
+}
+
+.animation {
+  animation-name: highlight;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
