@@ -1,0 +1,7 @@
+@use '../../assets/style/variables.scss' as *;
+.table-row {
+  td {
+    border: 1px solid $color-slate-950;
+    padding: 5px;
+  }
+}

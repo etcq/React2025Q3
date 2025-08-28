@@ -17,10 +17,11 @@ export default function CountryTable() {
   const [searchName, setSearchName] = useState<string | undefined>();
   const [selectCols, setSelectedCols] = useState(['co2', 'co2_per_capita']);
   const {
-    isDescending,
+    isDescName,
+    isDescPopulation,
+    sortByName,
     sortedData,
     setSortedData,
-    toggleSorDirection,
     sortByPopulation,
   } = useSortTable();
   const debouncedYear = useDebounce(currentYear, 400);
@@ -51,8 +52,11 @@ export default function CountryTable() {
   };
 
   const handleSortByPopulation = () => {
-    toggleSorDirection();
     sortByPopulation();
+  };
+
+  const handleSortByName = () => {
+    sortByName();
   };
 
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,13 +68,21 @@ export default function CountryTable() {
       <table className="m-2">
         <thead>
           <tr>
-            <th className="border-1 p-2 w-65 bg-slate-400">
-              Country:
-              <input
-                className="bg-slate-600 ms-0.5 rounded-2xl ps-2 text-slate-50 w-40 "
-                placeholder="input name"
-                onChange={handleChangeName}
-              />
+            <th className="border-1 p-2 bg-slate-400">
+              <div className="flex items-center justify-center">
+                <div
+                  onClick={handleSortByName}
+                  className="hover:cursor-pointer flex items-center hover:text-emerald-400"
+                >
+                  {!isDescName ? <FaSortAmountDown /> : <FaSortAmountDownAlt />}
+                  Country:
+                </div>
+                <input
+                  className="bg-slate-600 ms-1 rounded-2xl ps-2 text-slate-50 w-40"
+                  placeholder="input name"
+                  onChange={handleChangeName}
+                />
+              </div>
             </th>
             <th className="border-1 p-2 w-15 bg-slate-400">iso</th>
             <th className="border-1 p-2 w-30 bg-slate-400">
@@ -83,10 +95,14 @@ export default function CountryTable() {
             </th>
             <th className="border-1 p-2 w-25 bg-slate-400">
               <div
-                className="hover:cursor-pointer flex items-center"
+                className="hover:cursor-pointer flex items-center hover:text-emerald-400"
                 onClick={handleSortByPopulation}
               >
-                {!isDescending ? <FaSortAmountDown /> : <FaSortAmountDownAlt />}
+                {!isDescPopulation ? (
+                  <FaSortAmountDown />
+                ) : (
+                  <FaSortAmountDownAlt />
+                )}
                 Population
               </div>
             </th>

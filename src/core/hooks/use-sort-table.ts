@@ -3,17 +3,15 @@ import type { ICountryDataPerYearList } from '../interfaces';
 
 export function useSortTable(dataset?: ICountryDataPerYearList) {
   const [sortedData, setSortedData] = useState(dataset);
-  const [isDescending, setIsDescending] = useState(false);
-
-  const toggleSorDirection = () => {
-    setIsDescending(!isDescending);
-  };
+  const [isDescPopulation, setIsDescPopulation] = useState(false);
+  const [isDescName, setIsDescName] = useState(false);
 
   const sortByName = () => {
+    setIsDescName(!isDescName);
     if (!sortedData) return;
     const sortedDataset = Object.fromEntries(
       Object.entries(sortedData).sort(([country], [nextCountry]) =>
-        !isDescending
+        !isDescName
           ? country.toLowerCase().localeCompare(nextCountry.toLowerCase())
           : nextCountry.toLowerCase().localeCompare(country.toLowerCase())
       )
@@ -22,18 +20,19 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
   };
 
   const sortByPopulation = () => {
+    setIsDescPopulation(!isDescPopulation);
     if (!sortedData) return;
     const sortedDataset = Object.fromEntries(
       Object.entries(sortedData).sort(([, data], [, nextData]) => {
         const population = +data.yearInformation.population;
         const nextPopulation = +nextData.yearInformation.population;
-        if (!isDescending) {
-          if (isNaN(population)) return 1;
-          if (isNaN(nextPopulation)) return -1;
+        if (!isDescPopulation) {
+          if (isNaN(population)) return -1;
+          if (isNaN(nextPopulation)) return 1;
           return population - nextPopulation;
         }
-        if (isNaN(population)) return -1;
-        if (isNaN(nextPopulation)) return 1;
+        if (isNaN(population)) return 1;
+        if (isNaN(nextPopulation)) return -1;
         return nextPopulation - population;
       })
     );
@@ -41,9 +40,9 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
   };
 
   return {
-    isDescending,
+    isDescName,
     sortedData,
-    toggleSorDirection,
+    isDescPopulation,
     setSortedData,
     sortByName,
     sortByPopulation,

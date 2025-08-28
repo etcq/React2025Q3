@@ -1,3 +1,4 @@
+import styles from './table-row.module.scss';
 interface ITableRow {
   name: string;
   iso: string;
@@ -6,19 +7,15 @@ interface ITableRow {
 
 export function TableRow({ name, iso, yearData }: ITableRow) {
   return (
-    <tr>
-      <td className="border-1 p-2">{name}</td>
-      <td className="border-1 p-2">{iso ?? 'N/A'}</td>
-      <td className="border-1 p-2">{yearData?.year}</td>
-      <td className="border-1 p-2">{yearData?.population ?? 'N/A'}</td>
+    <tr className={styles['table-row']}>
+      <td>{name}</td>
+      <td>{iso ?? 'N/A'}</td>
+      <td>{yearData?.year}</td>
+      <td>{yearData?.population ?? 'N/A'}</td>
       {yearData &&
         Object.entries(yearData).map(([param, value]) => {
           if (param === 'year' || param === 'population') return;
-          return (
-            <td className="border-1 p-2" key={param}>
-              {value ?? 'N/A'}
-            </td>
-          );
+          return <td key={param}>{value ?? 'N/A'}</td>;
         })}
     </tr>
   );
