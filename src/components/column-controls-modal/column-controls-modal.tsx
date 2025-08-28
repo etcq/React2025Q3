@@ -28,14 +28,12 @@ export function ColumnControlsModal({
 
   return createPortal(
     <div className={styles.modal}>
-      <div className="bg-slate-700 text-slate-200 text-2xl p-2">
-        Add columns...
-      </div>
-      <div className="overflow-scroll overflow-x-hidden p-1">
+      <div className={styles['modal-header']}>Add columns...</div>
+      <div className={styles['modal-list']}>
         {columnNames.map((name) => (
           <div
             key={name}
-            className="flex flex-row justify-between mt-1 hover:cursor-pointer hover:bg-slate-600 bg-slate-400 p-3 rounded-2xl"
+            className={styles['modal-list-item']}
             onClick={() => handleSelectName(name)}
           >
             {name}

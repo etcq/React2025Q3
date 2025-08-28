@@ -1,0 +1,48 @@
+@use '../../assets/style/variables.scss' as *;
+
+.table {
+  margin: 8px;
+  &-head-cell {
+    border: 1px solid $color-slate-950;
+    padding: 8px;
+    background-color: $color-slate-400;
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &-sort-btn {
+        display: flex;
+        align-items: center;
+        &:hover {
+          cursor: pointer;
+          color: oklch(76.5% 0.177 163.223);
+        }
+      }
+      &-input {
+        font-size: 12px;
+        background-color: $color-slate-600;
+        margin-inline-start: 4px;
+        border-radius: 8px;
+        padding-left: 8px;
+        color: $color-slate-200;
+        width: 120px;
+      }
+    }
+  }
+}
+
+.col-control-btn {
+  background-color: $color-slate-700;
+  color: $color-slate-200;
+  margin: 8px;
+  border-radius: 16px;
+  padding: 10px 20px;
+  font-size: 18px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  &:hover {
+    cursor: pointer;
+    background-color: $color-slate-700;
+  }
+}

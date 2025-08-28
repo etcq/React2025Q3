@@ -16,6 +16,27 @@
   &-header {
     font-size: 24px;
     padding: 8px;
+    background-color: $color-slate-700;
+    color: $color-slate-200;
+  }
 
+  &-list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 4px;
+    &-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 4px;
+      padding: 12px;
+      border-radius: 16px;
+      background-color: $color-slate-400;
+      &:hover {
+        cursor: pointer;
+        background-color: $color-slate-200;
+
+      }
+    }
   }
 }

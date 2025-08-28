@@ -1,14 +1,15 @@
-import { getCO2data } from '@/core/services/co2';
+import { getCO2data } from '@services/co2';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { TableRow } from '../table-row/table-row';
 import { ColumnControlsModal } from '../column-controls-modal/column-controls-modal';
 import { getCountryInformationPerYear } from '@/core/utils/get-year-information';
 import { useDebounce } from '@uidotdev/usehooks';
 import { getSearchedCountries } from '@/core/utils/get-searched-countries';
-import { useSortTable } from '@/core/hooks/use-sort-table';
+import { useSortTable } from '@hooks/use-sort-table';
 import type { ICountryDataPerYearList } from '@/core/interfaces';
 import { FaSortAmountDown } from 'react-icons/fa';
 import { FaSortAmountDownAlt } from 'react-icons/fa';
+import styles from './country-table.module.scss';
 
 export default function CountryTable() {
   const [dataset, setDataset] = useState<ICountryDataPerYearList>();
@@ -65,37 +66,37 @@ export default function CountryTable() {
 
   return (
     <>
-      <table className="m-2">
+      <table className={styles.table}>
         <thead>
           <tr>
-            <th className="border-1 p-2 bg-slate-400">
-              <div className="flex items-center justify-center">
+            <th className={styles['table-head-cell']}>
+              <div className={styles.content}>
                 <div
                   onClick={handleSortByName}
-                  className="hover:cursor-pointer flex items-center hover:text-emerald-400"
+                  className={styles['content-sort-btn']}
                 >
                   {!isDescName ? <FaSortAmountDown /> : <FaSortAmountDownAlt />}
                   Country:
                 </div>
                 <input
-                  className="bg-slate-600 ms-1 rounded-2xl ps-2 text-slate-50 w-40"
+                  className={styles['content-input']}
                   placeholder="input name"
                   onChange={handleChangeName}
                 />
               </div>
             </th>
-            <th className="border-1 p-2 w-15 bg-slate-400">iso</th>
-            <th className="border-1 p-2 w-30 bg-slate-400">
+            <th className={styles['table-head-cell']}>iso</th>
+            <th className={styles['table-head-cell']}>
               year:{' '}
               <input
-                className="bg-slate-600 rounded-2xl ps-2 text-slate-50 w-25"
+                className={styles['content-input']}
                 placeholder="input year"
                 onChange={handleChangeYear}
               />
             </th>
-            <th className="border-1 p-2 w-25 bg-slate-400">
+            <th className={styles['table-head-cell']}>
               <div
-                className="hover:cursor-pointer flex items-center hover:text-emerald-400"
+                className={styles['content-sort-btn']}
                 onClick={handleSortByPopulation}
               >
                 {!isDescPopulation ? (
@@ -108,7 +109,7 @@ export default function CountryTable() {
             </th>
             {selectCols.map((col) => {
               return (
-                <th className="border-1 p-2 bg-slate-400" key={col}>
+                <th className={styles['table-head-cell']} key={col}>
                   {col}
                 </th>
               );
@@ -130,7 +131,7 @@ export default function CountryTable() {
         </tbody>
       </table>
       <button
-        className="bg-slate-700 m-2 text-slate-200 flex justify-center p-3 rounded-full hover:bg-slate-400 fixed bottom-10 right-20"
+        className={styles['col-control-btn']}
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
         Add data columns
