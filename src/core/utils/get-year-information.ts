@@ -19,7 +19,11 @@ export function getCountryInformationPerYear(
     if (yearData) {
       countryInformation[country] = {
         isoCode: data.iso_code,
-        yearInformation: getYearFilteredData(yearData, ['year', ...columns]),
+        yearInformation: getYearFilteredData(yearData, [
+          'year',
+          'population',
+          ...columns,
+        ]),
       };
     }
   });
