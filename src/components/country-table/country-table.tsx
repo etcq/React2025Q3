@@ -1,7 +1,6 @@
 import { getCO2data } from '@services/co2';
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
 import { TableRow } from '../table-row/table-row';
-import { ColumnControlsModal } from '../column-controls-modal/column-controls-modal';
 import { getCountryInformationPerYear } from '@/core/utils/get-year-information';
 import { useDebounce } from '@uidotdev/usehooks';
 import { getSearchedCountries } from '@/core/utils/get-searched-countries';
@@ -11,12 +10,11 @@ import { FaSortAmountDown } from 'react-icons/fa';
 import { FaSortAmountDownAlt } from 'react-icons/fa';
 import styles from './country-table.module.scss';
 
-export default function CountryTable() {
+export default function CountryTable({ selectCols }: { selectCols: string[] }) {
   const [dataset, setDataset] = useState<ICountryDataPerYearList>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentYear, setCurrentYear] = useState<number | undefined>();
   const [searchName, setSearchName] = useState<string | undefined>();
-  const [selectCols, setSelectedCols] = useState(['co2', 'co2_per_capita']);
+
   const {
     isDescName,
     isDescPopulation,
@@ -45,24 +43,24 @@ export default function CountryTable() {
     setSortedData(dataset);
   }, [dataset, setSortedData]);
 
-  const handleChangeYear = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeYear = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value.length === 4 || value.length === 0) {
       setCurrentYear(+value);
     }
-  };
+  }, []);
 
-  const handleSortByPopulation = () => {
+  const handleSortByPopulation = useCallback(() => {
     sortByPopulation();
-  };
+  }, [sortByPopulation]);
 
-  const handleSortByName = () => {
+  const handleSortByName = useCallback(() => {
     sortByName();
-  };
+  }, [sortByName]);
 
-  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearchName(e.target.value);
-  };
+  }, []);
 
   return (
     <>
@@ -130,18 +128,6 @@ export default function CountryTable() {
             })}
         </tbody>
       </table>
-      <button
-        className={styles['col-control-btn']}
-        onClick={() => setIsModalOpen(!isModalOpen)}
-      >
-        Add data columns
-      </button>
-
-      <ColumnControlsModal
-        isOpen={isModalOpen}
-        selectCols={selectCols}
-        setSelectedCols={setSelectedCols}
-      />
     </>
   );
 }

@@ -1,0 +1,22 @@
+@use '../assets/style/variables.scss' as *;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+
+  .col-control-btn {
+  background-color: $color-slate-700;
+  color: $color-slate-200;
+  margin: 8px;
+  border-radius: 16px;
+  padding: 10px 20px;
+  font-size: 18px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  &:hover {
+    cursor: pointer;
+    background-color: $color-slate-700;
+  }
+}
+}
