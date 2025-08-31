@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import styles from '../table-row/table-row.module.scss';
 
-export function TableCell({ children }: { children: React.ReactNode }) {
+const TableCell = memo(function TableCell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isAnimated, setIsAnimated] = useState(false);
   useEffect(() => {
     setIsAnimated(true);
@@ -13,4 +17,6 @@ export function TableCell({ children }: { children: React.ReactNode }) {
   return (
     <td className={isAnimated ? styles.animation : ''}>{children ?? 'N/A'}</td>
   );
-}
+});
+
+export { TableCell };

@@ -1,5 +1,5 @@
 import { columnNames } from '@/core/constants';
-import type { SetStateAction } from 'react';
+import { useCallback, type SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
 import { IoCheckmarkOutline } from 'react-icons/io5';
 import styles from './column-controls-modal.module.scss';
@@ -15,14 +15,17 @@ export function ColumnControlsModal({
   selectCols,
   setSelectedCols,
 }: IColumnControlsProps) {
-  const handleSelectName = (colName: string) => {
-    const index = selectCols.indexOf(colName);
-    if (index === -1) {
-      setSelectedCols([...selectCols, colName]);
-    } else {
-      setSelectedCols([...selectCols.filter((col) => col !== colName)]);
-    }
-  };
+  const handleSelectName = useCallback(
+    (colName: string) => {
+      const index = selectCols.indexOf(colName);
+      if (index === -1) {
+        setSelectedCols([...selectCols, colName]);
+      } else {
+        setSelectedCols([...selectCols.filter((col) => col !== colName)]);
+      }
+    },
+    [selectCols, setSelectedCols]
+  );
 
   if (!isOpen) return null;
 

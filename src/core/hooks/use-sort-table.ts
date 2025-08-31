@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { ICountryDataPerYearList } from '../interfaces';
 
 export function useSortTable(dataset?: ICountryDataPerYearList) {
@@ -6,7 +6,11 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
   const [isDescPopulation, setIsDescPopulation] = useState(false);
   const [isDescName, setIsDescName] = useState(false);
 
-  const sortByName = () => {
+  useEffect(() => {
+    setSortedData(dataset);
+  }, [dataset]);
+
+  const sortByName = useCallback(() => {
     setIsDescName(!isDescName);
     if (!sortedData) return;
     const sortedDataset = Object.fromEntries(
@@ -17,9 +21,9 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
       )
     );
     setSortedData(sortedDataset);
-  };
+  }, [isDescName, sortedData]);
 
-  const sortByPopulation = () => {
+  const sortByPopulation = useCallback(() => {
     setIsDescPopulation(!isDescPopulation);
     if (!sortedData) return;
     const sortedDataset = Object.fromEntries(
@@ -37,7 +41,7 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
       })
     );
     setSortedData(sortedDataset);
-  };
+  }, [isDescPopulation, sortedData]);
 
   return {
     isDescName,
@@ -45,6 +49,7 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
     isDescPopulation,
     setSortedData,
     sortByName,
+    setIsDescPopulation,
     sortByPopulation,
   };
 }

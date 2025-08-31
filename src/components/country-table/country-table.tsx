@@ -1,20 +1,28 @@
 import { getCO2data } from '@services/co2';
-import { useCallback, useEffect, useState, type ChangeEvent } from 'react';
-import { TableRow } from '../table-row/table-row';
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+  type ChangeEvent,
+} from 'react';
+import { TableRow } from '@components';
 import { getCountryInformationPerYear } from '@/core/utils/get-year-information';
 import { useDebounce } from '@uidotdev/usehooks';
 import { getSearchedCountries } from '@/core/utils/get-searched-countries';
-import { useSortTable } from '@hooks/use-sort-table';
-import type { ICountryDataPerYearList } from '@/core/interfaces';
-import { FaSortAmountDown } from 'react-icons/fa';
-import { FaSortAmountDownAlt } from 'react-icons/fa';
 import styles from './country-table.module.scss';
+import type { ICountryDataPerYearList } from '@/core/interfaces';
+import { useSortTable } from '@/core/hooks/use-sort-table';
+import { SortIcon } from '../ui/sort-icon/sort-icon';
 
-export default function CountryTable({ selectCols }: { selectCols: string[] }) {
+const CountryTable = memo(function CountryTable({
+  selectCols,
+}: {
+  selectCols: string[];
+}) {
   const [dataset, setDataset] = useState<ICountryDataPerYearList>();
   const [currentYear, setCurrentYear] = useState<number | undefined>();
   const [searchName, setSearchName] = useState<string | undefined>();
-
   const {
     isDescName,
     isDescPopulation,
@@ -73,7 +81,7 @@ export default function CountryTable({ selectCols }: { selectCols: string[] }) {
                   onClick={handleSortByName}
                   className={styles['content-sort-btn']}
                 >
-                  {!isDescName ? <FaSortAmountDown /> : <FaSortAmountDownAlt />}
+                  <SortIcon isDesc={isDescName} />
                   Country:
                 </div>
                 <input
@@ -97,11 +105,7 @@ export default function CountryTable({ selectCols }: { selectCols: string[] }) {
                 className={styles['content-sort-btn']}
                 onClick={handleSortByPopulation}
               >
-                {!isDescPopulation ? (
-                  <FaSortAmountDown />
-                ) : (
-                  <FaSortAmountDownAlt />
-                )}
+                <SortIcon isDesc={isDescPopulation} />
                 Population
               </div>
             </th>
@@ -116,10 +120,10 @@ export default function CountryTable({ selectCols }: { selectCols: string[] }) {
         </thead>
         <tbody>
           {sortedData &&
-            Object.entries(sortedData).map(([country, data], index) => {
+            Object.entries(sortedData).map(([country, data]) => {
               return (
                 <TableRow
-                  key={index}
+                  key={country}
                   name={country}
                   iso={data.isoCode}
                   yearData={data.yearInformation}
@@ -130,4 +134,6 @@ export default function CountryTable({ selectCols }: { selectCols: string[] }) {
       </table>
     </>
   );
-}
+});
+
+export default CountryTable;

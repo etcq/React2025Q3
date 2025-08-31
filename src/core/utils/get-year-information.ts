@@ -15,7 +15,9 @@ export function getCountryInformationPerYear(
     const filteredPerYear = data.data.filter((yearData: IYearData) => {
       return yearData.year === currentYear;
     });
-    const yearData = !currentYear ? data.data.pop() : filteredPerYear[0];
+    const yearData = !currentYear
+      ? data.data[data.data.length - 1]
+      : filteredPerYear[0];
     if (yearData) {
       countryInformation[country] = {
         isoCode: data.iso_code,
