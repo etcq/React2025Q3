@@ -33,14 +33,16 @@
 ## Check after optimization
 
 ### Render table 
-<img width="596" height="376" alt="image" src="https://github.com/user-attachments/assets/6787f2ab-68dc-445b-9320-753c3d6bf317" />
+<img width="200" height="300" alt="image" src="https://github.com/user-attachments/assets/6787f2ab-68dc-445b-9320-753c3d6bf317" />
 
 
 ### Add column with data 
 -table: 
+
 <img width="585" height="280" alt="image" src="https://github.com/user-attachments/assets/b579cd0d-2559-4df3-9542-90e1c5c6ad36" />
 
 -controls:
+
 <img width="598" height="318" alt="image" src="https://github.com/user-attachments/assets/14707a90-62f8-449a-91cb-11f74100c548" />
 
 ### Sorting
