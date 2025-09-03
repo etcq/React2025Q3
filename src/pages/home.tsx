@@ -1,11 +1,8 @@
 import Loading from '@/components/loading/loading';
-import { lazy, Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import styles from './home.module.scss';
 import { ColumnControlsModal } from '@/components';
-
-const CountryTable = lazy(
-  () => import('@components/country-table/country-table')
-);
+import CountryTable from '@/components/country-table/country-table';
 
 export function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,12 +12,12 @@ export function Home() {
     <div className={styles.wrapper}>
       <Suspense fallback={<Loading />}>
         <CountryTable selectCols={selectCols} />
-        <ColumnControlsModal
-          isOpen={isModalOpen}
-          selectCols={selectCols}
-          setSelectedCols={setSelectedCols}
-        />
       </Suspense>
+      <ColumnControlsModal
+        isOpen={isModalOpen}
+        selectCols={selectCols}
+        setSelectedCols={setSelectedCols}
+      />
       <button
         className={styles['col-control-btn']}
         onClick={() => setIsModalOpen(!isModalOpen)}

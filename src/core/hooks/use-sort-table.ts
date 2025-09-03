@@ -1,17 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { ICountryDataPerYearList } from '../interfaces';
 
-export function useSortTable(dataset?: ICountryDataPerYearList) {
-  const [sortedData, setSortedData] = useState(dataset);
+export function useSortTable() {
+  const [sortedData, setSortedData] = useState<
+    ICountryDataPerYearList | undefined
+  >();
   const [isDescPopulation, setIsDescPopulation] = useState(false);
   const [isDescName, setIsDescName] = useState(false);
 
-  useEffect(() => {
-    setSortedData(dataset);
-  }, [dataset]);
-
-  const sortByName = useCallback(() => {
+  const sortByName = () => {
     setIsDescName(!isDescName);
+    setSortedData(sortedDataByName);
+  };
+
+  const sortByPopulation = () => {
+    setIsDescPopulation(!isDescPopulation);
+    setSortedData(sortedDataByPopulation);
+  };
+
+  const sortedDataByName = useMemo(() => {
     if (!sortedData) return;
     const sortedDataset = Object.fromEntries(
       Object.entries(sortedData).sort(([country], [nextCountry]) =>
@@ -20,11 +27,10 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
           : nextCountry.toLowerCase().localeCompare(country.toLowerCase())
       )
     );
-    setSortedData(sortedDataset);
-  }, [isDescName, sortedData]);
+    return sortedDataset;
+  }, [sortedData, isDescName]);
 
-  const sortByPopulation = useCallback(() => {
-    setIsDescPopulation(!isDescPopulation);
+  const sortedDataByPopulation = useMemo(() => {
     if (!sortedData) return;
     const sortedDataset = Object.fromEntries(
       Object.entries(sortedData).sort(([, data], [, nextData]) => {
@@ -40,8 +46,8 @@ export function useSortTable(dataset?: ICountryDataPerYearList) {
         return nextPopulation - population;
       })
     );
-    setSortedData(sortedDataset);
-  }, [isDescPopulation, sortedData]);
+    return sortedDataset;
+  }, [sortedData, isDescPopulation]);
 
   return {
     isDescName,

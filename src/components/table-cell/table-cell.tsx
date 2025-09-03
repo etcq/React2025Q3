@@ -1,6 +1,8 @@
 import { useEffect, useState, memo } from 'react';
 import styles from '../table-row/table-row.module.scss';
 
+const animationTimer = 1100;
+
 const TableCell = memo(function TableCell({
   children,
 }: {
@@ -11,7 +13,7 @@ const TableCell = memo(function TableCell({
     setIsAnimated(true);
     const timer = setTimeout(() => {
       setIsAnimated(false);
-    }, 1100);
+    }, animationTimer);
     return () => clearTimeout(timer);
   }, [children]);
   return (

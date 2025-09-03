@@ -1,26 +1,22 @@
-import { getCO2data } from '@services/co2';
-import {
-  memo,
-  useCallback,
-  useEffect,
-  useState,
-  type ChangeEvent,
-} from 'react';
-import { TableRow } from '@components';
+import { use, useCallback, useEffect, useState, type ChangeEvent } from 'react';
 import { getCountryInformationPerYear } from '@/core/utils/get-year-information';
 import { useDebounce } from '@uidotdev/usehooks';
 import { getSearchedCountries } from '@/core/utils/get-searched-countries';
+import { useSortTable } from '@hooks/use-sort-table';
 import styles from './country-table.module.scss';
-import type { ICountryDataPerYearList } from '@/core/interfaces';
-import { useSortTable } from '@/core/hooks/use-sort-table';
+import { CountryTableBody } from '@components';
 import { SortIcon } from '../ui/sort-icon/sort-icon';
+import type { IResponseData } from '@/core/interfaces';
+import { getCO2Data } from '@/core/services/co2';
 
-const CountryTable = memo(function CountryTable({
-  selectCols,
-}: {
+interface ITableProps {
   selectCols: string[];
-}) {
-  const [dataset, setDataset] = useState<ICountryDataPerYearList>();
+}
+
+const getDataPromise = getCO2Data();
+
+export default function CountryTable({ selectCols }: ITableProps) {
+  const dataset = use<IResponseData>(getDataPromise);
   const [currentYear, setCurrentYear] = useState<number | undefined>();
   const [searchName, setSearchName] = useState<string | undefined>();
   const {
@@ -35,21 +31,14 @@ const CountryTable = memo(function CountryTable({
   const debouncedName = useDebounce(searchName, 400);
 
   useEffect(() => {
-    getCO2data()
-      .then((data) => data.data)
-      .then((dataset) => {
-        const result = getCountryInformationPerYear(
-          getSearchedCountries(dataset, debouncedName),
-          selectCols,
-          debouncedYear
-        );
-        setDataset(result);
-      });
-  }, [selectCols, debouncedYear, debouncedName]);
-
-  useEffect(() => {
-    setSortedData(dataset);
-  }, [dataset, setSortedData]);
+    if (!dataset) return;
+    const result = getCountryInformationPerYear(
+      getSearchedCountries(dataset, debouncedName),
+      selectCols,
+      debouncedYear
+    );
+    setSortedData(result);
+  }, [dataset, setSortedData, selectCols, debouncedName, debouncedYear]);
 
   const handleChangeYear = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -118,22 +107,8 @@ const CountryTable = memo(function CountryTable({
             })}
           </tr>
         </thead>
-        <tbody>
-          {sortedData &&
-            Object.entries(sortedData).map(([country, data]) => {
-              return (
-                <TableRow
-                  key={country}
-                  name={country}
-                  iso={data.isoCode}
-                  yearData={data.yearInformation}
-                />
-              );
-            })}
-        </tbody>
+        <CountryTableBody sortedData={sortedData} />
       </table>
     </>
   );
-});
-
-export default CountryTable;
+}
